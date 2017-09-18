@@ -1,0 +1,11 @@
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\LibraryProject.dll
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\LibraryProject.pdb
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\nunit.framework.dll
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\WebDriver.dll
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\nunit.framework.xml
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\WebDriver.xml
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.dll
+D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.pdb

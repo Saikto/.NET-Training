@@ -10,3 +10,5 @@ D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.cs
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.CoreCompileInputs.cache
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.exe
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.pdb
+D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\LibraryProject.dll
+D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\LibraryProject.pdb
