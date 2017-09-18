@@ -9,3 +9,14 @@ D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.cs
 D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.csproj.CoreCompileInputs.cache
 D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.dll
 D:\Tasks\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.pdb
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\LibraryProject.dll
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\LibraryProject.pdb
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\nunit.framework.dll
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\WebDriver.dll
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\nunit.framework.xml
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\bin\Debug\WebDriver.xml
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.dll
+E:\Study\VS Projects\.NET-Training\ConsoleProject\LibraryProject\obj\Debug\LibraryProject.pdb

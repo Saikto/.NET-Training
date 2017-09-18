@@ -11,22 +11,8 @@ namespace ConsoleProject
     {
         static void Main(string[] args)
         {
-            int a = 0;
-            int b = 0;
-            bool flagForA = true;
-            bool flagForB = true;
             Console.WriteLine("Enter 2 numbers:");
-            if (!Int32.TryParse(Console.ReadLine(), out a))
-            {
-                flagForA = false;
-                Console.WriteLine("First value is not a number!");
-            }
-            if (!Int32.TryParse(Console.ReadLine(), out b))
-            {
-                flagForB = false;
-                Console.WriteLine("Second value is not a number!");
-            }
-            if (flagForA && flagForB)
+            if ((Int32.TryParse(Console.ReadLine(), out int a)) && (Int32.TryParse(Console.ReadLine(), out int b)))
             {
                 Console.Write("Sum: ");
                 Console.WriteLine(ArifmeticOperations.NumbersSum(a, b));
@@ -36,6 +22,10 @@ namespace ConsoleProject
                 Console.WriteLine(ArifmeticOperations.NumbersDivision(a, b));
                 Console.Write("Multiplication: ");
                 Console.WriteLine(ArifmeticOperations.NumbersMultiplication(a, b));
+            }
+            else
+            {
+                 Console.WriteLine("One(both) values are not number(s)");
             }
         }
     }
