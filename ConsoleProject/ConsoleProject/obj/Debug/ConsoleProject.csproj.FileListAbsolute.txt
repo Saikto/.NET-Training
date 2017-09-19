@@ -1,4 +1,3 @@
-D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.exe.config
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.exe
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.pdb
 D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
@@ -26,3 +25,6 @@ E:\Study\VS Projects\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\Conso
 E:\Study\VS Projects\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.CoreCompileInputs.cache
 E:\Study\VS Projects\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.exe
 E:\Study\VS Projects\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.pdb
+D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.exe.config
+D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.ConsoleProjectResources.resources
+D:\Tasks\.NET-Training\ConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.GenerateResource.Cache

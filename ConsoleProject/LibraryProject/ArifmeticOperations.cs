@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject
 {
-    public static class ArifmeticOperations
+    public class ArifmeticOperations
     {
 
         public static int NumbersSum(int a, int b)
@@ -26,5 +26,7 @@ namespace LibraryProject
         {
             return (a * b);
         }
+
+
     }
 }
