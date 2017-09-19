@@ -1,0 +1,7 @@
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\bin\Debug\ConsoleApp01.exe.config
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\bin\Debug\ConsoleApp01.exe
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\bin\Debug\ConsoleApp01.pdb
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\obj\Debug\ConsoleApp01.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\obj\Debug\ConsoleApp01.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\obj\Debug\ConsoleApp01.exe
+D:\Tasks\.NET-Training\HW 02\ConsoleApp01\obj\Debug\ConsoleApp01.pdb
