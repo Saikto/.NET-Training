@@ -1,0 +1,9 @@
+D:\Tasks\.NET-Training\ConsoleProject\Tests\bin\Debug\Tests.dll
+D:\Tasks\.NET-Training\ConsoleProject\Tests\bin\Debug\Tests.pdb
+D:\Tasks\.NET-Training\ConsoleProject\Tests\bin\Debug\LibraryProject.dll
+D:\Tasks\.NET-Training\ConsoleProject\Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Tasks\.NET-Training\ConsoleProject\Tests\bin\Debug\LibraryProject.pdb
+D:\Tasks\.NET-Training\ConsoleProject\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\ConsoleProject\Tests\obj\Debug\Tests.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\ConsoleProject\Tests\obj\Debug\Tests.dll
+D:\Tasks\.NET-Training\ConsoleProject\Tests\obj\Debug\Tests.pdb
