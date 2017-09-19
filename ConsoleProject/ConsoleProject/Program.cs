@@ -33,24 +33,24 @@ namespace ConsoleProject
         static void Main(string[] args)
         {
             int a = 0, b = 0;
-            bool aFlag = false, bFlag = false;
+            bool flag = true;
             //Console or Resource file choice
             if (ConfigurationManager.AppSettings.Get("ConsoleInput").Equals("true")) 
             {
                 //Console input
                 Console.WriteLine("Enter 2 numbers:");
-                aFlag = Int32.TryParse(Console.ReadLine(), out a);
-                bFlag = Int32.TryParse(Console.ReadLine(), out b);
+                flag = Int32.TryParse(Console.ReadLine(), out a);
+                flag = Int32.TryParse(Console.ReadLine(), out b);
             }
             else
             {
                 //Resource file input
-                aFlag = Int32.TryParse(ConsoleProjectResources.a, out a);
-                bFlag = Int32.TryParse(ConsoleProjectResources.b, out b);
+                flag = Int32.TryParse(ConsoleProjectResources.a, out a);
+                flag = Int32.TryParse(ConsoleProjectResources.b, out b);
                 Console.WriteLine($"Using parameters {a} , {b}..");
             }
             //If input values are numbers
-            if (aFlag && bFlag)
+            if (flag)
             {
                 //Print choice
                 if (ConfigurationManager.AppSettings.Get("Library").Equals("true"))
