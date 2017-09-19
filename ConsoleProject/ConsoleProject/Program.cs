@@ -34,7 +34,8 @@ namespace ConsoleProject
         {
             int a = 0, b = 0;
             bool aFlag = false, bFlag = false;
-            if (ConfigurationManager.AppSettings.Get("ConsoleInput").Equals("true")) //Console or Resource file choice
+            //Console or Resource file choice
+            if (ConfigurationManager.AppSettings.Get("ConsoleInput").Equals("true")) 
             {
                 //Console input
                 Console.WriteLine("Enter 2 numbers:");
@@ -48,8 +49,10 @@ namespace ConsoleProject
                 bFlag = Int32.TryParse(ConsoleProjectResources.b, out b);
                 Console.WriteLine($"Using parameters {a} , {b}..");
             }
+            //If input values are numbers
             if (aFlag && bFlag)
             {
+                //Print choice
                 if (ConfigurationManager.AppSettings.Get("Library").Equals("true"))
                 {
                     LibraryPrint(a, b);
