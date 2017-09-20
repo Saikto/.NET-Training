@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,42 @@ namespace ConsoleApp01
             return document;
         }
 
+        public static string FindSentencesEnd(string doc)
+        {
+            List <int> indexesList = new List<int>();
+            int[] indexes = new int[doc.Length];
+            for (int i = 0; i < doc.Length; i++)
+            {
+                if (doc[i].Equals('!') || doc[i].Equals('?'))
+                {
+                    indexesList.Add(i);
+                }
+                else if(doc[i].Equals('.'))
+                {
+                    try
+                    {
+                        if (Char.IsLower(doc[i + 2]))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            indexesList.Add(i);
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        indexesList.Add(i);
+                    }
+                }
+            }
+            foreach (int index in indexesList)
+            {
+                Console.WriteLine($"{index} ");
+            }
+            return doc;
+        }
+
         static void Main(string[] args)
         {
             string document = "";
@@ -37,7 +74,9 @@ namespace ConsoleApp01
                 Console.WriteLine("[Reading from file..]");
                 document = FileInput(ConfigurationManager.AppSettings.Get("FilePath"));
             }
+            Console.WriteLine(document);
             document = document.ToLower();
+            FindSentencesEnd(document);
 
         }
     }
