@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp01
 {
@@ -14,7 +15,31 @@ namespace ConsoleApp01
         public static string FileInput(string path)
         {
             string document = "";
-            document = File.ReadAllText(path);
+            try
+            {
+                document = File.ReadAllText(path);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("Path to file is not valid.");
+            }
+            catch (PathTooLongException e)
+            {
+                Console.WriteLine("Path to file is too long.");
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine("No such directory.");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("No such file.");
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Console.WriteLine("No access to file.");
+            }
+
             return document;
         }
 
@@ -25,44 +50,9 @@ namespace ConsoleApp01
             return document;
         }
 
-        public static string FindSentencesEnd(string doc)
-        {
-            List <int> indexesList = new List<int>();
-            int[] indexes = new int[doc.Length];
-            for (int i = 0; i < doc.Length; i++)
-            {
-                if (doc[i].Equals('!') || doc[i].Equals('?'))
-                {
-                    indexesList.Add(i);
-                }
-                else if(doc[i].Equals('.'))
-                {
-                    try
-                    {
-                        if (Char.IsLower(doc[i + 2]))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            indexesList.Add(i);
-                        }
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        indexesList.Add(i);
-                    }
-                }
-            }
-            foreach (int index in indexesList)
-            {
-                Console.WriteLine($"{index} ");
-            }
-            return doc;
-        }
-
         static void Main(string[] args)
         {
+            string[] sentenceEnd = {".", "!", "?"};
             string document = "";
             if (ConfigurationManager.AppSettings.Get("ConsoleInput").Equals("true"))
             {
@@ -76,8 +66,11 @@ namespace ConsoleApp01
             }
             Console.WriteLine(document);
             document = document.ToLower();
-            FindSentencesEnd(document);
-
+            string pattern = "(.+?)([*.!?])\\s+";
+            string replacement = $"[{DateTime.Now}:" +$"{DateTime.Now.Millisecond}" + "] $1$2\n";
+            Regex reg = new Regex(pattern);
+            document = reg.Replace(document, replacement);
+            Console.WriteLine(document);
         }
     }
 }

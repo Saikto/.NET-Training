@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ConsoleApp02
 {
     class Program
     {
+        //Prints list
         static void PrintList<T>(List<T> list)
         {
             foreach (var t in list)
@@ -16,7 +18,21 @@ namespace ConsoleApp02
                 Console.WriteLine(t.ToString().PadLeft(width - 1));
             }
         }
-
+        //Prints double values from list with 2 symbols after . separator. Example 5.75
+        static void PrintListSpecialDouble(List<double> list)
+        {
+            string pattern = "([0-9]+)(\\.)([0-9]{2}\\z)";
+            Regex reg = new Regex(pattern);
+            foreach (double t in list)
+            {
+                if (reg.IsMatch(t.ToString()))
+                {
+                    int width = Console.WindowWidth;
+                    Console.WriteLine(t.ToString().PadLeft(width - 1));
+                }
+            }
+        }
+        //Returns average value from list of integers
         static double IntegerAverage(List<int> list)
         {
             double sum = 0;
@@ -26,7 +42,24 @@ namespace ConsoleApp02
             }
             return sum / list.Count;
         }
-
+        //Returns average value from list of doubles with 2 symbols after .
+        static double SpecialDoubleAverage(List<double> list)
+        {
+            string pattern = "([0-9]+)(\\.)([0-9]{2}\\z)";
+            Regex reg = new Regex(pattern);
+            int counter = 0;
+            double sum = 0;
+            foreach (double n in list)
+            {
+                if (reg.IsMatch(n.ToString()))
+                {
+                    sum = sum + n;
+                    counter++;
+                }
+            }
+            return sum / counter;
+        }
+        //Deletes empty strings
         static void ClearStringsUp(List<string> list)
         {
             List<int> stringsToDelete = new List<int>();
@@ -47,45 +80,54 @@ namespace ConsoleApp02
         static void Main(string[] args)
         {
             List<string> inputList = new List<string>();
-            Console.WriteLine("Input your strings. To stop input type \"exit\". ");
+            Console.WriteLine("Input your strings. Use \".\" in real numbers. To stop input type \"\\exit\\\". ");
             for (;;)
             {
                 var tempStr = Console.ReadLine();
-                if (tempStr != null && tempStr.Equals("exit"))
+                if (tempStr != null && tempStr.Equals("\\exit\\"))
                 {
                     break;
                 }
                 else inputList.Add(tempStr);
             }
-            string outString = "";
-            foreach (string str in inputList)
-            {
-                outString = outString + " " + str;
-            }
-            string[] outStringsArray = outString.Split();
             List<int> integers = new List<int>();
             List<double> doubles = new List<double>();
             List<string> strings = new List<string>();
-            foreach (string str in outStringsArray)
+            string pattern = "([0-9]+)(\\,)([0-9]+)";
+            Regex reg = new Regex(pattern);
+            foreach (string str in inputList)
             {
-                if (Int32.TryParse(str, out int i))
+                if (reg.IsMatch(str))
+                {
+                    bool b = (Double.TryParse(reg.Replace(str, "$1.$3"), out double j));
+                    if (b)
+                        doubles.Add(j);
+                }
+                else if (Int32.TryParse(str, out int i))
                 {
                     integers.Add(i);
                     continue;
                 }
-                else if (Double.TryParse(str, out double j))
+                else if (Double.TryParse(str, out double d))
                 {
-                    doubles.Add(j);
+                    doubles.Add(d);
                 }
                 else strings.Add(str);
             }
-            Console.WriteLine($"---- INTEGERS COUNT: {integers.Count}" );
+            string coutInt = $"---- INTEGERS COUNT: {integers.Count}";
+            string coutDouble = $"---- DOUBLES COUNT: {doubles.Count}";
+            string coutString = $"---- STRINGS COUNT: {strings.Count}";
+            //Integers
+            Console.WriteLine(coutInt + new string('-', Console.WindowWidth - 1 - coutInt.Length));
             PrintList(integers);
             Console.WriteLine(("Average: " + IntegerAverage(integers)).PadLeft(Console.WindowWidth - 1));
-            Console.WriteLine($"---- DOUBLES COUNT: {doubles.Count}");
-            PrintList(doubles);
+            //Doubles
+            Console.WriteLine(coutDouble + new string('-', Console.WindowWidth - 1 - coutDouble.Length));
+            PrintListSpecialDouble(doubles);
+            Console.WriteLine(("Average: " + SpecialDoubleAverage(doubles)).PadLeft(Console.WindowWidth - 1));
+            //Strings
             ClearStringsUp(strings);
-            Console.WriteLine($"---- STRINGS COUNT: {strings.Count}");
+            Console.WriteLine(coutString + new string('-', Console.WindowWidth - 1 - coutString.Length));
             PrintList(strings);
         }
     }
