@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ConsoleApp02
 {
@@ -95,6 +96,7 @@ namespace ConsoleApp02
             List<string> strings = new List<string>();
             string pattern = "([0-9]+)(\\,)([0-9]+)";
             Regex reg = new Regex(pattern);
+            //Resorts members of inputlist to 3 lists: integers, doubles, strings
             foreach (string str in inputList)
             {
                 if (reg.IsMatch(str))
@@ -124,11 +126,13 @@ namespace ConsoleApp02
             //Doubles
             Console.WriteLine(coutDouble + new string('-', Console.WindowWidth - 1 - coutDouble.Length));
             PrintListSpecialDouble(doubles);
-            Console.WriteLine(("Average: " + SpecialDoubleAverage(doubles)).PadLeft(Console.WindowWidth - 1));
+            Console.WriteLine(("Average (speial): " + SpecialDoubleAverage(doubles)).PadLeft(Console.WindowWidth - 1));
             //Strings
             ClearStringsUp(strings);
             Console.WriteLine(coutString + new string('-', Console.WindowWidth - 1 - coutString.Length));
-            PrintList(strings);
+            var newStrings = strings.OrderBy(item => item).ToList();
+            //PrintList(strings);
+            PrintList(newStrings);
         }
     }
 }
