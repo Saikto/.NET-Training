@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ConsoleApp02
 {
@@ -60,23 +59,6 @@ namespace ConsoleApp02
             }
             return sum / counter;
         }
-        //Deletes empty strings
-        static void ClearStringsUp(List<string> list)
-        {
-            List<int> stringsToDelete = new List<int>();
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i].Equals(" ") || list[i].Equals(""))
-                {
-                    stringsToDelete.Add(i);
-                }
-            }
-            stringsToDelete.Reverse();
-            foreach (var index in stringsToDelete)
-            {
-                list.RemoveAt(index);
-            }
-        }
 
         static void Main(string[] args)
         {
@@ -128,11 +110,9 @@ namespace ConsoleApp02
             PrintListSpecialDouble(doubles);
             Console.WriteLine(("Average (speial): " + SpecialDoubleAverage(doubles)).PadLeft(Console.WindowWidth - 1));
             //Strings
-            ClearStringsUp(strings);
             Console.WriteLine(coutString + new string('-', Console.WindowWidth - 1 - coutString.Length));
-            var newStrings = strings.OrderBy(item => item).ToList();
-            //PrintList(strings);
-            PrintList(newStrings);
+            var sortedStrings = strings.OrderBy(item => item).ToList();
+            PrintList(sortedStrings);
         }
     }
 }
