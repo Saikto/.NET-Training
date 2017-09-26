@@ -39,14 +39,14 @@ namespace ConsoleProject
             {
                 //Console input
                 Console.WriteLine("Enter 2 numbers:");
-                flag = Int32.TryParse(Console.ReadLine(), out a);
-                flag = Int32.TryParse(Console.ReadLine(), out b);
+                flag = Int32.TryParse(Console.ReadLine(), out a) && 
+                       Int32.TryParse(Console.ReadLine(), out b);
             }
             else
             {
                 //Resource file input
-                flag = Int32.TryParse(ConsoleProjectResources.a, out a);
-                flag = Int32.TryParse(ConsoleProjectResources.b, out b);
+                flag = Int32.TryParse(ConsoleProjectResources.a, out a) &&
+                       Int32.TryParse(ConsoleProjectResources.b, out b);
                 Console.WriteLine($"Using parameters {a} , {b}..");
             }
             //If input values are numbers
