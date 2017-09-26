@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using EquationsAndMatrixLibrary;
 using NLog;
+using System.Configuration;
 
 namespace ConsoleApp
 {
     class Program
     {
+        //Logger instance
         private static Logger logger = LogManager.GetLogger("Equations");
+        //Method to get equation type from console
         static string TypeInput()
         {
             int choice = 0;
@@ -34,16 +38,14 @@ namespace ConsoleApp
                 return "Linear";
             return "Quadratic";
         }
-
+        //Method to print roots of linear equation
         static void PrintResult(double root)
         {
-            //int result;
-            //Console.WriteLine(!Int32.TryParse(root.ToString(), out result) ? $"Root:\nx={root}" : $"Root:\nx={result}");
             Console.Write($"Root:\nx = ");
             Console.WriteLine("{0:0.##}", root);
 
         }
-
+        //Method to print roots of quadratic equation
         static void PrintResult(double[] roots)
         {
             Console.WriteLine("Roots:");
@@ -53,7 +55,7 @@ namespace ConsoleApp
                 Console.WriteLine("{0:0.##}" , roots[i]);
             }
         }
-
+        //Method to get coeffs from console
         static double[] CoefficientsInput(string type)
         {
             var coeffs = new double[2];
@@ -105,6 +107,24 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+            //Matrixes//////////////////////////////////////////////////////////////////////////////
+            string inputFilePath = ConfigurationManager.AppSettings.Get("path");
+            StreamReader reader = new StreamReader(inputFilePath);
+            List<int> endIndexes= new List<int>(2);
+            int index = 0;
+            while (endIndexes.Count != 2)
+            {
+                if (reader.ReadLine().Equals("end"))
+                {
+                    endIndexes.Add(index);
+                }
+                index++;
+            }
+            Matrix X = new Matrix(3, 4);
+            Matrix Z = new Matrix(4, 3);
+            X.FillMatrixFromFile(inputFilePath, 0, endIndexes[0] - 1);
+            Z.FillMatrixFromFile(inputFilePath, endIndexes[0] + 1, endIndexes[1] - 1);
+            //Equations///////////////////////////////////////////////////////////////////////////////
             string type = "";
             type = TypeInput();
             double[] coeffs = CoefficientsInput(type);
@@ -130,6 +150,7 @@ namespace ConsoleApp
                     logger.Log(LogLevel.Info, $"Equation type: {type}| No roots");
                 }
             }
+            
         }
     }
 }
