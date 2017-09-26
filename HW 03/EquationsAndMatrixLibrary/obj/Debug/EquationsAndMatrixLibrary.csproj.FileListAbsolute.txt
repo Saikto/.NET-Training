@@ -1,0 +1,6 @@
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMatrixLibrary.dll
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMatrixLibrary.pdb
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.dll
+D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.pdb

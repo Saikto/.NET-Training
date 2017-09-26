@@ -1,0 +1,12 @@
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.exe
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.pdb
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.exe
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.pdb
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\EquationsAndMatrixLibrary.dll
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\EquationsAndMatrixLibrary.pdb
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.dll
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.xml
+D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.config

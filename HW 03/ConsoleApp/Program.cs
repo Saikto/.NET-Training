@@ -5,11 +5,13 @@ using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using EquationsAndMatrixLibrary;
+using NLog;
 
 namespace ConsoleApp
 {
     class Program
     {
+        private static Logger logger = LogManager.GetLogger("Equations");
         static string TypeInput()
         {
             int choice = 0;
@@ -62,9 +64,11 @@ namespace ConsoleApp
                 for (; ; )
                 {
                     Console.Write("a = ");
-                    if (!Double.TryParse(Console.ReadLine(), out coeffs[2]))
+                    string a = Console.ReadLine();
+                    if (!Double.TryParse(a, out coeffs[2]))
                     {
                         Console.WriteLine("Unacceptable coefficient. Try again.");
+                        logger.Log(LogLevel.Info, $"User entered unacceptable coefficient A: {a}");
                     }
                     else break;
                 }
@@ -77,18 +81,22 @@ namespace ConsoleApp
             for (;;)
             {
                 Console.Write("b = ");
-                if (!Double.TryParse(Console.ReadLine(), out coeffs[1]))
+                string b = Console.ReadLine();
+                if (!Double.TryParse(b, out coeffs[1]))
                 {
                     Console.WriteLine("Unacceptable coefficient. Try again.");
+                    logger.Log(LogLevel.Info, $"User entered unacceptable coefficient B: {b}");
                 }
                 else break;
             }
             for (;;)
             {
                 Console.Write("c = ");
-                if (!Double.TryParse(Console.ReadLine(), out coeffs[0]))
+                string c = Console.ReadLine();
+                if (!Double.TryParse(c, out coeffs[0]))
                 {
                     Console.WriteLine("Unacceptable coefficient. Try again.");
+                    logger.Log(LogLevel.Info, $"User entered unacceptable coefficient C: {c}");
                 }
                 else break;
             }
@@ -97,21 +105,30 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            double[] coeffs = CoefficientsInput(TypeInput());
-            if (coeffs.Length == 2)
+            string type = "";
+            type = TypeInput();
+            double[] coeffs = CoefficientsInput(type);
+            if (type.Equals("Linear"))
             {
                 LinearEquation linearEquation = new LinearEquation(coeffs);
-                PrintResult(linearEquation.Solve());
+                double result = linearEquation.Solve();
+                PrintResult(result);
+                logger.Log(LogLevel.Info, $"Equation type: {type}| Root: {result}");
             }
-            else if (coeffs.Length == 3)
+            else if (type.Equals("Quadratic"))
             {
                 QuadraticEquation quadraticEquation = new QuadraticEquation(coeffs);
                 if (!quadraticEquation.AreComplexRoots())
                 {
-                    PrintResult(quadraticEquation.Solve());
+                    double[] result = quadraticEquation.Solve();
+                    PrintResult(result);
+                    logger.Log(LogLevel.Info, $"Equation type: {type}| Roots: {result[0]} , {result[1]}");
                 }
-                else 
+                else
+                {
                     Console.WriteLine("There are no real roots.");
+                    logger.Log(LogLevel.Info, $"Equation type: {type}| No roots");
+                }
             }
         }
     }
