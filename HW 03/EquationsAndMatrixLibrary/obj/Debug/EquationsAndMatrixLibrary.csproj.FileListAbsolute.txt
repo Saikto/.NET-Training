@@ -4,3 +4,9 @@ D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMat
 D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMatrixLibrary.pdb
 D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.dll
 D:\Tasks\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMatrixLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\bin\Debug\EquationsAndMatrixLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 03\EquationsAndMatrixLibrary\obj\Debug\EquationsAndMatrixLibrary.pdb

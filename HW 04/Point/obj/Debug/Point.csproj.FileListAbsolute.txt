@@ -1,0 +1,6 @@
+E:\Study\VS Projects\.NET-Training\HW 04\Point\bin\Debug\Point.dll
+E:\Study\VS Projects\.NET-Training\HW 04\Point\bin\Debug\Point.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\Point\obj\Debug\Point.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 04\Point\obj\Debug\Point.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 04\Point\obj\Debug\Point.dll
+E:\Study\VS Projects\.NET-Training\HW 04\Point\obj\Debug\Point.pdb

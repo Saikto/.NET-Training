@@ -10,3 +10,15 @@ D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\EquationsAndMatrixLibrary.pdb
 D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.dll
 D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.xml
 D:\Tasks\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.config
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.config
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\ConsoleApp.pdb
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\EquationsAndMatrixLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.dll
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\EquationsAndMatrixLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\bin\Debug\NLog.xml
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 03\ConsoleApp\obj\Debug\ConsoleApp.pdb

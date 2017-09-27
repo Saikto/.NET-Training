@@ -108,7 +108,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //Matrixes//////////////////////////////////////////////////////////////////////////////
-            string inputFilePath = ConfigurationManager.AppSettings.Get("path");
+            string inputFilePath = ConfigurationManager.AppSettings.Get("homepath");
             StreamReader reader = new StreamReader(inputFilePath);
             List<int> endIndexes= new List<int>(2);
             int index = 0;
@@ -120,10 +120,23 @@ namespace ConsoleApp
                 }
                 index++;
             }
-            Matrix X = new Matrix(3, 4);
-            Matrix Z = new Matrix(4, 3);
+            int n = 3, m = 4;
+            Matrix X = new Matrix(n, m);
+            Matrix Z = new Matrix(m, n);
             X.FillMatrixFromFile(inputFilePath, 0, endIndexes[0] - 1);
             Z.FillMatrixFromFile(inputFilePath, endIndexes[0] + 1, endIndexes[1] - 1);
+            X.PrintMatrix();
+            Z.PrintMatrix();
+            Matrix A = new Matrix(n, n);
+            try
+            {
+                A = X * Z;
+                A.PrintMatrix();
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Can't multiply matrices of such dimensions.");
+            }
             //Equations///////////////////////////////////////////////////////////////////////////////
             string type = "";
             type = TypeInput();

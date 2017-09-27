@@ -1,0 +1,13 @@
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ClassWithExemplarsCount.dll
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Fibonacci.dll
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.dll
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ClassWithExemplarsCount.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Fibonacci.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.pdb

@@ -1,0 +1,5 @@
+E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\bin\Debug\ClassWithExemplarsCount.dll
+E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\bin\Debug\ClassWithExemplarsCount.pdb
+E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.dll
+E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.pdb
