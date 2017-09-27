@@ -25,8 +25,9 @@ namespace ConsoleApp
             
             //int primeCount = fibonacciRow.Count(t => t.IsPrime());
             //Console.WriteLine($"Prime count in first {rowLength} members of fib row: {primeCount}");
-            Console.WriteLine($"{fibonacciRow[73]}");
-            Console.WriteLine($"{ fibonacciRow[73].IsPrime()}");
+            
+            //Console.WriteLine($"{fibonacciRow[73]}");           //Freeze from here
+            //Console.WriteLine($"{ fibonacciRow[73].IsPrime()}");
 
             //Divisible by sum of numbers
             var divisible = fibonacciRow.Where(t => t.IsDivisible(t.DigitsSum())).ToList();
@@ -58,6 +59,9 @@ namespace ConsoleApp
             //{
             //    Console.WriteLine(number);
             //}
+
+            var a = fibonacciRow.Where(t => t.IsDivisible(3));
+            Console.WriteLine(fibonacciRow[7].GetLastDigits(2));
         }
     }
 }

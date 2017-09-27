@@ -25,6 +25,18 @@ namespace HomeworkUtils
 
     public static class BigIntegerExtension
     {
+        public static int GetLastDigits(this BigInteger n, int count)
+        {
+            int index = 0;
+            string str = n.ToString();
+            if (str.Length < count)
+            {
+                return Int32.Parse(str.Substring(0));
+            }
+            index = str.IndexOf(str[str.Length - count].ToString());
+            return Int32.Parse(str.Substring(index));
+        }
+
         public static bool Contains(this BigInteger n, int digit)
         {
             if (n.ToString().Contains(digit.ToString()))
