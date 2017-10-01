@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeworkUtils", "HomeworkUt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{04A53391-FEDA-4405-A296-439A337637E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomersXMLLibrary", "CustomersXMLLibrary\CustomersXMLLibrary.csproj", "{64A9FE9E-B727-473C-BD4F-F8CC91DC2164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A9934C54-6722-4D6D-BD5E-714B2CCD43C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{04A53391-FEDA-4405-A296-439A337637E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A53391-FEDA-4405-A296-439A337637E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A53391-FEDA-4405-A296-439A337637E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A9FE9E-B727-473C-BD4F-F8CC91DC2164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A9FE9E-B727-473C-BD4F-F8CC91DC2164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A9FE9E-B727-473C-BD4F-F8CC91DC2164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A9FE9E-B727-473C-BD4F-F8CC91DC2164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9934C54-6722-4D6D-BD5E-714B2CCD43C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9934C54-6722-4D6D-BD5E-714B2CCD43C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9934C54-6722-4D6D-BD5E-714B2CCD43C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9934C54-6722-4D6D-BD5E-714B2CCD43C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
