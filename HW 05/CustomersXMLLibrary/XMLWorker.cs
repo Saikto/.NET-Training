@@ -40,6 +40,7 @@ namespace CustomersXMLLibrary
         public static string path =
             @"E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\RD. HW - AT Lab. C#. 05 - Customers.xml";
 
+        //Adds order to selected XElement
         public static void AddOrder(this XElement rootCustomer, string id, string orderdate, string total)
         {
             XElement newOrder = new XElement("order",
@@ -49,6 +50,7 @@ namespace CustomersXMLLibrary
             rootCustomer.Element("orders").Add(newOrder);
         }
 
+        //Adds customer to selected XElement
         public static void AddCustomer(this XElement rootElement, string id, string city, string postalcode, string phone)
         {
             XElement newCustomer = new XElement("customer",
@@ -60,6 +62,7 @@ namespace CustomersXMLLibrary
             rootElement.Add(newCustomer);
         }
 
+        //Returns list of customers containing the customers whose sum of all orders exceeds X
         public static List<XElement> OrdersSumMoreXList(this XDocument doc, double x)
         {
             var customers = doc
@@ -70,6 +73,7 @@ namespace CustomersXMLLibrary
             return customers;
         }
 
+        //Returns list of customers containing the customers whose "total" value of at  least one order exceeds X
         public static List<XElement> OrderMoreXList(this XDocument doc, double x)
         {
             var customers = doc
@@ -80,6 +84,7 @@ namespace CustomersXMLLibrary
             return customers;
         }
 
+        //Groups customer by country () [TODO]
         public static void GroupByCountry(this XDocument doc)
         {
             var customersByCountry = doc
@@ -88,6 +93,7 @@ namespace CustomersXMLLibrary
                 .GroupBy(t => t.Element("country")).ToList();
         }
 
+        //Returns dictionary in wich KEY is first order Date and value is customer XElement
         public static Dictionary<string, XElement> CustomersWithStartDate(this XDocument doc)
         {
             var customersWithFirstOrderDate = doc
@@ -101,6 +107,7 @@ namespace CustomersXMLLibrary
             return customersWithFirstOrderDate;
         }
 
+        //Returns string value of postal code XElement
         public static string GetPostalCode(this XElement t)
         {
             if (t.Element("postalcode") != null)
@@ -108,6 +115,7 @@ namespace CustomersXMLLibrary
             return "";
         }
 
+        //Returns list of customers who have wrong postal code/phone number/no region
         public static List<XElement> CustomersWrongData(this XDocument doc)
         {
             string pattern = "[0-9]+";
@@ -121,6 +129,7 @@ namespace CustomersXMLLibrary
             return customersWithWrongData;
         }
 
+        //Returns dictionary in wich KEY is city name and value is city profability
         public static Dictionary<string, double> CityProfability(this XDocument doc)
         {
             Dictionary<string, double> cityOrdersAverage =new Dictionary<string, double>();
@@ -140,6 +149,7 @@ namespace CustomersXMLLibrary
             return cityOrdersAverage;
         }
 
+        //Returns dictionary in wich KEY is city name and value is city intensity
         public static Dictionary<string, double> CityIntensity(this XDocument doc)
         {
             Dictionary<string, double> cityOrdersByCustomerAverage = new Dictionary<string, double>();
