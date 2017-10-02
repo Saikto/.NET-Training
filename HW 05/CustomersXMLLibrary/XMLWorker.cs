@@ -37,8 +37,17 @@ namespace CustomersXMLLibrary
 
     public static class XMLWorker
     {
-        public static string path =
-            @"E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\RD. HW - AT Lab. C#. 05 - Customers.xml";
+        public static int GetYearFromXElement(this XElement orderdate)
+        {
+            DateTime date = DateTime.Parse(orderdate.Value);
+            return date.Year;
+        }
+
+        public static int GetMonthFromXElement(this XElement orderdate)
+        {
+            DateTime date = DateTime.Parse(orderdate.Value);
+            return date.Month;
+        }
 
         //Adds order to selected XElement
         public static void AddOrder(this XElement rootCustomer, string id, string orderdate, string total)
@@ -166,6 +175,68 @@ namespace CustomersXMLLibrary
                 cityOrdersByCustomerAverage.Add(city.Value, average);
             }
             return cityOrdersByCustomerAverage;
+        }
+
+
+        //Returns dictionary in wich KEY is month number, VALUE is customers activity percent
+        public static Dictionary<int, double> CustomersActivityByMonth(this XDocument doc)
+        {
+            double customersCount = doc.Element("customers")
+                .Elements("customer").ToList().Count;
+            Dictionary<int, double> customersActivity = new Dictionary<int, double>(12);
+            for (int i = 1; i <= 12; i++)
+            {
+                var iMonthCustomers = doc.Element("customers")
+                    .Elements("customer")
+                    .Where(c => c.Descendants("orderdate").Any(t => t.GetMonthFromXElement() == i)).ToList();
+                customersActivity.Add(i, iMonthCustomers.Count / customersCount * 100);
+            }
+            return customersActivity;
+        }
+
+        //Returns dictionary in wich KEY is year, VALUE is customers activity percent
+        public static Dictionary<int, double> CustomersActivityByYear(this XDocument doc)
+        {
+            double customersCount = doc.Element("customers")
+                .Elements("customer").ToList().Count;
+            var listOfYears = doc.Element("customers")
+                .Elements("customer")
+                .Descendants("orderdate")
+                .Select(t => t.GetYearFromXElement()).Distinct().OrderBy(t => t).ToList();
+            Dictionary<int, double> customersActivity = new Dictionary<int, double>();
+            foreach (int year in listOfYears)
+            {
+                var iYearCustomers = doc.Element("customers")
+                    .Elements("customer")
+                    .Where(c => c.Descendants("orderdate").Any(t => t.GetYearFromXElement() == year)).ToList();
+                customersActivity.Add(year, iYearCustomers.Count / customersCount * 100);
+            }
+            return customersActivity;
+        }
+
+        //Returns dictionary in wich KEY is year-month pair, VALUE is customers activity percent
+        public static Dictionary<string, double> CustomersActivityByYearAndMonth(this XDocument doc)
+        {
+            double customersCount = doc.Element("customers")
+                .Elements("customer").ToList().Count;
+            var listOfYears = doc.Element("customers")
+                .Elements("customer")
+                .Descendants("orderdate")
+                .Select(t => t.GetYearFromXElement()).Distinct().OrderBy(t => t).ToList();
+            Dictionary<string, double> customersActivity = new Dictionary<string, double>();
+            foreach (int year in listOfYears)
+            {
+                var iYearCustomers = doc.Element("customers")
+                    .Elements("customer")
+                    .Where(c => c.Descendants("orderdate").Any(t => t.GetYearFromXElement() == year)).ToList();
+                for (int i = 1; i <= 12; i++)
+                {
+                    var iMonthCustomers = iYearCustomers
+                                            .Where(c => c.Descendants("orderdate").Any(t => t.GetMonthFromXElement() == i)).ToList();
+                    customersActivity.Add(year.ToString() + "-" + i.ToString(), iMonthCustomers.Count / customersCount * 100);
+                }
+            }
+            return customersActivity;
         }
     }
 }
