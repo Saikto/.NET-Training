@@ -7,6 +7,7 @@ using NUnit;
 using System.Text;
 using System.Threading.Tasks;
 using CustomersXMLLibrary;
+using NUnit.Framework.Internal;
 using Assert = NUnit.Framework.Assert;
 
 namespace Tests
@@ -15,7 +16,8 @@ namespace Tests
     public class CustomersTests
     {
         public static string path =
-            @"E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\RD. HW - AT Lab. C#. 05 - Customers.xml";
+            //@"E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\RD. HW - AT Lab. C#. 05 - Customers.xml";
+            @"D:\Tasks\.NET-Training\HW 05\CustomersXMLLibrary\RD. HW - AT Lab. C#. 05 - Customers.xml";
 
         [TestMethod]
         public void TstGroupByCountry()
@@ -31,9 +33,10 @@ namespace Tests
             string postalcode = "220000";
             string phone = "366-35-66";
             double x = 10000;
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
             int count = XMLWorker.OrderMoreXList(doc, x).Count;
-            doc.Element("customers").AddCustomer(id, postalcode, phone);
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
             doc.Element("customers")
                 .Elements("customer")
                 .Single(t => t.Element("id").Value == id)
@@ -50,9 +53,10 @@ namespace Tests
             string postalcode = "220000";
             string phone = "366-35-66";
             double x = 1000;
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
             int count = XMLWorker.OrdersSumMoreXList(doc, x).Count;
-            doc.Element("customers").AddCustomer(id, postalcode, phone);
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
             doc.Element("customers")
                 .Elements("customer")
                 .Single(t => t.Element("id").Value == id)
@@ -68,8 +72,9 @@ namespace Tests
             string id = "IGOR";
             string postalcode = "220000";
             string phone = "366-35-66";
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
-            doc.Element("customers").AddCustomer(id, postalcode, phone);
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
             var ordersCount = doc
                 .Element("customers")
                 .Elements("customer")
@@ -94,11 +99,12 @@ namespace Tests
         [TestMethod]
         public void TstWrongData()
         {
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
             int count = XMLWorker.CustomersWrongData(doc).Count;
-            doc.Element("customers").AddCustomer("IGOR", "220-000", "(029)366-35-66");
-            doc.Element("customers").AddCustomer("VASIL", "220000", "840-66-90");
-            doc.Element("customers").AddCustomer("VASIL", "220000", "(017)840-66-90");
+            doc.Element("customers").AddCustomer("IGOR", city, "220-000", "(029)366-35-66");
+            doc.Element("customers").AddCustomer("VASIL", city, "220000", "840-66-90");
+            doc.Element("customers").AddCustomer("VASIL", city, "220000", "(017)840-66-90");
             int count1 = XMLWorker.CustomersWrongData(doc).Count;
             Assert.AreEqual(count1 - 3, count);
         }
@@ -109,11 +115,12 @@ namespace Tests
             string id = "IGOR";
             string postalcode = "220000";
             string phone = "366-35-66";
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
             var customersCount = doc
                 .Element("customers")
                 .Elements("customer").ToList().Count;
-            doc.Element("customers").AddCustomer(id, postalcode, phone);
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
             var customersCount1 = doc
                 .Element("customers")
                 .Elements("customer").ToList().Count;
@@ -123,8 +130,46 @@ namespace Tests
         [TestMethod]
         public void TstCityProfability()
         {
+            string id = "IGOR";
+            string postalcode = "220000";
+            string phone = "366-35-66";
+            string city = "Minsk";
             XDocument doc = XDocument.Load(path);
-            doc.CityProfability();
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
+            doc.Element("customers")
+                .Elements("customer")
+                .Single(t => t.Element("id").Value == id)
+                .AddOrder("268", "1998 - 04 - 03T00: 00:00", "1000");
+            Dictionary<string, double> profability = new Dictionary<string,double>();
+            profability = doc.CityProfability();
+
+            double x = 0;
+            if(profability.TryGetValue("Minsk", out x))
+                Assert.AreEqual(1000, x);
+            else
+                Assert.Fail();
+        }
+
+        [TestMethod]
+        public void TstCityIntensity()
+        {
+            string id = "IGOR";
+            string postalcode = "220000";
+            string phone = "366-35-66";
+            string city = "Minsk";
+            XDocument doc = XDocument.Load(path);
+            doc.Element("customers").AddCustomer(id, city, postalcode, phone);
+            doc.Element("customers")
+                .Elements("customer")
+                .Single(t => t.Element("id").Value == id)
+                .AddOrder("268", "1998 - 04 - 03T00: 00:00", "1000");
+            Dictionary<string, double> intensity = new Dictionary<string, double>();
+            intensity = doc.CityIntensity();
+            double x = 0;
+            if (intensity.TryGetValue("Minsk", out x))
+                Assert.AreEqual(1, x);
+            else
+                Assert.Fail();
         }
     }
 }

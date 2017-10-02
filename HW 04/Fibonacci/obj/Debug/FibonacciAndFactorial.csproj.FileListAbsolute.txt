@@ -3,3 +3,9 @@ E:\Study\VS Projects\.NET-Training\HW 04\Fibonacci\bin\Debug\Fibonacci.pdb
 E:\Study\VS Projects\.NET-Training\HW 04\Fibonacci\obj\Debug\FibonacciAndFactorial.csproj.CoreCompileInputs.cache
 E:\Study\VS Projects\.NET-Training\HW 04\Fibonacci\obj\Debug\Fibonacci.dll
 E:\Study\VS Projects\.NET-Training\HW 04\Fibonacci\obj\Debug\Fibonacci.pdb
+D:\Tasks\.NET-Training\HW 04\Fibonacci\bin\Debug\Fibonacci.dll
+D:\Tasks\.NET-Training\HW 04\Fibonacci\bin\Debug\Fibonacci.pdb
+D:\Tasks\.NET-Training\HW 04\Fibonacci\obj\Debug\FibonacciAndFactorial.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 04\Fibonacci\obj\Debug\FibonacciAndFactorial.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 04\Fibonacci\obj\Debug\Fibonacci.dll
+D:\Tasks\.NET-Training\HW 04\Fibonacci\obj\Debug\Fibonacci.pdb

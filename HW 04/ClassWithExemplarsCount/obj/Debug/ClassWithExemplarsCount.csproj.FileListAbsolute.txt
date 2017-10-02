@@ -3,3 +3,9 @@ E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\bin\Debug\Class
 E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.csproj.CoreCompileInputs.cache
 E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.dll
 E:\Study\VS Projects\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.pdb
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\bin\Debug\ClassWithExemplarsCount.dll
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\bin\Debug\ClassWithExemplarsCount.pdb
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.dll
+D:\Tasks\.NET-Training\HW 04\ClassWithExemplarsCount\obj\Debug\ClassWithExemplarsCount.pdb

@@ -49,10 +49,13 @@ namespace CustomersXMLLibrary
             rootCustomer.Element("orders").Add(newOrder);
         }
 
-        public static void AddCustomer(this XElement rootElement, string id, string postalcode, string phone)
+        public static void AddCustomer(this XElement rootElement, string id, string city, string postalcode, string phone)
         {
             XElement newCustomer = new XElement("customer",
                 new XElement("id", id),
+                new XElement("city", city),
+                new XElement("postacode", postalcode),
+                new XElement("phone", phone),
                 new XElement("orders"));
             rootElement.Add(newCustomer);
         }
@@ -120,7 +123,7 @@ namespace CustomersXMLLibrary
 
         public static Dictionary<string, double> CityProfability(this XDocument doc)
         {
-            Dictionary<string, double> CityOrdersAverage =new Dictionary<string, double>();
+            Dictionary<string, double> cityOrdersAverage =new Dictionary<string, double>();
             List<XElement> cities = doc.Descendants("city").Distinct(new XElementEqualityComparer()).ToList();
             foreach (var city in cities)
             {
@@ -132,9 +135,27 @@ namespace CustomersXMLLibrary
                 double ordersSumByCity = cityCustomers.Descendants("total")
                     .Sum(t => double.Parse(t.Value, CultureInfo.InvariantCulture));
                 double average = ordersSumByCity / ordersCountByCity;
-                CityOrdersAverage.Add(city.Value, average);
+                cityOrdersAverage.Add(city.Value, average);
             }
-            return CityOrdersAverage;
+            return cityOrdersAverage;
+        }
+
+        public static Dictionary<string, double> CityIntensity(this XDocument doc)
+        {
+            Dictionary<string, double> cityOrdersByCustomerAverage = new Dictionary<string, double>();
+            List<XElement> cities = doc.Descendants("city").Distinct(new XElementEqualityComparer()).ToList();
+            foreach (var city in cities)
+            {
+                var cityCustomers = doc
+                    .Element("customers")
+                    .Elements("customer")
+                    .Where(t => t.Element("city").Value == city.Value).ToList();
+                int ordersCountByCity = cityCustomers.Descendants("total").ToList().Count;
+                int customersCountInCity = cityCustomers.Count;
+                double average = (double)customersCountInCity / (double)ordersCountByCity;
+                cityOrdersByCustomerAverage.Add(city.Value, average);
+            }
+            return cityOrdersByCustomerAverage;
         }
     }
 }

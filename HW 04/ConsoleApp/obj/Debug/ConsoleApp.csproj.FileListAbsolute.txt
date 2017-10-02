@@ -11,3 +11,16 @@ E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.dll
 E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\ClassWithExemplarsCount.pdb
 E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Fibonacci.pdb
 E:\Study\VS Projects\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.pdb
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.exe
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\ConsoleApp.pdb
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\ClassWithExemplarsCount.dll
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\Fibonacci.dll
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.dll
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\ClassWithExemplarsCount.pdb
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\Fibonacci.pdb
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\bin\Debug\Point.pdb
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.exe
+D:\Tasks\.NET-Training\HW 04\ConsoleApp\obj\Debug\ConsoleApp.pdb

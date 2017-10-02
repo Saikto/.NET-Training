@@ -108,7 +108,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //Matrixes//////////////////////////////////////////////////////////////////////////////
-            string inputFilePath = ConfigurationManager.AppSettings.Get("homepath");
+            string inputFilePath = ConfigurationManager.AppSettings.Get("path");
             StreamReader reader = new StreamReader(inputFilePath);
             List<int> endIndexes= new List<int>(2);
             int index = 0;
