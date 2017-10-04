@@ -1,0 +1,9 @@
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\bin\Debug\CustomersXMLLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\bin\Debug\CustomersXMLLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\obj\Debug\CustomersXMLLibrary.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\obj\Debug\CustomersXMLLibrary.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\obj\Debug\CustomersXMLLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\obj\Debug\CustomersXMLLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\bin\Debug\nunit.framework.dll
+E:\Study\VS Projects\.NET-Training\HW 05\CustomersXMLLibrary\bin\Debug\nunit.framework.xml

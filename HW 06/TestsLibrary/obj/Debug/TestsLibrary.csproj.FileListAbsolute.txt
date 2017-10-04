@@ -1,0 +1,15 @@
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\TestsLibrary.dll
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\TestsLibrary.pdb
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\nunit.framework.dll
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\WebDriver.dll
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\WebDriver.Support.dll
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\nunit.framework.xml
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\WebDriver.xml
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\WebDriver.Support.xml
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAssemblyReference.cache
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\obj\Debug\TestsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\obj\Debug\TestsLibrary.dll
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\obj\Debug\TestsLibrary.pdb
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\chromedriver.exe
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\geckodriver.exe
+C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\MicrosoftWebDriver.exe

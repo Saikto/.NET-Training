@@ -1,0 +1,11 @@
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\Tests.dll
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\Tests.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\CustomersXMLLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\nunit.framework.dll
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\CustomersXMLLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\bin\Debug\nunit.framework.xml
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\obj\Debug\Tests.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\obj\Debug\Tests.dll
+E:\Study\VS Projects\.NET-Training\HW 05\Tests\obj\Debug\Tests.pdb

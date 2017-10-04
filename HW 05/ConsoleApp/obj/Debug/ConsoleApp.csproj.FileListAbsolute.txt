@@ -1,0 +1,9 @@
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\bin\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\bin\Debug\ConsoleApp.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\bin\Debug\HomeworkUtils.dll
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\bin\Debug\HomeworkUtils.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\obj\Debug\ConsoleApp.exe
+E:\Study\VS Projects\.NET-Training\HW 05\ConsoleApp\obj\Debug\ConsoleApp.pdb

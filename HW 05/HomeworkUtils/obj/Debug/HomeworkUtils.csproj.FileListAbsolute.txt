@@ -1,0 +1,6 @@
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\bin\Debug\HomeworkUtils.dll
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\bin\Debug\HomeworkUtils.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\obj\Debug\HomeworkUtils.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\obj\Debug\HomeworkUtils.dll
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\obj\Debug\HomeworkUtils.pdb
+E:\Study\VS Projects\.NET-Training\HW 05\HomeworkUtils\obj\Debug\HomeworkUtils.csprojResolveAssemblyReference.cache
