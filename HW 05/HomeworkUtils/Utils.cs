@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Security;
 using System.Numerics;
@@ -25,6 +26,7 @@ namespace HomeworkUtils
 
     public static class BigIntegerExtension
     {
+
         public static int GetLastDigits(this BigInteger n, int count)
         {
             int index = 0;
@@ -33,8 +35,8 @@ namespace HomeworkUtils
             {
                 return Int32.Parse(str.Substring(0));
             }
-            index = str.IndexOf(str[str.Length - count].ToString());
-            return Int32.Parse(str.Substring(index));
+            //index = str.IndexOf(str[str.Length - count].ToString());
+            return Int32.Parse(str.Substring(str.Length-count));
         }
 
         public static bool Contains(this BigInteger n, int digit)
@@ -172,6 +174,45 @@ namespace HomeworkUtils
                 }
             }
             return count;
+        }
+
+        public static List<BigInteger> LeftRightMembersDevisibleBy5(List<BigInteger> list)
+        {
+            List<BigInteger> newList = new List<BigInteger>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                int j = 5;
+                bool flag = false;
+                for (j = i - 1; j >= i - 5; j--)
+                {
+                    if (j <= 0)
+                    {
+                        break;;
+                    }
+                    if (list[j].IsDivisible(5))
+                    {
+                        newList.Add(list[i]);
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag)
+                {
+                    for (j = i + 1; j <= i + 5; j++)
+                    {
+                        if (j == list.Count)
+                        {
+                            break; ;
+                        }
+                        if (list[j].IsDivisible(5))
+                        {
+                            newList.Add(list[i]);
+                            break;
+                        }
+                    }
+                }
+            }
+            return newList;
         }
     }
 }

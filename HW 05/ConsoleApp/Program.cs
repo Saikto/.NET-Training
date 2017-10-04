@@ -60,8 +60,10 @@ namespace ConsoleApp
             //    Console.WriteLine(number);
             //}
 
-            var a = fibonacciRow.Where(t => t.IsDivisible(3));
-            Console.WriteLine(fibonacciRow[7].GetLastDigits(2));
+            //Reterns list of element whose +-5 members adre divisible by 5
+            var b = Utils.LeftRightMembersDevisibleBy5(fibonacciRow);
+            //Returns list of last 2 digits of numbers in list b that are divisible by 3
+            var a = b.Where(t => t.IsDivisible(3)).Select(t => t.GetLastDigits(2)).ToList();
         }
     }
 }
