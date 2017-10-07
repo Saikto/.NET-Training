@@ -13,14 +13,27 @@ namespace TestsLibrary
     {
         private IWebDriver _driver;
 
-        [FindsBy(How = How.Id, Using = "")]
-        public IWebElement UserNameField;
-
+        [FindsBy(How = How.XPath, Using = @"//*[@class=""content-box-body-list no-list-style""]")]
+        private IWebElement ArticleMenu;
         
         public ArticlePage(IWebDriver driver)
         {
             this._driver = driver;
             PageFactory.InitElements(_driver, this);
+        }
+
+        public List<string> GetArticleMenu()
+        {
+            try
+            {
+                var listOfLi = ArticleMenu.FindElements(By.TagName("li"));
+                var listOfActions = listOfLi.Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList();
+                return listOfActions;
+            }
+            catch (NoSuchElementException exception)
+            {
+                throw new NoSuchElementException("Article menu not found.", exception);
+            }
         }
     }
 }

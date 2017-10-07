@@ -7,18 +7,13 @@ using OpenQA.Selenium.IE;
 
 namespace TestsLibrary
 {
-    public class WebDriverSelector
+    public static class WebDriverSelector
     {
-        private static Dictionary<string, IWebDriver> driversForTests = new Dictionary<string, IWebDriver>();
-
-        private WebDriverSelector()
-        {
-        }
-
-        public static IWebDriver GetWebDriver(string methodName, string browser)
+        private static volatile Dictionary<string, IWebDriver> driversForTests = new Dictionary<string, IWebDriver>();
+        public static IWebDriver GetWebDriver(string startedName, string browser)
         {
             IWebDriver driver;
-            if (driversForTests.TryGetValue(methodName, out driver))
+            if (driversForTests.TryGetValue(startedName, out driver))
                 return driver;
             switch (browser)
             {
@@ -38,7 +33,7 @@ namespace TestsLibrary
                     driver = new FirefoxDriver();
                     break;
             }
-            driversForTests.Add(methodName, driver);
+            driversForTests.Add(startedName, driver);
             return driver;
         }
     }

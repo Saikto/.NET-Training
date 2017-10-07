@@ -53,8 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\ArticlePage.cs" />
+    <Compile Include="Pages\CurrentIssuePage.cs" />
+    <Compile Include="Pages\JournalPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
-    <Compile Include="WebDriver.cs" />
+    <Compile Include="WebDriver\WebDriverSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

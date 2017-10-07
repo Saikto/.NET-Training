@@ -13,3 +13,18 @@ C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\obj\Debug\TestsLibrary.pdb
 C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\chromedriver.exe
 C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\geckodriver.exe
 C:\Users\igor_\source\repos\TestsLibrary\TestsLibrary\bin\Debug\MicrosoftWebDriver.exe
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\chromedriver.exe
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\geckodriver.exe
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\MicrosoftWebDriver.exe
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\TestsLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\TestsLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\nunit.framework.dll
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.dll
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Support.dll
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\nunit.framework.xml
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.xml
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Support.xml
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAssemblyReference.cache
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csproj.CoreCompileInputs.cache
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.dll
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.pdb
