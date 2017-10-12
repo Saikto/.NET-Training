@@ -14,7 +14,7 @@ namespace SerializationRunner
     {
         public static void SerializeCatalog(Catalog catalog, string path)
         {
-            var serializer = new XmlSerializer(typeof(Catalog));
+            var serializer = new XmlSerializer(typeof(Catalog), new Type[] { typeof(Book) });
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
             {
                 
@@ -25,11 +25,10 @@ namespace SerializationRunner
 
         public static Catalog DeserializeCatalog(string path)
         {
-            var serializer = new XmlSerializer(typeof(Catalog));
-            using (FileStream fileStream = new FileStream(path, FileMode.Open))
+            var serializer = new XmlSerializer(typeof(Catalog), new Type[] {typeof(Book)});
+            using (XmlReader reader = XmlReader.Create(path))
             {
-                Catalog catalog = new Catalog();
-                catalog = (Catalog)serializer.Deserialize(fileStream);
+                Catalog catalog = (Catalog)serializer.Deserialize(reader);
                 Console.WriteLine("Catalog successfully deserialized.");
                 return catalog;
             }

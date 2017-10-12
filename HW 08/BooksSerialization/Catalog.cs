@@ -11,9 +11,9 @@ namespace BooksSerialization
     [Serializable, XmlRoot(ElementName = "catalog", Namespace = "http://library.by/catalog")]
     public class Catalog
     {
-        [XmlAttribute("xmlns")]
+        [XmlAttribute(AttributeName = "xmlns")]
         public string Xmlns { get; set; }
-        [XmlAttribute("date")]
+        [XmlAttribute(AttributeName = "date", DataType = "date")]
         public DateTime Date { get; set; }
         [XmlElement("book", typeof(Book))]
         public List<Book> BooksList { get; set; }
