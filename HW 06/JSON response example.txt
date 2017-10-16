@@ -1,0 +1,73 @@
+{
+	"TotalFound":2,
+	"QueryTime":132,
+	"NextCursorMark":"AoJwgM7c/dwCPxNKT1VSTkFML3ByZWNvcy8wNC4wMi8wMDAwNjUzNC0yMDE3MDcwMDAtMDAwMDMvcm9vdA==",
+	"Results":
+	[
+		{
+			"Id":"JOURNAL/precos/04.02/00006534-900000000-98392/root",
+			"Score":19.95764,
+			"Fields":
+			[
+				{
+					"FieldName":"AccessionNumber",
+					"FieldValue":"00006534-900000000-98392",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"AssetType",
+					"FieldValue":"article",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"Title",
+					"FieldValue":"Reply",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"OtherIds",
+					"FieldValue":["pub-sub-type PAP-SAME","cadmus-id 00006534_2017_publish__kamali_reconstruction8232_"],
+					"FieldType":"Array"
+				}
+			],
+			"HighlightFields":
+				[
+				]
+		},
+		{
+			"Id":"JOURNAL/precos/04.02/00006534-201707000-00003/root",
+			"Score":14.520296,
+			"Fields":
+			[
+				{
+					"FieldName":"AccessionNumber",
+					"FieldValue":"00006534-201707000-00003",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"AssetType",
+					"FieldValue":"article",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"Title",
+					"FieldValue":"Medial Row Perforators Are Associated with Higher Rates of Fat Necrosis in Bilateral DIEP Flap Breast Reconstruction",
+					"FieldType":"String"
+				},
+				{
+					"FieldName":"OtherIds",
+					"FieldValue":["cadmus-id 00006534_2017_140_19_kamali_reconstruction_1"],
+					"FieldType":"Array"
+				}
+			],
+			"HighlightFields":
+			[
+				{
+					"FieldName":"Abstract",
+					"FieldValue":[" were separated into three cohorts based on perforator location: lateral row only, <em>medial</em> row only, and <em>medial</em> plus lateral rows. Postoperative flap-related complications were compared and analyzed."],
+					"FieldType":"Array"
+				}
+			]
+		}
+	]
+}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -16,10 +18,10 @@ namespace TestsLibrary.Pages
         }
 
         [FindsBy(How = How.ClassName, Using = @"resultCount")]
-        public IWebElement ResultCount;
+        private IWebElement ResultCount;
 
         [FindsBy(How = How.XPath, Using = @"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")]
-        public IWebElement SortByDropDownList;
+        private IWebElement SortByDropDownList;
 
         public SearchResultPage(IWebDriver driver)
         {
@@ -53,8 +55,26 @@ namespace TestsLibrary.Pages
                 SortByDropDownList.FindElement(
                     By.XPath("//*[@id=\"wpSearchResults\"]/div/div[2]/div[3]/div/div[2]/div/div[3]")).Click();
             }
-
-
         }
+
+        public List<string> GetResultTitlesList()
+        {
+            var titles = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]"))
+                .Select(x => x.GetAttribute("title"))
+                .Take(20)
+                .ToList();
+            return titles;
+        }
+
+        public List<string> GetResultPreviewsList()
+        {
+            var previews = _driver.FindElements(By.ClassName("article-previews"))
+                .Select(x => x.GetAttribute("innerHTML"))
+                .Take(20)
+                .ToList();
+            return previews;
+        }
+
+
     }
 }

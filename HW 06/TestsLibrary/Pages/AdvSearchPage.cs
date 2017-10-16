@@ -118,11 +118,6 @@ namespace TestsLibrary.Pages
             AllKeyWordsField.SendKeys(allKeyWords);
             TitleField.SendKeys(title);
 
-            if (ContentTypeArticleCheckBox.GetAttribute("checked") == "checked" && !searchArticles)
-            {
-                ContentTypeArticleCheckBox.Click();
-            }
-
             if (!ContentTypeImageCheckBox.Selected && searchImages)
             {
                 ContentTypeImageCheckBox.Click();
@@ -130,6 +125,11 @@ namespace TestsLibrary.Pages
             else if (ContentTypeImageCheckBox.Selected && !searchImages)
             {
                 ContentTypeImageCheckBox.Click();
+            }
+
+            if (!searchArticles && searchImages)
+            {
+                ContentTypeArticleCheckBox.Click();
             }
 
             if (!CMECheckBox.Selected && cme)
@@ -146,9 +146,9 @@ namespace TestsLibrary.Pages
             if(fiveYears)
                 LastFiveYearsRadio.Click();
 
-            if (allArticleTypes)
+            if (allArticleTypes && AllArticleTypesRadio.Enabled)
                 AllArticleTypesRadio.Click();
-            if (openAccess)
+            if (openAccess && AllArticleTypesRadio.Enabled)
                 OpenAccessOnlyRadio.Click();
         }
     }
