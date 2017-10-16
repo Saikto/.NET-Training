@@ -17,7 +17,6 @@ namespace SerializationRunner
             var serializer = new XmlSerializer(typeof(Catalog), new Type[] { typeof(Book) });
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
             {
-                
                 serializer.Serialize(fileStream, catalog);
                 Console.WriteLine("Catalog successfully serialized.");
             }
@@ -36,8 +35,8 @@ namespace SerializationRunner
 
         static void Main(string[] args)
         {
-            string path = @"E:\Study\VS Projects\.NET-Training\HW 08\RD. HW - AT Lab. C#. 08 - Books.xml";
-            string path1 = @"E:\Study\VS Projects\.NET-Training\HW 08\Books.xml";
+            string path = @"..\..\..\RD. HW - AT Lab. C#. 08 - Books.xml";
+            string path1 = @"..\..\..\Books.xml";
             Catalog catalog = DeserializeCatalog(path);
             SerializeCatalog(catalog, path1);
         }

@@ -8,6 +8,7 @@ using NUnit;
 using TestsLibrary;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using TestsLibrary.Pages;
 
 namespace Tests
 {
@@ -54,22 +55,8 @@ namespace Tests
             using (_driver)
             {
                 JournalPage journalPage = new JournalPage(_driver);
-                try
-                {
-                    journalPage.FindOpenArticle().Click();
-                }
-                catch (NoSuchElementException)
-                {
-                    IWebElement freeArticle = journalPage.FindFreeArticle();
-                    if (freeArticle == null)
-                    {
-                        Assert.Fail("Open or free article where not found.");
-                    }
-                    else
-                    {
-                        freeArticle.Click();
-                    }
-                }
+                journalPage.FindOpenArticle().Click();
+                journalPage.FindFreeArticle().Click();
                 ArticlePage articlePage = new ArticlePage(_driver);
                 List<string> menuAtions = articlePage.GetArticleMenu();
 
@@ -105,6 +92,25 @@ namespace Tests
                 Assert.IsTrue(listOfInnerHTML[2].Contains("View Contributor Index"));
             }
             
+        }
+
+        [Test]
+        public void TstAdvSearch()
+        {
+            string methodName = "TstAdvSearch";
+            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
+
+            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+            //using (_driver)
+            //{
+                AdvSearchPage searchPage = new AdvSearchPage(_driver);
+                //searchPage.SelectSearchOptions("blood", "adv", false, true, true, false, true, false, true);
+                searchPage.SelectSearchOptions("1");
+                searchPage.SearchButton.Click();
+                SearchResultPage resultsPage = new SearchResultPage(_driver);
+                int count = resultsPage.GetResultCount();
+                resultsPage.SelectSortByOption(SearchResultPage.SortByOptionsEnum.Newest);
+            //}
         }
     }
 }
