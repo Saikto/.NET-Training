@@ -68,6 +68,7 @@
     <Compile Include="SOLR\SearchResponse.cs" />
     <Compile Include="SOLR\SolrRequestGenerator.cs" />
     <Compile Include="SOLR\SolrWorker.cs" />
+    <Compile Include="Utils\TitlesComparer.cs" />
     <Compile Include="WebDriver\WebDriverSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

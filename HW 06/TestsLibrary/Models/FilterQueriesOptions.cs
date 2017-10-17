@@ -18,15 +18,13 @@ namespace TestsLibrary.Models
         public bool cme;
         public bool openAccess;
         public PublicationDateEnum pDate;
-        public int lastNYears;
         public SortByOptionsEnum sorting;
         public int rowsToGet;
 
         public FilterQueriesOptions(bool _articles = true,
                                     bool _image = false, bool _blogposts = false, bool _other = false, bool _podcast = false,
                                     bool _video = false, bool _cme = false, bool _openAccess = false, PublicationDateEnum _pDate = PublicationDateEnum.AllDates,
-                                    int _lastNYears = 0, SortByOptionsEnum _sorting = SortByOptionsEnum.BestMatch,
-                                    int _rowsToGet = 20)
+                                    SortByOptionsEnum _sorting = SortByOptionsEnum.BestMatch, int _rowsToGet = 20)
         {
             articles = _articles;
             image = _image;
@@ -36,8 +34,7 @@ namespace TestsLibrary.Models
             video = _video;
             cme = _cme;
             openAccess = _openAccess;
-            pDate = _pDate; //TODO;
-            lastNYears = _lastNYears; //TODO;
+            pDate = _pDate;
             sorting = _sorting;
             rowsToGet = _rowsToGet;
         }

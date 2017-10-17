@@ -115,11 +115,17 @@ namespace TestsLibrary.SOLR
             if (filterQuery != "" && FQO.openAccess) filterQuery += " AND " + qOpenAccess;
             else if (filterQuery == "" && FQO.openAccess) filterQuery += qOpenAccess;
 
-            DateTime start = new DateTime(DateTime.Now.Year - FQO.lastNYears, DateTime.Now.Month, DateTime.Now.Day);
-            string qPublicationDateRange = $"PublicationDateRange:[{start} TO {DateTime.Now:O}]";
+            //TODO Other date ranges
+            if (FQO.pDate == PublicationDateEnum.Last5Years)
+            {
+                DateTime start = new DateTime(DateTime.Now.Year - 5, DateTime.Now.Month, DateTime.Now.Day);
+                string qPublicationDateRange = $"PublicationDateRange:[{start} TO {DateTime.Now:O}]";
 
-            if (filterQuery != "" && FQO.lastNYears != 0) filterQuery += " AND " + qPublicationDateRange;
-            else if (filterQuery == "" && FQO.lastNYears != 0) filterQuery += qPublicationDateRange;
+                if (filterQuery != "" && FQO.pDate != PublicationDateEnum.AllDates)
+                    filterQuery += " AND " + qPublicationDateRange;
+                else if (filterQuery == "" && FQO.pDate != PublicationDateEnum.AllDates)
+                    filterQuery += qPublicationDateRange;
+            }
 
             if (filterQuery != "")
             {

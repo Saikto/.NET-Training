@@ -10,10 +10,12 @@ using NUnit;
 using TestsLibrary;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestsLibrary.Enums;
 using TestsLibrary.Models;
 using TestsLibrary.Pages;
 using TestsLibrary.SOLR;
+using TestsLibrary.Utils;
 
 namespace Tests
 {
@@ -34,10 +36,12 @@ namespace Tests
         [Test]
         public void TstLogIn()
         {
+            //WebDriver setup
             string methodName = "TstLogIn";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             _driver.Url = "http://journals.lww.com";
-
+            
+            //Test
             using (_driver)
             {
                 LoginPage loginPage = new LoginPage(_driver);
@@ -52,11 +56,13 @@ namespace Tests
         [Test]
         public void TstMenuElementsExist()
         {
+            //WebDriver setup
             string methodName = "TstMenuElementsExist";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             //_driver.Url = "http://journals.lww.com/annalsplasticsurgery"; //Only FREE article
             _driver.Url = "http://journals.lww.com/asaiojournal"; //Only Open article
-
+            
+            //Test
             using (_driver)
             {
                 JournalPage journalPage = new JournalPage(_driver);
@@ -83,10 +89,12 @@ namespace Tests
         [Test]
         public void TstCurrentIssueLinksExist()
         {
+            //WebDriver setup
             string methodName = "TstCurrentIssueLinksExist";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             _driver.Url = "http://journals.lww.com/asaiojournal";
-
+            
+            //Test
             using (_driver)
             {
                 JournalPage journalPage = new JournalPage(_driver);
@@ -100,51 +108,40 @@ namespace Tests
             
         }
 
+        //Articles with cme withing all dates
         [Test]
-        public void TstSearchTitle()
+        public void TstAdvSearchCase1()
         {
-            string methodName = "TstSearchTitle";
+            //WebDriver setup
+            string methodName = "TstAdvSearchCase1";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-            QueryStringOptions qsOptions = new QueryStringOptions();
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
-            string[] products = { "aacr" };
-
-            string title = "blood";
-            ///using (_driver)
-            //{
+            //_driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+            _driver.Url = "http://journals.lww.com/plasreconsurg/pages/advancedsearch.aspx";
+            //Search options setup
+            QueryStringOptions qsOptions = new QueryStringOptions(_title:"A");
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _cme:true,
+                _pDate:PublicationDateEnum.AllDates, _sorting:SortByOptionsEnum.Newest);
+            string[] products = { "PRECOS" };
+            
+            //Test
+            //Titles from ui, exepting PAP
+            List<string> titlesUi;
+            using (_driver)
+            {
                 AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions(qsOptions, fqOptions);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
                 searchPage.SearchButton.Click();
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
-                var titles = resultsPage
-                    .GetResultTitlesList()
-                    .ToList();
-            //}
+                resultsPage.SelectSortByOption(fqOptions.sorting);
+                titlesUi = resultsPage.GetResultTitlesWithoutPAPList(fqOptions.rowsToGet);
+            }
+            //Titles from api, exepting PAP
+            var sRequest = SolrRequest.GenerateRequest(qsOptions, fqOptions, products);
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+            var resultsApi = searchResponse.Results.Where(r => r.GetPublishDate()[0] != 9000).ToList();
+            bool a = TitlesComparer.AreTitlesEqual(titlesUi, resultsApi);
+            Assert.AreEqual(true, a);
         }
-
-        //[Test]
-        //public void TstSearchCme()
-        //{
-        //    string methodName = "TstSearchArticles";
-        //    IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-        //    _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-
-        //    string title = "a";
-        //    using (_driver)
-        //    {
-        //        AdvSearchPage searchPage = new AdvSearchPage(_driver);
-        //        searchPage.SelectSearchOptions(title: title, cme: true);
-        //        searchPage.SearchButton.Click();
-        //        SearchResultPage resultsPage = new SearchResultPage(_driver);
-        //        var doNotContain = resultsPage
-        //            .GetResultPreviewsList()
-        //            .Where(t => t.Contains("Image Gallery"))
-        //            .ToList();
-        //        Assert.IsTrue(0 == doNotContain.Count);
-        //    }
-        //}
-
 
         [Test]
         public void TstAdvSearch()

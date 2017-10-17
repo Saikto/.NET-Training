@@ -154,7 +154,9 @@ namespace TestsLibrary.Pages
                 {
                     for (int i = 1; i < journalsToSearchIn.Count; i++)
                     {
-                        journalsToSearchIn[i].FindElement(By.TagName("input")).Click();
+                        IWebElement e = journalsToSearchIn[i].FindElement(By.TagName("input"));
+                        if(e.Selected)
+                            e.Click();
                     }
                 }
             }

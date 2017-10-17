@@ -4,23 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReflectionUI"
-        xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib" x:Class="ReflectionUI.MainWindow"
+        xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib" x:Name="MainForm" x:Class="ReflectionUI.MainWindow"
         mc:Ignorable="d"
-        Title="Reflection UI" Height="800" Width="1000" ResizeMode ="NoResize">
-    <Grid>
-        <Button x:Name="BtClose" Content="Close" HorizontalAlignment="Left" Height="30" Margin="920,720,0,0" VerticalAlignment="Top" Width="50" Click="BtClose_Click"/>
-        <TextBox x:Name="TbDirectoryChoosen" HorizontalAlignment="Left" Height="50" Margin="25,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
-        <Button x:Name="BtDirChoice" Content="Browse folder" HorizontalAlignment="Left" Height="50" Margin="360,20,0,0" VerticalAlignment="Top" Width="120" Click="BtDirChoice_Click"/>
-        <Label x:Name="LbFilesLable" Content="DLL files in selected folder:&#xA;" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top" Width="175"/>
-        <Label x:Name="LbTypesLable" Content="Types defined in selected assembly" HorizontalAlignment="Left" Margin="224,84,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LbPropertiesLable" Content="Properties:" HorizontalAlignment="Left" Margin="25,411,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LbFieldsLable" Content="Fields:" HorizontalAlignment="Left" Margin="205,411,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LbMethodsLable" Content="Methods:" HorizontalAlignment="Left" Margin="385,411,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="LbDll" HorizontalAlignment="Left" Height="288" Margin="25,118,0,0" VerticalAlignment="Top" Width="175" SelectionChanged="LbDll_SelectionChanged"/>
-        <ListBox x:Name="LbTypes" HorizontalAlignment="Left" Height="288" Margin="224,118,0,0" VerticalAlignment="Top" Width="256" SelectionChanged="LbTypes_SelectionChanged"/>
-        <ListBox x:Name="LbFields" HorizontalAlignment="Left" Height="280" Margin="224,442,0,0" VerticalAlignment="Top" Width="160"/>
-        <ListBox x:Name="LbProperties" HorizontalAlignment="Left" Height="280" Margin="25,442,0,0" VerticalAlignment="Top" Width="175"/>
-        <ListBox x:Name="LbMethods" HorizontalAlignment="Left" Height="280" Margin="411,442,0,0" VerticalAlignment="Top" Width="162"/>
+        Title="Reflection UI" Height="850" Width="600" ResizeMode ="NoResize">
+    <Grid HorizontalAlignment="Left" Width="590">
+        <Button x:Name="BtCloseAllVisible" Content="Close" HorizontalAlignment="Left" Height="30" Margin="520,770,0,0" VerticalAlignment="Top" Width="50" Click="BtClose_Click"/>
+        <TextBox x:Name="TbDirectoryChoosen" HorizontalAlignment="Left" Height="25" Margin="25,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="420"/>
+        <Button x:Name="BtDirChoice" Content="Browse folder" HorizontalAlignment="Left" Height="25" Margin="453,35,0,0" VerticalAlignment="Top" Width="120" Click="BtDirChoice_Click"/>
+        <Label x:Name="LbFilesLable" Content="DLL files in selected folder:&#xA;" HorizontalAlignment="Left" Margin="25,70,0,0" VerticalAlignment="Top" Width="175" Height="30" FontWeight="Bold"/>
+        <Label x:Name="LbTypesLable" Content="Types defined in selected assembly:" HorizontalAlignment="Left" Margin="253,70,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LbPropertiesLable" Content="Properties:" HorizontalAlignment="Left" Margin="25,430,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LbFieldsLable" Content="Fields:" HorizontalAlignment="Left" Margin="225,430,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LbMethodsLable" Content="Methods:" HorizontalAlignment="Left" Margin="411,430,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ListBox x:Name="LbDll" HorizontalAlignment="Left" Height="280" Margin="25,100,0,0" VerticalAlignment="Top" Width="213" SelectionChanged="LbDll_SelectionChanged"/>
+        <ListBox x:Name="LbTypes" HorizontalAlignment="Left" Height="280" Margin="253,100,0,0" VerticalAlignment="Top" Width="320" SelectionChanged="LbTypes_SelectionChanged"/>
+        <ListBox x:Name="LbFields" HorizontalAlignment="Left" Height="280" Margin="225,460,0,0" VerticalAlignment="Top" Width="160"/>
+        <ListBox x:Name="LbProperties" HorizontalAlignment="Left" Height="280" Margin="25,460,0,0" VerticalAlignment="Top" Width="175"/>
+        <ListBox x:Name="LbMethods" HorizontalAlignment="Left" Height="280" Margin="411,460,0,0" VerticalAlignment="Top" Width="162"/>
+        <Label x:Name="LbFolderPath" Content="Path to selected folder:" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="175" Height="36" FontWeight="Bold"/>
+        <CheckBox x:Name="CbProperties" Content="Show properties" HorizontalAlignment="Left" Margin="25,395,0,0" VerticalAlignment="Top" Checked="CbProperties_Checked" Unchecked="CbProperties_Unchecked"/>
+        <CheckBox x:Name="CbFields" Content="Show fields" HorizontalAlignment="Left" Margin="155,395,0,0" VerticalAlignment="Top" Width="90" Checked="CbFields_Checked" Unchecked="CbFields_Unchecked"/>
+        <CheckBox x:Name="CbMethods" Content="Show methods" HorizontalAlignment="Left" Margin="275,395,0,0" VerticalAlignment="Top" Unchecked="CbMethods_Unchecked" Checked="CbMethods_Checked"/>
+        <CheckBox x:Name="CbAll" Content="Show all" HorizontalAlignment="Left" Margin="425,395,0,0" VerticalAlignment="Top" FontWeight="Bold" Checked="CbAll_Checked" Unchecked="CbAll_Unchecked" />
+        <Button x:Name="BtCloseAllInvisible" Content="Close" HorizontalAlignment="Left" Height="30" Margin="520,395,0,0" VerticalAlignment="Top" Width="50" Click="BtClose_Click"/>
 
     </Grid>
 </Window>

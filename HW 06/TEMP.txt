@@ -1,0 +1,21 @@
+//[Test]
+        //public void TstSearchCme()
+        //{
+        //    string methodName = "TstSearchArticles";
+        //    IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
+        //    _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+
+        //    string title = "a";
+        //    using (_driver)
+        //    {
+        //        AdvSearchPage searchPage = new AdvSearchPage(_driver);
+        //        searchPage.SelectSearchOptions(title: title, cme: true);
+        //        searchPage.SearchButton.Click();
+        //        SearchResultPage resultsPage = new SearchResultPage(_driver);
+        //        var doNotContain = resultsPage
+        //            .GetResultPreviewsList()
+        //            .Where(t => t.Contains("Image Gallery"))
+        //            .ToList();
+        //        Assert.IsTrue(0 == doNotContain.Count);
+        //    }
+        //}

@@ -50,6 +50,10 @@ namespace TestsLibrary.SOLR
             return date;
         }
 
+        public string GetTitle()
+        {
+            return Fields[2].FieldValue.ToString();
+        }
     }
 
     public class Fields

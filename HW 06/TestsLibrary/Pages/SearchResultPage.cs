@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using TestsLibrary.Enums;
 
 namespace TestsLibrary.Pages
@@ -35,6 +36,7 @@ namespace TestsLibrary.Pages
 
         public void SelectSortByOption(SortByOptionsEnum option)
         {
+            
             SortByDropDownList.Click();
 
             if (option == SortByOptionsEnum.BestMatch)
@@ -54,33 +56,25 @@ namespace TestsLibrary.Pages
             }
         }
 
-        public List<string> GetResultTitlesList()
+        public List<string> GetResultTitlesWithoutPAPList(int n)
         {
-            List<string> titles = new List<string>();
-            GetArticlesList().ForEach(r =>
-                titles.Add(r.FindElement(By.XPath("//div[1]/div[1]/header[1]/h4[1]/a[1]")).GetAttribute("title")));
-            //var titles = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]"))
-            //    .Select(x => x.GetAttribute("title"))
-            //    .Take(20)
-            //    .ToList();
+            List<string> titlesWithoutPAP = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]")).
+                Where(x => x.FindElements(By.XPath("../../../ul[contains(@class, 'article-actions')]/li[contains(@id, 'PAP')]")).Count == 0).
+                Select(x => x.GetAttribute("title")).
+                Take(n).
+                ToList();
+            return titlesWithoutPAP;
+        }
+
+        public List<string> GetResultTitlesList(int n)
+        {
+            List<string> titles = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]")).
+                Where(x => x.FindElements(By.XPath("../../../ul[contains(@class, 'article-actions')]/li[contains(@id, 'PAP')]")).Count == 0).
+                Select(x => x.GetAttribute("title")).
+                Take(n).
+                ToList();
             return titles;
         }
-
-        public List<IWebElement> GetArticlesList()
-        {
-            var list = Result.FindElements(By.ClassName("article")).ToList();
-            return list;
-        }
-
-        public List<string> GetResultPreviewsList()
-        {
-            var previews = _driver.FindElements(By.ClassName("article-previews"))
-                .Select(x => x.GetAttribute("innerHTML"))
-                .Take(20)
-                .ToList();
-            return previews;
-        }
-
 
     }
 }
