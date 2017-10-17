@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TestsLibrary.Enums;
+using TestsLibrary.Models;
 using TestsLibrary.Pages;
 
 namespace TestsLibrary.SOLR
@@ -30,8 +32,7 @@ namespace TestsLibrary.SOLR
             FilterQueries = new List<string>();
         }
 
-        private void QueryStringOptions(string qAllKeys = "", string title = "", string authors = "", string abstr = "", string fullText = "",
-            string volume = "", string issue = "")
+        private void QueryStringOptions(QueryStringOptions QSA)
         {
             string qTitle = "";
             string qAuthor = "";
@@ -40,15 +41,15 @@ namespace TestsLibrary.SOLR
             string qVolume = "";
             string qIssue = "";
 
-            if (title != "") qTitle = $"Title:({title})";
-            if (authors != "") qAuthor = $"Authors:({authors})";
-            if (abstr != "") qAbstract = $"Abstract:({abstr})";
-            if (fullText != "") qFullText = $"FullText:({fullText})";
-            if (volume != "") qVolume = $"Volume:({volume})";
-            if (issue != "") qIssue = $"Issue:({issue})";
+            if (QSA.title != "") qTitle = $"Title:({QSA.title})";
+            if (QSA.authors != "") qAuthor = $"Authors:({QSA.authors})";
+            if (QSA.abstr != "") qAbstract = $"Abstract:({QSA.abstr})";
+            if (QSA.fullText != "") qFullText = $"FullText:({QSA.fullText})";
+            if (QSA.volume != "") qVolume = $"Volume:({QSA.volume})";
+            if (QSA.issue != "") qIssue = $"Issue:({QSA.issue})";
 
-            if (QueryString != null && qAllKeys != "") QueryString += " AND " + qAllKeys;
-            else if (QueryString == null && qAllKeys != "") QueryString += qAllKeys;
+            if (QueryString != null && QSA.qAllKeys != "") QueryString += " AND " + QSA.qAllKeys;
+            else if (QueryString == null && QSA.qAllKeys != "") QueryString += QSA.qAllKeys;
 
             if (QueryString != null && qTitle != "") QueryString += " AND " + qTitle;
             else if(QueryString == null && qTitle != "") QueryString += qTitle;
@@ -69,9 +70,7 @@ namespace TestsLibrary.SOLR
             else if (QueryString == null && qIssue != "") QueryString += qIssue;
         }
 
-        private void FilterQueriesOptions(bool articles = true, bool image = false, bool blogposts = false,
-            bool other = false, bool podcast = false, bool video = false,
-            bool cme = false, bool openAccess = false, int lastNYears = 0)
+        private void FilterQueriesOptions(FilterQueriesOptions FQO)
         {
             string filterQuery = "";
 
@@ -86,41 +85,41 @@ namespace TestsLibrary.SOLR
 
             string filter = "";
 
-            if (filter != "" && articles) filter += " OR " + qArticles;
-            else if (filter == "" && articles) filter += qArticles;
+            if (filter != "" && FQO.articles) filter += " OR " + qArticles;
+            else if (filter == "" && FQO.articles) filter += qArticles;
 
-            if (filter != "" && image) filter += " OR " + qImages;
-            else if (filter == "" && image) filter += qImages;
+            if (filter != "" && FQO.image) filter += " OR " + qImages;
+            else if (filter == "" && FQO.image) filter += qImages;
 
-            if (filter != "" && blogposts) filter += " OR " + qBlogspots;
-            else if (filter == "" && blogposts) filter += qBlogspots;
+            if (filter != "" && FQO.blogposts) filter += " OR " + qBlogspots;
+            else if (filter == "" && FQO.blogposts) filter += qBlogspots;
 
-            if (filter != "" && other) filter += " OR " + qOther;
-            else if (filter == "" && other) filter += qOther;
+            if (filter != "" && FQO.other) filter += " OR " + qOther;
+            else if (filter == "" && FQO.other) filter += qOther;
 
-            if (filter != "" && podcast) filter += " OR " + qPodcast;
-            else if (filter == "" && podcast) filter += qPodcast;
+            if (filter != "" && FQO.podcast) filter += " OR " + qPodcast;
+            else if (filter == "" && FQO.podcast) filter += qPodcast;
 
-            if (filter != "" && video) filter += " OR " + qVideo;
-            else if (filter == "" && video) filter += qVideo;
+            if (filter != "" && FQO.video) filter += " OR " + qVideo;
+            else if (filter == "" && FQO.video) filter += qVideo;
 
             string qAssetType = "";
 
-            if (articles || image || blogposts || other || podcast || video) qAssetType += $"AssetType:({filter})";
+            if (FQO.articles || FQO.image || FQO.blogposts || FQO.other || FQO.podcast || FQO.video) qAssetType += $"AssetType:({filter})";
 
             filterQuery += qAssetType;
 
-            if (filterQuery != "" && cme) filterQuery += " AND " + qCME;
-            else if (filterQuery == "" && cme) filterQuery += qCME;
+            if (filterQuery != "" && FQO.cme) filterQuery += " AND " + qCME;
+            else if (filterQuery == "" && FQO.cme) filterQuery += qCME;
 
-            if (filterQuery != "" && openAccess) filterQuery += " AND " + qOpenAccess;
-            else if (filterQuery == "" && openAccess) filterQuery += qOpenAccess;
+            if (filterQuery != "" && FQO.openAccess) filterQuery += " AND " + qOpenAccess;
+            else if (filterQuery == "" && FQO.openAccess) filterQuery += qOpenAccess;
 
-            DateTime start = new DateTime(DateTime.Now.Year - lastNYears, DateTime.Now.Month, DateTime.Now.Day);
+            DateTime start = new DateTime(DateTime.Now.Year - FQO.lastNYears, DateTime.Now.Month, DateTime.Now.Day);
             string qPublicationDateRange = $"PublicationDateRange:[{start} TO {DateTime.Now:O}]";
 
-            if (filterQuery != "" && lastNYears != 0) filterQuery += " AND " + qPublicationDateRange;
-            else if (filterQuery == "" && lastNYears != 0) filterQuery += qPublicationDateRange;
+            if (filterQuery != "" && FQO.lastNYears != 0) filterQuery += " AND " + qPublicationDateRange;
+            else if (filterQuery == "" && FQO.lastNYears != 0) filterQuery += qPublicationDateRange;
 
             if (filterQuery != "")
             {
@@ -128,36 +127,31 @@ namespace TestsLibrary.SOLR
             }
         }
 
-        private void ProductsOptions(params string[] prod)
+        private void ProductsOptions(params string[] prods)
         {
-            Products = prod.ToList();
+            Products = prods.ToList();
         }
 
 
-        public static string GenerateRequest(string qAllKeys = "", string title = "", string authors = "", string abstr = "",
-                                    string fullText = "", string volume = "", string issue = "", bool articles = true, 
-                                    bool image = false, bool blogposts = false, bool other = false, bool podcast = false, 
-                                    bool video = false, bool cme = false, bool openAccess = false, int lastNYears = 0, 
-                                    SearchResultPage.SortByOptionsEnum sorting = SearchResultPage.SortByOptionsEnum.BestMatch,
-                                    int rowsToGet = 20, params string[] prod)
+        public static string GenerateRequest(QueryStringOptions QSA, FilterQueriesOptions FQO, params string[] prods)
         {
             SolrRequest jRequest = new SolrRequest();
-            jRequest.QueryStringOptions(qAllKeys, title, authors, abstr, fullText, volume, issue);
-            jRequest.FilterQueriesOptions(articles, image, blogposts, other, podcast, video, cme, openAccess, lastNYears);
-            jRequest.ProductsOptions(prod);
+            jRequest.QueryStringOptions(QSA);
+            jRequest.FilterQueriesOptions(FQO);
+            jRequest.ProductsOptions(prods);
             var request = JsonConvert.SerializeObject(jRequest);
 
             string sortingBlock;
             string resultSpec;
 
             string part1 = "\"QueryProcessingOptions\":{\"UseSynonyms\":true,\"BoostFields\":[{\"Name\":\"Title\",\"Value\":0.01}]},\"ResultSpec\":{\"Start\":0,\"CursorMark\":\"*\",\"";
-            string part2 = $"Rows\":{rowsToGet},";
+            string part2 = $"Rows\":{FQO.rowsToGet},";
             string part3 = "\"SortFields\":[{";
             string part4;
             string part5 = "}],\"Highlighting\":{\"Fields\":[\"Abstract\"]},\"ReturnFields\":[\"AccessionNumber\",\"AssetType\",\"Title\",\"ImageTitle\",\"ImageWkmrid\",\"OtherIds\",\"EpisodeUrl\",\"ImageID\"],\"Debug\":false}";
 
             
-            if (sorting == SearchResultPage.SortByOptionsEnum.Newest)
+            if (FQO.sorting == SortByOptionsEnum.Newest)
             {
                 sortingBlock = "\"Name\":\"PublicationDate\",\"Order\":\"Descending\"";
                 part4 = $"{sortingBlock}";
@@ -165,7 +159,7 @@ namespace TestsLibrary.SOLR
                 request = request.Replace("\"Hardcode\":\"Code\"", resultSpec);
                 return request;
             }
-            if (sorting == SearchResultPage.SortByOptionsEnum.Oldest)
+            if (FQO.sorting == SortByOptionsEnum.Oldest)
             {
                 sortingBlock = "\"Name\":\"PublicationDate\"";
                 part4 = $"{sortingBlock}";

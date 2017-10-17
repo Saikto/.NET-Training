@@ -30,3 +30,20 @@ E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.dll
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.pdb
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\Newtonsoft.Json.dll
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\Newtonsoft.Json.xml
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\chromedriver.exe
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\geckodriver.exe
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\MicrosoftWebDriver.exe
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\TestsLibrary.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\TestsLibrary.pdb
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\nunit.framework.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Support.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\Newtonsoft.Json.xml
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\nunit.framework.xml
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.xml
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Support.xml
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAssemblyReference.cache
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csproj.CoreCompileInputs.cache
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.dll
+D:\Study\EPAM\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.pdb

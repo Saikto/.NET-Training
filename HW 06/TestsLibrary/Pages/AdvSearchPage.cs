@@ -2,6 +2,8 @@
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TestsLibrary.Enums;
+using TestsLibrary.Models;
 
 namespace TestsLibrary.Pages
 {
@@ -108,48 +110,54 @@ namespace TestsLibrary.Pages
             PageFactory.InitElements(_driver, this);
         }
 
-        public void SelectSearchOptions(string allKeyWords = "", string title = "", bool searchArticles = true, bool searchImages = false, bool cme = false,
-            bool allDates = true, bool fiveYears = false, bool allArticleTypes = true, bool openAccess = false)
+        public void SelectSearchOptions(QueryStringOptions qso, FilterQueriesOptions fqo, params string[] prods)
         {
-            if (allDates == fiveYears)
-                throw new ArgumentException();
-            if(allArticleTypes == openAccess)
-                throw new ArgumentException();
-            AllKeyWordsField.SendKeys(allKeyWords);
-            TitleField.SendKeys(title);
+            AllKeyWordsField.SendKeys(qso.qAllKeys);
+            TitleField.SendKeys(qso.title);
 
-            if (!ContentTypeImageCheckBox.Selected && searchImages)
+            if (!ContentTypeImageCheckBox.Selected && fqo.image)
             {
                 ContentTypeImageCheckBox.Click();
             }
-            else if (ContentTypeImageCheckBox.Selected && !searchImages)
+            else if (ContentTypeImageCheckBox.Selected && !fqo.image)
             {
                 ContentTypeImageCheckBox.Click();
             }
 
-            if (!searchArticles && searchImages)
+            if (!fqo.articles && fqo.image)
             {
                 ContentTypeArticleCheckBox.Click();
             }
 
-            if (!CMECheckBox.Selected && cme)
+            if (!CMECheckBox.Selected && fqo.cme)
             {
                 CMECheckBox.Click();
             }
-            else if (CMECheckBox.Selected && !cme)
+            else if (CMECheckBox.Selected && !fqo.cme)
             {
                 CMECheckBox.Click();
             }
 
-            if (allDates)
+            if (fqo.pDate == PublicationDateEnum.AllDates)
                 AllDatesRadio.Click();
-            if(fiveYears)
+            if(fqo.pDate == PublicationDateEnum.Last5Years)
                 LastFiveYearsRadio.Click();
 
-            if (allArticleTypes && AllArticleTypesRadio.Enabled)
-                AllArticleTypesRadio.Click();
-            if (openAccess && AllArticleTypesRadio.Enabled)
+            if (fqo.openAccess && AllArticleTypesRadio.Enabled)
                 OpenAccessOnlyRadio.Click();
+
+            //Deselecting unnecessary journals
+            if (prods.Length == 1)
+            {
+                var journalsToSearchIn = _driver.FindElements(By.ClassName("asb-journals-row"));
+                if (journalsToSearchIn.Count > 1)
+                {
+                    for (int i = 1; i < journalsToSearchIn.Count; i++)
+                    {
+                        journalsToSearchIn[i].FindElement(By.TagName("input")).Click();
+                    }
+                }
+            }
         }
     }
 }

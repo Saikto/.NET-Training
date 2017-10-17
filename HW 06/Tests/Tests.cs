@@ -10,6 +10,8 @@ using NUnit;
 using TestsLibrary;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using TestsLibrary.Enums;
+using TestsLibrary.Models;
 using TestsLibrary.Pages;
 using TestsLibrary.SOLR;
 
@@ -59,7 +61,7 @@ namespace Tests
             {
                 JournalPage journalPage = new JournalPage(_driver);
                 journalPage.FindOpenArticle().Click();
-                journalPage.FindFreeArticle().Click();
+                //journalPage.FindFreeArticle().Click();
                 ArticlePage articlePage = new ArticlePage(_driver);
                 List<string> menuAtions = articlePage.GetArticleMenu();
 
@@ -104,64 +106,21 @@ namespace Tests
             string methodName = "TstSearchTitle";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+            QueryStringOptions qsOptions = new QueryStringOptions();
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
+            string[] products = { "aacr" };
 
             string title = "blood";
-            using (_driver)
-            {
+            ///using (_driver)
+            //{
                 AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions(title: title);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions);
                 searchPage.SearchButton.Click();
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
-                var doNotContain = resultsPage
+                var titles = resultsPage
                     .GetResultTitlesList()
-                    .Where(t => !t.ToLowerInvariant().Contains(title))
                     .ToList();
-                Assert.IsTrue(0 == doNotContain.Count);
-            }
-        }
-
-        [Test]
-        public void TstSearchImages()
-        {
-            string methodName = "TstSearchImages";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-
-            string title = "a";
-            using (_driver)
-            {
-                AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions(title: title, searchImages:true, searchArticles:false);
-                searchPage.SearchButton.Click();
-                SearchResultPage resultsPage = new SearchResultPage(_driver);
-                var doNotContain = resultsPage
-                    .GetResultPreviewsList()
-                    .Where(t => !t.Contains("Image Gallery"))
-                    .ToList();
-                Assert.IsTrue(0 == doNotContain.Count);
-            }
-        }
-
-        [Test]
-        public void TstSearchArticles()
-        {
-            string methodName = "TstSearchArticles";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-
-            string title = "a";
-            using (_driver)
-            {
-                AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions(title: title);
-                searchPage.SearchButton.Click();
-                SearchResultPage resultsPage = new SearchResultPage(_driver);
-                var doNotContain = resultsPage
-                    .GetResultPreviewsList()
-                    .Where(t => t.Contains("Image Gallery"))
-                    .ToList();
-                Assert.IsTrue(0 == doNotContain.Count);
-            }
+            //}
         }
 
         //[Test]
@@ -193,16 +152,19 @@ namespace Tests
             string methodName = "TstAdvSearch";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+            QueryStringOptions qsOptions = new QueryStringOptions();
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
+            string[] products = { "aacr" };
 
             using (_driver)
             {
                 AdvSearchPage searchPage = new AdvSearchPage(_driver);
                 //searchPage.SelectSearchOptions("blood", "adv", false, true, true, false, true, false, true);
-                searchPage.SelectSearchOptions("1");
+                searchPage.SelectSearchOptions(qsOptions, fqOptions);
                 searchPage.SearchButton.Click();
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
                 int count = resultsPage.GetResultCount();
-                resultsPage.SelectSortByOption(SearchResultPage.SortByOptionsEnum.Newest);
+                resultsPage.SelectSortByOption(SortByOptionsEnum.Newest);
             }
         }
 
@@ -211,17 +173,18 @@ namespace Tests
         {
             string methodName = "TstAdvSearch";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/appliedimmunohist//pages/advancedsearch.aspx";
+            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
+            QueryStringOptions qsOptions = new QueryStringOptions("a");
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _image:true);
+            string[] products = { "aacr" };
 
-            string[] products = { "appliedimmunohist/" };
-            var sRequest = SolrRequest.GenerateRequest(qAllKeys: "a", image: true, prod: products);
-            Console.WriteLine(sRequest);
+            var sRequest = SolrRequest.GenerateRequest(qsOptions,fqOptions, products);
             var searchResponse = SolrWorker.GetSearchResults(sRequest);
             int countS = searchResponse.TotalFound;
             using (_driver)
             {
                 AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions("a", searchImages:true);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
                 searchPage.SearchButton.Click();
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
                 int countW = resultsPage.GetResultCount();
@@ -231,11 +194,13 @@ namespace Tests
         }
 
         [Test]
-        public void TstSolrGeneratedRequest()
+        public void TstSolrEquality()
         {
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
+            QueryStringOptions qsOptions = new QueryStringOptions();
+            string[] products = { "aacr" };
 
-            string[] products = {"precos", "plrcs", "prstb", "prcsgo"}; 
-            var sRequest = SolrRequest.GenerateRequest(qAllKeys: "a", image: true, cme: true, prod: products);
+            var sRequest = SolrRequest.GenerateRequest(qsOptions, fqOptions, products);
             var searchResponse = SolrWorker.GetSearchResults(sRequest);
             var withoutPAP = searchResponse.Results.Select(r => r.GetPublishDate()[0] != 9000).ToList();
         }

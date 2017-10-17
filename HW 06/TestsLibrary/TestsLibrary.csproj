@@ -55,6 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PublicationDateEnum.cs" />
+    <Compile Include="Enums\SortByOptionsEnum.cs" />
+    <Compile Include="Models\FilterQueriesOptions.cs" />
+    <Compile Include="Models\QueryStringOptions.cs" />
     <Compile Include="Pages\AdvSearchPage.cs" />
     <Compile Include="Pages\ArticlePage.cs" />
     <Compile Include="Pages\CurrentIssuePage.cs" />

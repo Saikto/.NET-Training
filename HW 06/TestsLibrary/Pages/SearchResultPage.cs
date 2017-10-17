@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TestsLibrary.Enums;
 
 namespace TestsLibrary.Pages
 {
     public class SearchResultPage
     {
         private IWebDriver _driver;
-
-        public enum SortByOptionsEnum
-        {
-            BestMatch,
-            Newest,
-            Oldest
-        }
-
+        
         [FindsBy(How = How.ClassName, Using = @"resultCount")]
         private IWebElement ResultCount;
+
+        [FindsBy(How = How.ClassName, Using = @"wp-feature-articles")]
+        private IWebElement Result;
 
         [FindsBy(How = How.XPath, Using = @"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")]
         private IWebElement SortByDropDownList;
@@ -59,11 +56,20 @@ namespace TestsLibrary.Pages
 
         public List<string> GetResultTitlesList()
         {
-            var titles = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]"))
-                .Select(x => x.GetAttribute("title"))
-                .Take(20)
-                .ToList();
+            List<string> titles = new List<string>();
+            GetArticlesList().ForEach(r =>
+                titles.Add(r.FindElement(By.XPath("//div[1]/div[1]/header[1]/h4[1]/a[1]")).GetAttribute("title")));
+            //var titles = _driver.FindElements(By.XPath("//div[contains(@class, 'wp-feature-articles')]/div/article[1]/div[1]/div[1]/header[1]/h4[1]/a[1]"))
+            //    .Select(x => x.GetAttribute("title"))
+            //    .Take(20)
+            //    .ToList();
             return titles;
+        }
+
+        public List<IWebElement> GetArticlesList()
+        {
+            var list = Result.FindElements(By.ClassName("article")).ToList();
+            return list;
         }
 
         public List<string> GetResultPreviewsList()
