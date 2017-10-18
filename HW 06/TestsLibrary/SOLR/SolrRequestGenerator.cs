@@ -118,8 +118,9 @@ namespace TestsLibrary.SOLR
             //TODO Other date ranges
             if (FQO.pDate == PublicationDateEnum.Last5Years)
             {
+                string pattern = "yyyy-m-dtHH:mm:ssz";
                 DateTime start = new DateTime(DateTime.Now.Year - 5, DateTime.Now.Month, DateTime.Now.Day);
-                string qPublicationDateRange = $"PublicationDateRange:[{start} TO {DateTime.Now:O}]";
+                string qPublicationDateRange = $"PublicationDateRange:[{start:s}{TimeZone.CurrentTimeZone} TO {DateTime.Now:s}{TimeZone.CurrentTimeZone}]";
 
                 if (filterQuery != "" && FQO.pDate != PublicationDateEnum.AllDates)
                     filterQuery += " AND " + qPublicationDateRange;

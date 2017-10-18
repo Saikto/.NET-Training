@@ -165,14 +165,15 @@ namespace Tests
             }
         }
 
+        //All key words aricles and images withing last five years
         [Test]
-        public void TstResultEqualityBestMatch()
+        public void TstAdvSearhCase2()
         {
-            string methodName = "TstAdvSearch";
+            string methodName = "TstAdvSearhCase2";
             IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
             _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-            QueryStringOptions qsOptions = new QueryStringOptions("a");
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _image:true);
+            QueryStringOptions qsOptions = new QueryStringOptions(_qAllKeys: "a");
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _image:true, _pDate:PublicationDateEnum.Last5Years, _sorting:SortByOptionsEnum.BestMatch);
             string[] products = { "aacr" };
 
             var sRequest = SolrRequest.GenerateRequest(qsOptions,fqOptions, products);
@@ -185,6 +186,8 @@ namespace Tests
                 searchPage.SearchButton.Click();
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
                 int countW = resultsPage.GetResultCount();
+                Assert.AreNotEqual(0, countS);
+                Assert.AreNotEqual(0, countW);
                 Assert.AreEqual(countS, countW);
             }
             
