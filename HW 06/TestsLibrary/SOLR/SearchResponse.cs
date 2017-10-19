@@ -25,6 +25,19 @@ namespace TestsLibrary.SOLR
         [JsonProperty("Results")]
         public List<SearchApiResult> Results { get; set; }
 
+        public List<string> GetTitlesApiWithoutPap()
+        {
+            return Results.Where(r => r.GetPublishDate() != 9000)
+                            .Select(r => r.GetTitle())
+                            .ToList();
+        }
+
+        public List<string> GetArticleIdsApiWithoutPap()
+        {
+            return Results.Where(r => r.GetPublishDate() != 9000)
+                             .Select(r => r.GetComparableArticleId())
+                             .ToList();
+        }
     }
 
     public class SearchApiResult
@@ -41,18 +54,22 @@ namespace TestsLibrary.SOLR
         [JsonProperty("HighlightFields")]
         public List<Fields> HighlightFields { get; set; }
 
-        public int[] GetPublishDate()
+        public int GetPublishDate()
         {
             var s = Fields[0].FieldValue.ToString().Split('-');
-            int[] date = new int[2];
-            date[0] = Int32.Parse(s[1].Substring(0, 4));
-            date[1] = Int32.Parse(s[1].Substring(4, 2));
+            var date = Int32.Parse(s[1].Substring(0, 4));
             return date;
         }
 
         public string GetTitle()
         {
             return Fields[2].FieldValue.ToString();
+        }
+
+        public string GetComparableArticleId()
+        {
+            string[] s = Fields[0].FieldValue.ToString().Split('-');
+            return s[1] + "-" + s[2];
         }
     }
 

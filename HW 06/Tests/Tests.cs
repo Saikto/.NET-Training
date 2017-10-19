@@ -19,36 +19,27 @@ using TestsLibrary.Utils;
 
 namespace Tests
 {
-    public enum Browsers {
-        Chrome,
-        FireFox,
-        InternetExplorer,
-        Edge
-    }
-    //asaiojournal
     public class Tests
     {
-        private string _browser = Browsers.FireFox.ToString();
-        private string _login = "igor_neslukhovski@epam.com";
-        private string _pass = "epam_test1";
 
         [Parallelizable(ParallelScope.Self)]
         [Test]
         public void TstLogIn()
         {
-            //WebDriver setup
-            string methodName = "TstLogIn";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com";
-            
-            //Test
-            using (_driver)
+            //TEST SETUP//
+            var login = TestData.DataForTstLogIn.Login;
+            var pass = TestData.DataForTstLogIn.Pass;
+            var driver = TestData.DataForTstLogIn.Driver;
+            driver.Url = TestData.DataForTstLogIn.StartUrl;
+
+            //TEST
+            using (driver)
             {
-                LoginPage loginPage = new LoginPage(_driver);
-                loginPage.UserNameField.SendKeys(_login);
-                loginPage.PasswordField.SendKeys(_pass);
+                LoginPage loginPage = new LoginPage(driver);
+                loginPage.UserNameField.SendKeys(login);
+                loginPage.PasswordField.SendKeys(pass);
                 loginPage.SubmitButton.Click();
-                _driver.FindElement(By.Id("ctl00_ucUserActionsToolbar_lnkLogout"));
+                driver.FindElement(By.Id("ctl00_ucUserActionsToolbar_lnkLogout"));
             }
         }
 
@@ -56,19 +47,17 @@ namespace Tests
         [Test]
         public void TstMenuElementsExist()
         {
-            //WebDriver setup
-            string methodName = "TstMenuElementsExist";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            //_driver.Url = "http://journals.lww.com/annalsplasticsurgery"; //Only FREE article
-            _driver.Url = "http://journals.lww.com/asaiojournal"; //Only Open article
-            
-            //Test
-            using (_driver)
+            //TEST SETUP//
+            var driver = TestData.DataForTstCurrentIssueLinksExist.Driver;
+            driver.Url = TestData.DataForTstCurrentIssueLinksExist.StartUrl;
+
+            //TEST
+            using (driver)
             {
-                JournalPage journalPage = new JournalPage(_driver);
+                JournalPage journalPage = new JournalPage(driver);
                 journalPage.FindOpenArticle().Click();
                 //journalPage.FindFreeArticle().Click();
-                ArticlePage articlePage = new ArticlePage(_driver);
+                ArticlePage articlePage = new ArticlePage(driver);
                 List<string> menuAtions = articlePage.GetArticleMenu();
 
                 Assert.IsTrue(menuAtions[0].Contains("Article as PDF"));
@@ -89,17 +78,16 @@ namespace Tests
         [Test]
         public void TstCurrentIssueLinksExist()
         {
-            //WebDriver setup
-            string methodName = "TstCurrentIssueLinksExist";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/asaiojournal";
-            
-            //Test
-            using (_driver)
+            //TEST SETUP//
+            var driver = TestData.DataForTstCurrentIssueLinksExist.Driver;
+            driver.Url = TestData.DataForTstCurrentIssueLinksExist.StartUrl;
+
+            //TEST
+            using (driver)
             {
-                JournalPage journalPage = new JournalPage(_driver);
+                JournalPage journalPage = new JournalPage(driver);
                 journalPage.NavigateToCurrentIssue();
-                CurrentIssuePage currentIssuePage = new CurrentIssuePage(_driver);
+                CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
                 var listOfInnerHTML = currentIssuePage.GetIssueLinks();
                 Assert.IsTrue(listOfInnerHTML[0].Contains("Table of Contents Outline"));
                 Assert.IsTrue(listOfInnerHTML[1].Contains("Subscribe to eTOC"));
@@ -108,102 +96,213 @@ namespace Tests
             
         }
 
-        //Articles with cme withing all dates
+        //Articles by title with cme withing all dates
+        [Parallelizable(ParallelScope.Self)]
         [Test]
         public void TstAdvSearchCase1()
         {
-            //WebDriver setup
-            string methodName = "TstAdvSearchCase1";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            //_driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-            _driver.Url = "http://journals.lww.com/plasreconsurg/pages/advancedsearch.aspx";
-            //Search options setup
-            QueryStringOptions qsOptions = new QueryStringOptions(_title:"A");
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _cme:true,
-                _pDate:PublicationDateEnum.AllDates, _sorting:SortByOptionsEnum.Newest);
-            string[] products = { "PRECOS" };
-            
-            //Test
-            //Titles from ui, exepting PAP
+            //TEST SETUP//
+            var driver = TestData.DataForTstAdvSearchCase1.Driver;
+            var qsOptions = TestData.DataForTstAdvSearchCase1.QsOptions;
+            var fqOptions = TestData.DataForTstAdvSearchCase1.FqOptions;
+            var products = TestData.DataForTstAdvSearchCase1.Products;
+            var sRequest = TestData.DataForTstAdvSearchCase1.SRequest;
+            driver.Url = TestData.DataForTstAdvSearchCase1.StartUrl;
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+
+            //TEST
+            //Titles and ids from api, exepting PAP
+            var titlesApi = searchResponse.GetTitlesApiWithoutPap();
+            var idsApi = searchResponse.GetArticleIdsApiWithoutPap();
+            var countS = searchResponse.TotalFound;
+            //Titles and ids from ui, exepting PAP
             List<string> titlesUi;
+            List<string> idsUi;
+            int countW;
+            using (driver)
+            {
+                AdvSearchPage searchPage = new AdvSearchPage(driver);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
+                searchPage.SearchButton.Click();
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")));
+                SearchResultPage resultsPage = new SearchResultPage(driver);
+                resultsPage.SelectSortByOption(fqOptions.sorting);
+                System.Threading.Thread.Sleep(2000);
+                resultsPage.GetTitlesAndIds(out titlesUi, out idsUi);
+                countW = resultsPage.GetResultCount();
+            }
+            //Assertation
+            Assert.AreEqual(countS, countW);
+            bool a = Comparers.CompareTitles(titlesUi, titlesApi);
+            bool b = Comparers.CompareIds(idsUi, idsApi);
+            Assert.AreEqual(true, a);
+            Assert.AreEqual(true, b);
+        }
+
+        //All key words aricles and images withing last five years/ best match
+        [Parallelizable(ParallelScope.Self)]
+        [Test]
+        public void TstAdvSearchCase2()
+        {
+            //TEST SETUP//
+            var driver = TestData.DataForTstAdvSearchCase2.Driver;
+            var qsOptions = TestData.DataForTstAdvSearchCase2.QsOptions;
+            var fqOptions = TestData.DataForTstAdvSearchCase2.FqOptions;
+            var products = TestData.DataForTstAdvSearchCase2.Products;
+            var sRequest = TestData.DataForTstAdvSearchCase2.SRequest;
+            driver.Url = TestData.DataForTstAdvSearchCase2.StartUrl;
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+            
+            //TEST
+            //Results count from API
+            int countS = searchResponse.TotalFound;
+            //Results count from UI
+            int countW;
+            using (driver)
+            {
+                AdvSearchPage searchPage = new AdvSearchPage(driver);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
+                searchPage.SearchButton.Click();
+                SearchResultPage resultsPage = new SearchResultPage(driver);
+                countW = resultsPage.GetResultCount();
+            }
+            //Assertions
+            Assert.AreNotEqual(0, countS);
+            Assert.AreNotEqual(0, countW);
+            Assert.AreEqual(countS, countW);
+        }
+
+        //Images by all keys  withing all dates by oldest
+        [Parallelizable(ParallelScope.Self)]
+        [Test]
+        public void TstAdvSearchCase3()
+        {
+            //TEST SETUP//
+            var driver = TestData.DataForTstAdvSearchCase3.Driver;
+            var qsOptions = TestData.DataForTstAdvSearchCase3.QsOptions;
+            var fqOptions = TestData.DataForTstAdvSearchCase3.FqOptions;
+            var products = TestData.DataForTstAdvSearchCase3.Products;
+            var sRequest = TestData.DataForTstAdvSearchCase3.SRequest;
+            driver.Url = TestData.DataForTstAdvSearchCase3.StartUrl;
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+
+            //TEST
+            //Titles and ids from api, exepting PAP
+            var titlesApi = searchResponse.GetTitlesApiWithoutPap();
+            var idsApi = searchResponse.GetArticleIdsApiWithoutPap();
+            var countS = searchResponse.TotalFound;
+            //Titles and ids from ui, exepting PAP
+            List<string> titlesUi;
+            List<string> idsUi;
+            int countW;
+            using (driver)
+            {
+                AdvSearchPage searchPage = new AdvSearchPage(driver);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
+                searchPage.SearchButton.Click();
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")));
+                SearchResultPage resultsPage = new SearchResultPage(driver);
+                resultsPage.SelectSortByOption(fqOptions.sorting);
+                System.Threading.Thread.Sleep(4000);
+                resultsPage.GetTitlesAndIds(out titlesUi, out idsUi);
+                countW = resultsPage.GetResultCount();
+            }
+            //Assertation
+            Assert.AreEqual(countS, countW);
+            bool a = Comparers.CompareTitles(titlesUi, titlesApi);
+            bool b = Comparers.CompareIds(idsUi, idsApi);
+            Assert.AreEqual(true, a);
+            Assert.AreEqual(true, b);
+        }
+
+        //Articles by all keys with open access withing all dates
+        [Parallelizable(ParallelScope.Self)]
+        [Test]
+        public void TstAdvSearchCase4()
+        {
+            //TEST SETUP//
+            var driver = TestData.DataForTstAdvSearchCase4.Driver;
+            var qsOptions = TestData.DataForTstAdvSearchCase4.QsOptions;
+            var fqOptions = TestData.DataForTstAdvSearchCase4.FqOptions;
+            var products = TestData.DataForTstAdvSearchCase4.Products;
+            var sRequest = TestData.DataForTstAdvSearchCase4.SRequest;
+            driver.Url = TestData.DataForTstAdvSearchCase4.StartUrl;
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+
+            //TEST
+            //Titles and ids from api, exepting PAP
+            var titlesApi = searchResponse.GetTitlesApiWithoutPap();
+            var idsApi = searchResponse.GetArticleIdsApiWithoutPap();
+            var countS = searchResponse.TotalFound;
+            //Titles and ids from ui, exepting PAP
+            List<string> titlesUi;
+            List<string> idsUi;
+            int countW;
+            using (driver)
+            {
+                AdvSearchPage searchPage = new AdvSearchPage(driver);
+                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
+                searchPage.SearchButton.Click();
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")));
+                SearchResultPage resultsPage = new SearchResultPage(driver);
+                resultsPage.SelectSortByOption(fqOptions.sorting);
+                System.Threading.Thread.Sleep(4000);
+                resultsPage.GetTitlesAndIds(out titlesUi, out idsUi);
+                countW = resultsPage.GetResultCount();
+            }
+            //Assertation
+            Assert.AreEqual(countS, countW);
+            bool a = Comparers.CompareTitles(titlesUi, titlesApi);
+            bool b = Comparers.CompareIds(idsUi, idsApi);
+            Assert.AreEqual(true, a);
+            Assert.AreEqual(true, b);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [Test]
+        public void TstRequest()
+        {
+            //TEST SETUP//
+            QueryStringOptions qsOptions = new QueryStringOptions();
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles: true, _cme:true, _sorting:SortByOptionsEnum.Newest);
+            string[] products = { "ccme" };
+            var sRequest = SolrRequest.GenerateRequest(qsOptions, fqOptions, products);
+
+            //TEST
+            var searchResponse = SolrWorker.GetSearchResults(sRequest);
+        }
+
+        [Test]
+        public void TstUi()
+        {   
+            //TEST SETUP//
+            string methodName = "TstUi";
+            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, Browsers.FireFox.ToString());
+
+            _driver.Url = "http://journals.lww.com/ccmjournal/pages/advancedsearch.aspx";
+            QueryStringOptions qsOptions = new QueryStringOptions(_title: "A");
+            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles: true, _cme: true, _sorting: SortByOptionsEnum.Newest);
+            string[] products = { "ccme" };
+
+            //TEST
             using (_driver)
             {
                 AdvSearchPage searchPage = new AdvSearchPage(_driver);
                 searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
                 searchPage.SearchButton.Click();
+                var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div")));
                 SearchResultPage resultsPage = new SearchResultPage(_driver);
                 resultsPage.SelectSortByOption(fqOptions.sorting);
-                titlesUi = resultsPage.GetResultTitlesWithoutPAPList(fqOptions.rowsToGet);
-            }
-            //Titles from api, exepting PAP
-            var sRequest = SolrRequest.GenerateRequest(qsOptions, fqOptions, products);
-            var searchResponse = SolrWorker.GetSearchResults(sRequest);
-            var resultsApi = searchResponse.Results.Where(r => r.GetPublishDate()[0] != 9000).ToList();
-            bool a = TitlesComparer.AreTitlesEqual(titlesUi, resultsApi);
-            Assert.AreEqual(true, a);
-        }
-
-        [Test]
-        public void TstAdvSearch()
-        {
-            string methodName = "TstAdvSearch";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-            QueryStringOptions qsOptions = new QueryStringOptions();
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
-            string[] products = { "aacr" };
-
-            using (_driver)
-            {
-                AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                //searchPage.SelectSearchOptions("blood", "adv", false, true, true, false, true, false, true);
-                searchPage.SelectSearchOptions(qsOptions, fqOptions);
-                searchPage.SearchButton.Click();
-                SearchResultPage resultsPage = new SearchResultPage(_driver);
-                int count = resultsPage.GetResultCount();
-                resultsPage.SelectSortByOption(SortByOptionsEnum.Newest);
+                System.Threading.Thread.Sleep(2000);
+                resultsPage.GetAriclesIdsUiWithoutPap();
             }
         }
-
-        //All key words aricles and images withing last five years
-        [Test]
-        public void TstAdvSearhCase2()
-        {
-            string methodName = "TstAdvSearhCase2";
-            IWebDriver _driver = WebDriverSelector.GetWebDriver(methodName, _browser);
-            _driver.Url = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
-            QueryStringOptions qsOptions = new QueryStringOptions(_qAllKeys: "a");
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions(_articles:true, _image:true, _pDate:PublicationDateEnum.Last5Years, _sorting:SortByOptionsEnum.BestMatch);
-            string[] products = { "aacr" };
-
-            var sRequest = SolrRequest.GenerateRequest(qsOptions,fqOptions, products);
-            var searchResponse = SolrWorker.GetSearchResults(sRequest);
-            int countS = searchResponse.TotalFound;
-            using (_driver)
-            {
-                AdvSearchPage searchPage = new AdvSearchPage(_driver);
-                searchPage.SelectSearchOptions(qsOptions, fqOptions, products);
-                searchPage.SearchButton.Click();
-                SearchResultPage resultsPage = new SearchResultPage(_driver);
-                int countW = resultsPage.GetResultCount();
-                Assert.AreNotEqual(0, countS);
-                Assert.AreNotEqual(0, countW);
-                Assert.AreEqual(countS, countW);
-            }
-            
-        }
-
-        [Test]
-        public void TstSolrEquality()
-        {
-            FilterQueriesOptions fqOptions = new FilterQueriesOptions();
-            QueryStringOptions qsOptions = new QueryStringOptions();
-            string[] products = { "aacr" };
-
-            var sRequest = SolrRequest.GenerateRequest(qsOptions, fqOptions, products);
-            var searchResponse = SolrWorker.GetSearchResults(sRequest);
-            var withoutPAP = searchResponse.Results.Select(r => r.GetPublishDate()[0] != 9000).ToList();
-        }
-
     }
 }
