@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using TestsLibrary;
 using TestsLibrary.Enums;
 using TestsLibrary.Models;
 using TestsLibrary.SOLR;
 
-namespace Tests
+namespace Tests.Task_2
 {
-    public static class TestData
+    public static class TestDataTask2
     {
         public static class DataForTstAdvSearchCase1
         {
@@ -67,32 +62,6 @@ namespace Tests
                 _pDate: PublicationDateEnum.AllDates, _sorting: SortByOptionsEnum.Newest);
             public static string[] Products = { "ccme" };
             public static string SRequest = SolrRequest.GenerateRequest(QsOptions, FqOptions, Products);
-        }
-
-        public static class DataForTstCurrentIssueLinksExist
-        {
-            public static string MethodName = "TstCurrentIssueLinksExist";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
-            public static string StartUrl = "http://journals.lww.com/asaiojournal";
-        }
-
-        public static class DataForTstMenuElementsExist
-        {
-            public static string MethodName = "TstMenuElementsExist";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
-            public static string StartUrl = "http://journals.lww.com/asaiojournal"; //"http://journals.lww.com/annalsplasticsurgery" //Only FREE article
-        }
-
-        public static class DataForTstLogIn
-        {
-            public static string MethodName = "TstLogIn";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
-            public static string StartUrl = "http://journals.lww.com";
-            public static string Login = "igor_neslukhovski@epam.com";
-            public static string Pass = "epam_test1";
         }
     }
 }

@@ -60,12 +60,17 @@
     <Compile Include="Enums\SortByOptionsEnum.cs" />
     <Compile Include="Models\FilterQueriesOptions.cs" />
     <Compile Include="Models\QueryStringOptions.cs" />
+    <Compile Include="Pages\AddToFavoritesPopUp.cs" />
     <Compile Include="Pages\AdvSearchPage.cs" />
     <Compile Include="Pages\ArticlePage.cs" />
     <Compile Include="Pages\CurrentIssuePage.cs" />
+    <Compile Include="Pages\ImageGalleryPage.cs" />
+    <Compile Include="Pages\ImageViewer.cs" />
     <Compile Include="Pages\JournalPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\MyAccountPage.cs" />
     <Compile Include="Pages\SearchResultPage.cs" />
+    <Compile Include="Pages\UserActionsToolBarPage.cs" />
     <Compile Include="SOLR\SearchResponse.cs" />
     <Compile Include="SOLR\SolrRequestGenerator.cs" />
     <Compile Include="SOLR\SolrWorker.cs" />

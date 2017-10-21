@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.Generic;
+using System.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace TestsLibrary.Pages
@@ -7,19 +9,20 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        [FindsBy(How = How.XPath, Using = @"//*[@id=""ej-article-indicators-open""]")]
-        private IWebElement ArticleOpenIndicator;
-        
-        [FindsBy(How = How.XPath, Using = @"//*[@class=""article-list""]")]
-        private IWebElement ArticleList;
+        public By ArticleOpenIndicatorBy = By.XPath(@"//*[@id=""ej-article-indicators-open""]");
+        public By ArticleBy = By.XPath(@"//article");
+        public By CurrentIssueBy = By.XPath(@"//*[@id=""wpCurrentIssue""]");
 
-        [FindsBy(How = How.Id, Using = "wpCurrentIssue")]
+        private IWebElement ArticleOpenIndicator;
+        private List<IWebElement> ArticleList;
         private IWebElement CurrentIssue;
 
         public JournalPage(IWebDriver driver)
         {
-            this._driver = driver;
-            PageFactory.InitElements(_driver, this);
+            _driver = driver;
+            ArticleOpenIndicator = _driver.FindElement(ArticleOpenIndicatorBy);
+            ArticleList = _driver.FindElements(ArticleBy).ToList();
+            CurrentIssue = _driver.FindElement(CurrentIssueBy);
         }
 
         public IWebElement FindOpenArticle()
@@ -33,8 +36,8 @@ namespace TestsLibrary.Pages
 
         public IWebElement FindFreeArticle()
         {
-            var listOfArticles = ArticleList.FindElements(By.XPath(@"//*[@class=""article-actions""]"));
-            foreach (var article in listOfArticles)
+            var articlesActionsList = ArticleList.Select(a => a.FindElement(By.XPath(@"//*[@class=""article-actions""]")));
+            foreach (var article in articlesActionsList)
             {
                 var listOfLi = article.FindElements(By.TagName("li"));
                 foreach (var element in listOfLi)

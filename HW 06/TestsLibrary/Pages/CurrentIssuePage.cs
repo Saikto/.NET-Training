@@ -8,24 +8,34 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        [FindsBy(How = How.XPath, Using = @"//*[@class=""issueActions""]")]
-        private IWebElement IssueActions;
+        public By issueActionsBy = By.XPath(@"//*[@class=""issueActions""]");
+        public By actionTOCBy = By.XPath(@"//*[@class=""actionTOC""]");
+        public By subscribeTOCBy = By.XPath(@"//*[@class=""subscribeTOC""]");
+        public By contributorIndexBy = By.XPath(@"//*[@class=""contributorIndex""]");
+
+        private IWebElement issueActions;
+        private IWebElement actionTOC;
+        private IWebElement subscribeTOC;
+        private IWebElement contributorIndex;
 
         public CurrentIssuePage(IWebDriver driver)
         {
-            this._driver = driver;
-            PageFactory.InitElements(_driver, this);
+            _driver = driver;
+            issueActions = _driver.FindElement(issueActionsBy);
+            actionTOC = issueActions.FindElement(actionTOCBy);
+            subscribeTOC = issueActions.FindElement(subscribeTOCBy);
+            contributorIndex = issueActions.FindElement(contributorIndexBy);
         }
 
         public List<string> GetIssueLinks()
         {
             List<string> listOfInnerHTML = new List<string>();
-            listOfInnerHTML.Add(IssueActions.FindElement(By.ClassName("actionTOC")).FindElement(By.TagName("a"))
-                .GetAttribute("innerHTML"));
-            listOfInnerHTML.Add(IssueActions.FindElement(By.ClassName("subscribeTOC")).FindElement(By.TagName("a"))
-                .GetAttribute("innerHTML"));
-            listOfInnerHTML.Add(IssueActions.FindElement(By.ClassName("contributorIndex")).FindElement(By.TagName("a"))
-                .GetAttribute("innerHTML"));
+            listOfInnerHTML.Add(actionTOC.FindElement(By.TagName("a"))
+                                .GetAttribute("innerHTML"));
+            listOfInnerHTML.Add(subscribeTOC.FindElement(By.TagName("a"))
+                                .GetAttribute("innerHTML"));
+            listOfInnerHTML.Add(contributorIndex.FindElement(By.TagName("a"))
+                                .GetAttribute("innerHTML"));
             return listOfInnerHTML;
         }
     }

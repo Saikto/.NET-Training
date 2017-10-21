@@ -9,27 +9,36 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        [FindsBy(How = How.XPath, Using = @"//*[@class=""content-box-body-list no-list-style""]")]
-        private IWebElement ArticleMenu;
-        
+        public By articleMenuBy = By.XPath(@"//*[@class=""content-box-body-list no-list-style""]");
+        public By viewImagesGalleryBy = By.XPath(@"//a[contains(@id, ""hypViewImagesGallery"")]");
+
+        private IWebElement articleMenu;
+        private IWebElement viewImagesGallery;
+
         public ArticlePage(IWebDriver driver)
         {
-            this._driver = driver;
-            PageFactory.InitElements(_driver, this);
+            _driver = driver;
+            articleMenu = _driver.FindElement(articleMenuBy);
+            viewImagesGallery = articleMenu.FindElement(viewImagesGalleryBy);
         }
 
-        public List<string> GetArticleMenu()
+        public List<IWebElement> GetArticleMenu()
         {
             try
             {
-                var listOfLi = ArticleMenu.FindElements(By.TagName("li"));
-                var listOfActions = listOfLi.Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList();
-                return listOfActions;
+                var listOfArticleTools = articleMenu.FindElements(By.TagName("li")).ToList();
+                return listOfArticleTools;
             }
             catch (NoSuchElementException exception)
             {
                 throw new NoSuchElementException("Article menu not found.", exception);
             }
+        }
+
+        public void GoToImageGallery()
+        {
+            var imageGalleryLink = viewImagesGallery.GetAttribute("href");
+            _driver.Url = imageGalleryLink;
         }
     }
 }
