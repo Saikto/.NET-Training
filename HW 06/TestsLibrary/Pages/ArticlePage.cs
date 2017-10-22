@@ -9,8 +9,9 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public By articleMenuBy = By.XPath(@"//*[@class=""content-box-body-list no-list-style""]");
-        public By viewImagesGalleryBy = By.XPath(@"//a[contains(@id, ""hypViewImagesGallery"")]");
+        public static By articleMenuBy = By.XPath(@"//*[@class=""content-box-body-list no-list-style""]");
+        public static By viewImagesGalleryBy = By.XPath(@"//a[contains(@id, ""hypViewImagesGallery"")]");
+        public static By addToMyCollectionsIconBy = By.XPath(@"//i[@class=""wki icon-favorites""]");
 
         private IWebElement articleMenu;
         private IWebElement viewImagesGallery;

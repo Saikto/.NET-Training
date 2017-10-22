@@ -19,7 +19,7 @@ namespace Tests.Task_1
             public static string MethodName = "TstMenuElementsExist";
             public static string Browser = Browsers.FireFox.ToString();
             public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
-            public static string StartUrl = "http://journals.lww.com/asaiojournal"; //"http://journals.lww.com/annalsplasticsurgery" //Only FREE article
+            public static string StartUrl = "http://journals.lww.com/ccmjournal/"; //"http://journals.lww.com/annalsplasticsurgery" //Only FREE article
         }
 
         public static class DataForTstLogIn

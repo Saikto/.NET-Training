@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace TestsLibrary.Pages
 {
@@ -8,15 +8,17 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public By issueActionsBy = By.XPath(@"//*[@class=""issueActions""]");
-        public By actionTOCBy = By.XPath(@"//*[@class=""actionTOC""]");
-        public By subscribeTOCBy = By.XPath(@"//*[@class=""subscribeTOC""]");
-        public By contributorIndexBy = By.XPath(@"//*[@class=""contributorIndex""]");
+        public static By issueActionsBy = By.XPath(@"//*[@class=""issueActions""]");
+        public static By actionTOCBy = By.XPath(@"//*[@class=""actionTOC""]");
+        public static By subscribeTOCBy = By.XPath(@"//*[@class=""subscribeTOC""]");
+        public static By contributorIndexBy = By.XPath(@"//*[@class=""contributorIndex""]");
 
+        public AcrticlesContainer ArticlesContainer;
         private IWebElement issueActions;
         private IWebElement actionTOC;
         private IWebElement subscribeTOC;
         private IWebElement contributorIndex;
+
 
         public CurrentIssuePage(IWebDriver driver)
         {
@@ -25,6 +27,7 @@ namespace TestsLibrary.Pages
             actionTOC = issueActions.FindElement(actionTOCBy);
             subscribeTOC = issueActions.FindElement(subscribeTOCBy);
             contributorIndex = issueActions.FindElement(contributorIndexBy);
+            ArticlesContainer = new AcrticlesContainer(driver);
         }
 
         public List<string> GetIssueLinks()

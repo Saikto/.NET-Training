@@ -38,6 +38,18 @@ namespace Tests.Task_3
             public static string StartUrl = "http://journals.lww.com/ccmjournal/Fulltext/2017/11000/Investigating_the_Impact_of_Different_Suspicion_of.2.aspx";
             public static string Login = "igor_neslukhovski@epam.com";
             public static string Pass = "epam_test1";
+            public static string FolderName = "Test 2";
+        }
+
+        public static class DataForTstAddArticleToFavoritesFromIssue
+        {
+            public static string MethodName = "TstAddArticleToFavoritesFromIssue";
+            public static string Browser = Browsers.FireFox.ToString();
+            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
+            public static string StartUrl = "http://journals.lww.com/ccmjournal/pages/currenttoc.aspx";
+            public static string Login = "igor_neslukhovski@epam.com";
+            public static string Pass = "epam_test1";
+            public static string FolderName = "Test 2";
         }
     }
 }

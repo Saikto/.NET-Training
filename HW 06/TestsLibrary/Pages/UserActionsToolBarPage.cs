@@ -6,9 +6,9 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public By logOutButtonBy = By.XPath(@"//a[contains(@id, ""lnkLogout"")]");
-        public By accountActionsBy = By.XPath(@"//span[contains(@id, ""ucUserActionsToolbar_lblAccount"")]");
-        public By myAccountBy = By.XPath(@"//a[contains(@id, ""ucUserActionsToolbar_lnkMyAccount"")]");
+        public static By logOutButtonBy = By.XPath(@"//a[contains(@id, ""lnkLogout"")]");
+        public static By accountActionsBy = By.XPath(@"//span[contains(@id, ""ucUserActionsToolbar_lblAccount"")]");
+        public static By myAccountBy = By.XPath(@"//a[contains(@id, ""ucUserActionsToolbar_lnkMyAccount"")]");
 
         private IWebElement logOutButton;
         private IWebElement accountActions;
@@ -18,13 +18,13 @@ namespace TestsLibrary.Pages
         {
             _driver = driver;
             logOutButton = _driver.FindElement(logOutButtonBy);
-            accountActions = _driver.FindElement(accountActionsBy);
-            myAccount = _driver.FindElement(myAccountBy);
         }
 
         public void GoToMyAccount()
         {
+            accountActions = _driver.FindElement(accountActionsBy);
             accountActions.Click();
+            myAccount = _driver.FindElement(myAccountBy);
             myAccount.Click();
         }
 

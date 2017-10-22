@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using TestsLibrary.Enums;
 using TestsLibrary.Utils;
 
@@ -12,15 +10,14 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public By ResultCountBy = By.XPath(@"//*[@class=""resultCount""]");
-        public By ResultBy = By.XPath(@"//*[@class=""wp-feature-articles""]");
-        public By SortByDropDownListBy = By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div");
-        public By SortOptionBestMatchBy = By.XPath(@"//*[contains(text(), ""Best Match"")]");
-        public By SortOptionNewestBy = By.XPath(@"//*[contains(text(), ""Newest"")]");
-        public By SortOptionOldestBy = By.XPath(@"//*[contains(text(), ""Oldest"")]");
+        public static By ResultCountBy = By.XPath(@"//*[@class=""resultCount""]");
+        public static By SortByDropDownListBy = By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div");
+        public static By SortOptionBestMatchBy = By.XPath(@"//*[contains(text(), ""Best Match"")]");
+        public static By SortOptionNewestBy = By.XPath(@"//*[contains(text(), ""Newest"")]");
+        public static By SortOptionOldestBy = By.XPath(@"//*[contains(text(), ""Oldest"")]");
 
+        private AcrticlesContainer ArticlesContainer;
         private IWebElement ResultCount;
-        private IWebElement Result;
         private IWebElement SortByDropDownList;
         private IWebElement SortOptionBestMatch;
         private IWebElement SortOptionNewest;
@@ -31,38 +28,27 @@ namespace TestsLibrary.Pages
         {
             _driver = driver;
             ResultCount = _driver.FindElement(ResultCountBy);
-            Result = _driver.FindElement(ResultBy);
+            ArticlesContainer = new AcrticlesContainer(_driver);
             SortByDropDownList = _driver.FindElement(SortByDropDownListBy);
         }
 
         public void GetTitlesAndIds(out List<string> titles, out List<string> ids)
         {
-            var listOfArticles = Result.FindElements(By.TagName("article"));
+            var listOfArticles = ArticlesContainer.GetArticlesList();
             List<string> uiTitles = new List<string>();
             List<string> uiIds = new List<string>();
-            List<string> headers = _driver.FindElements(By.TagName("h4")).Select(h => h.GetAttribute("innerHTML")).ToList();
-            headers.RemoveAt(0);
-            int i = 0;
-            int j = 0;
-            foreach (var header in headers)
+            foreach (var article in listOfArticles)
             {
-                if (header.Contains("imagegallery"))
+                if (article.Href.Contains("imagegallery"))
                 {
-                    uiIds.Add(HrefParser.ParseImageHrefToId(_driver
-                        .FindElements(By.XPath("//*[@id=\"ej-featured-article-info\"]/header/h4/a"))[i]
-                        .GetAttribute("href")));
-                    uiTitles.Add("");
-                    i++;
+                    uiIds.Add(HrefParser.ParseImageHrefToId(article.Href));
+                    uiTitles.Add(article.Title);
                 }
-                if (!header.Contains("imagegallery"))
+                if (!article.Href.Contains("imagegallery") && !article.IsPap())
                 {
-                    var link = _driver.FindElements(By.XPath("//div[1]/div[1]/header[1]/h4[1]/a[1]"))[j];
-                    if (link.FindElements(By.XPath("../../../ul[contains(@class, 'article-actions')]/li[contains(@id, 'PAP')]")).Count == 0)
-                    {
-                        uiIds.Add(HrefParser.ParseArticleHrefToId(link.GetAttribute("href")));
-                        uiTitles.Add(link.GetAttribute("title"));
-                    }
-                    j++;
+                    uiTitles.Add("");
+                    uiIds.Add(HrefParser.ParseArticleHrefToId(article.Href));
+                    //uiTitles.Add(article.Title);
                 }
             }
             titles = uiTitles;
@@ -71,7 +57,8 @@ namespace TestsLibrary.Pages
 
         public int GetResultCount()
         {
-            if(Int32.TryParse(ResultCount.Text.Split()[0], out int count))
+            ResultCount = _driver.FindElement(ResultCountBy);
+            if (Int32.TryParse(ResultCount.Text.Split()[0], out int count))
                 return count;
             throw new NotFoundException();
         }
@@ -95,7 +82,7 @@ namespace TestsLibrary.Pages
                 SortOptionOldest.Click();
             }
             System.Threading.Thread.Sleep(4000);
-            Result = _driver.FindElement(ResultBy);
+            ArticlesContainer = new AcrticlesContainer(_driver);
         }
     }
 }

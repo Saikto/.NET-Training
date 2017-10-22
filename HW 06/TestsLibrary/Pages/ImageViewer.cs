@@ -8,10 +8,10 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
         
-        public By imageModalBy => By.XPath(@"//*[@id=""ArticleImageModal""]");
-        public By imageViewBy => By.XPath("//div[1]/section[1]/div[1]/div[1]/img[1]");
-        public By imageDisplayedCounterBy => By.XPath("//div/section/div[2]/div/div[2]/span");
-        public By nextImageButtonBy => By.XPath("//div/section/div[2]/div/div[2]/a[2]");
+        public static By imageModalBy => By.XPath(@"//*[@id=""ArticleImageModal""]");
+        public static By imageViewBy => By.XPath("//div[1]/section[1]/div[1]/div[1]/img[1]");
+        public static By imageDisplayedCounterBy => By.XPath("//div/section/div[2]/div/div[2]/span");
+        public static By nextImageButtonBy => By.XPath("//div/section/div[2]/div/div[2]/a[2]");
 
         private IWebElement imageModal;
         private IWebElement imageView;

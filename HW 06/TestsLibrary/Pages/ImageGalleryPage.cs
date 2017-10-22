@@ -12,11 +12,11 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        private By actionsDropDownMenuPpBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/ul[1]/li[3]/a[1]");
-        private By thumbDetailsElementsBy = By.XPath(@"//*[@class = ""ej-thumb-details""]");
-        private By selectAllCheckBoxBy = By.XPath(@"//*[@id = ""chkSelectTop""]");
-        private By actionsDropDownListToggleBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/li[1]");
-        private By actionsDropDownListMenuBy = By.XPath(@"//*[@class = ""wk--toolbar__dropdown-menu""]");
+        public static By actionsDropDownMenuPpBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/ul[1]/li[3]/a[1]");
+        public static By thumbDetailsElementsBy = By.XPath(@"//*[@class = ""ej-thumb-details""]");
+        public static By selectAllCheckBoxBy = By.XPath(@"//*[@id = ""chkSelectTop""]");
+        public static By actionsDropDownListToggleBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/li[1]");
+        public static By actionsDropDownListMenuBy = By.XPath(@"//*[@class = ""wk--toolbar__dropdown-menu""]");
 
 
         private IWebElement thumbDetailsElements;

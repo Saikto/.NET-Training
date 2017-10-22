@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+﻿using OpenQA.Selenium;
 using TestsLibrary.Enums;
 using TestsLibrary.Models;
 
@@ -11,103 +8,41 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public IWebElement SearchButton
-        {
-            get
-            {
-                var spanElement = _driver.FindElement(By.ClassName("buttonsDiv"));
-                var element = spanElement.FindElements(By.TagName("input"))
-                    .First(t => t.GetAttribute("type") == "submit");
-                return element;
-            }
-        }
+        public By SearchButtonBy = By.XPath(@"//input[contains(@name, ""searchAgain"")]");
+        public By AllKeyWordsFieldBy = By.XPath(@"//input[@id=""keywords_input_1""]");
+        public By TitleFieldBy = By.XPath(@"//input[@id=""keywords_input_2""]");
+        public By ContentTypeArticleCheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListArticle"")]");
+        public By ContentTypeImageCheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListImage"")]");
+        public By CMECheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListCME"")]");
+        public By AllDatesRadioBy = By.XPath(@"//input[contains(@id, ""searchDatesRadioButtonList_0"")]");
+        public By LastFiveYearsRadioBy = By.XPath(@"//input[contains(@id, ""searchDatesRadioButtonList_4"")]");
+        public By AllArticleTypesRadioBy = By.XPath(@"//input[contains(@id, ""articleAccessRadioButtonList_0"")]");
+        public By OpenAccessOnlyRadioBy = By.XPath(@"//input[contains(@id, ""articleAccessRadioButtonList_1"")]");
 
-        [FindsBy(How = How.XPath, Using = @"//*[@id=""keywords_input_1""]")]
-        public IWebElement AllKeyWordsField;
-
-        [FindsBy(How = How.XPath, Using = @"//*[@id=""keywords_input_2""]")]
-        public IWebElement TitleField;
-
-        public IWebElement ContentTypeArticleCheckBox
-        {
-            get
-            {
-                var spanElement = _driver.FindElements(By.ClassName("asb-content-inp"));
-                var element = spanElement.First(e =>
-                    e.FindElement(By.TagName("input")).GetAttribute("id").EndsWith("filterListArticle"));
-                return element;
-            }
-        }
-
-        public IWebElement ContentTypeImageCheckBox
-        {
-            get
-            {
-                var spanElement = _driver.FindElements(By.ClassName("asb-content-inp"));
-                var element = spanElement.First(e =>
-                    e.FindElement(By.TagName("input")).GetAttribute("id").EndsWith("filterListImage"));
-                return element;
-            }
-        }
-
-        public IWebElement CMECheckBox
-        {
-            get
-            {
-                var spanElement = _driver.FindElements(By.ClassName("asb-limit-content-inp"));
-                var element = spanElement.First(e =>
-                    e.FindElement(By.TagName("input")).GetAttribute("id").EndsWith("filterListCME"));
-                return element;
-            }
-        }
-
-        public IWebElement AllDatesRadio
-        {
-            get
-            {
-                var spanElement = _driver.FindElement(By.ClassName("pubDates"));
-                var element = spanElement.FindElements(By.TagName("input")).First(t => t.GetAttribute("value") == "AllIssues");
-                return element;
-            }
-        }
-
-        public IWebElement LastFiveYearsRadio
-        {
-            get
-            {
-                var spanElement = _driver.FindElement(By.ClassName("pubDates"));
-                var element = spanElement.FindElements(By.TagName("input"))
-                    .First(t => t.GetAttribute("value") == "Last5Years");
-                return element;
-            }
-        }
-
-        public IWebElement AllArticleTypesRadio
-        {
-            get
-            {
-                var spanElement = _driver.FindElement(By.ClassName("articleAccessOptions"));
-                var element = spanElement.FindElements(By.TagName("input"))
-                    .First(t => t.GetAttribute("value") == "All");
-                return element;
-            }
-        }
-
-        public IWebElement OpenAccessOnlyRadio
-        {
-            get
-            {
-                var spanElement = _driver.FindElement(By.ClassName("articleAccessOptions"));
-                var element = spanElement.FindElements(By.TagName("input"))
-                    .First(t => t.GetAttribute("value") == "OpenAccess");
-                return element;
-            }
-        }
+        private IWebElement SearchButton;
+        private IWebElement AllKeyWordsField;
+        private IWebElement TitleField;
+        private IWebElement ContentTypeArticleCheckBox;
+        private IWebElement ContentTypeImageCheckBox;
+        private IWebElement CmeCheckBox;
+        private IWebElement AllDatesRadio;
+        private IWebElement LastFiveYearsRadio;
+        private IWebElement AllArticleTypesRadio;
+        private IWebElement OpenAccessOnlyRadio;
 
         public AdvSearchPage(IWebDriver driver)
         {
-            this._driver = driver;
-            PageFactory.InitElements(_driver, this);
+            _driver = driver;
+            SearchButton = _driver.FindElement(SearchButtonBy);
+            AllKeyWordsField = _driver.FindElement(AllKeyWordsFieldBy);
+            TitleField = _driver.FindElement(TitleFieldBy);
+            ContentTypeArticleCheckBox = _driver.FindElement(ContentTypeArticleCheckBoxBy);
+            ContentTypeImageCheckBox = _driver.FindElement(ContentTypeImageCheckBoxBy);
+            CmeCheckBox = _driver.FindElement(CMECheckBoxBy);
+            AllDatesRadio = _driver.FindElement(AllDatesRadioBy);
+            LastFiveYearsRadio = _driver.FindElement(LastFiveYearsRadioBy);
+            AllArticleTypesRadio = _driver.FindElement(AllArticleTypesRadioBy);
+            OpenAccessOnlyRadio = _driver.FindElement(OpenAccessOnlyRadioBy);
         }
 
         public void SelectSearchOptions(QueryStringOptions qso, FilterQueriesOptions fqo, params string[] prods)
@@ -129,13 +64,13 @@ namespace TestsLibrary.Pages
                 ContentTypeArticleCheckBox.Click();
             }
 
-            if (!CMECheckBox.Selected && fqo.cme)
+            if (!CmeCheckBox.Selected && fqo.cme)
             {
-                CMECheckBox.Click();
+                CmeCheckBox.Click();
             }
-            else if (CMECheckBox.Selected && !fqo.cme)
+            else if (CmeCheckBox.Selected && !fqo.cme)
             {
-                CMECheckBox.Click();
+                CmeCheckBox.Click();
             }
 
             if (fqo.pDate == PublicationDateEnum.AllDates)
@@ -160,6 +95,11 @@ namespace TestsLibrary.Pages
                     }
                 }
             }
+        }
+
+        public void GoSearching()
+        {
+            SearchButton.Click();
         }
     }
 }

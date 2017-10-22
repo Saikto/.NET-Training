@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestsLibrary.SOLR;
+﻿using System.Collections.Generic;
 
 namespace TestsLibrary.Utils
 {
@@ -16,7 +11,7 @@ namespace TestsLibrary.Utils
                 return false;
             }
 
-            for(int i =0; i < titlesUi.Count; i++)
+            for(int i = 0; i < titlesUi.Count; i++)
             {
                 if (titlesUi[i] == "")
                 {

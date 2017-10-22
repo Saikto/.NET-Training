@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestsLibrary.Pages;
 
 namespace Tests.Task_1
@@ -18,14 +20,14 @@ namespace Tests.Task_1
             var pass = TestDataTask1.DataForTstLogIn.Pass;
             var driver = TestDataTask1.DataForTstLogIn.Driver;
             driver.Url = TestDataTask1.DataForTstLogIn.StartUrl;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             //TEST
             using (driver)
             {
                 LoginPage loginPage = new LoginPage(driver);
                 loginPage.Login(login, pass);
-                UserActionsToolBarPage userActionsToolBarPage = new UserActionsToolBarPage(driver);
-                driver.FindElement(userActionsToolBarPage.logOutButtonBy);
+                wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
             }
         }
 
@@ -36,15 +38,16 @@ namespace Tests.Task_1
             //TEST SETUP//
             var driver = TestDataTask1.DataForTstMenuElementsExist.Driver;
             driver.Url = TestDataTask1.DataForTstMenuElementsExist.StartUrl;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             //TEST
             using (driver)
             {
                 JournalPage journalPage = new JournalPage(driver);
-                journalPage.FindOpenArticle().Click();
-                //journalPage.FindFreeArticle().Click();
+                journalPage.ArticlesContainer.FindFreeOrOpenArticle().Click();
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.addToMyCollectionsIconBy));
                 ArticlePage articlePage = new ArticlePage(driver);
-                List<string> menuActions = articlePage.GetArticleMenu().Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList(); ;
+                List<string> menuActions = articlePage.GetArticleMenu().Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList();
 
                 Assert.IsTrue(menuActions[0].Contains("Article as PDF"));
                 Assert.IsTrue(menuActions[1].Contains("Article as EPUB"));
@@ -67,12 +70,14 @@ namespace Tests.Task_1
             //TEST SETUP//
             var driver = TestDataTask1.DataForTstCurrentIssueLinksExist.Driver;
             driver.Url = TestDataTask1.DataForTstCurrentIssueLinksExist.StartUrl;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             //TEST
             using (driver)
             {
                 JournalPage journalPage = new JournalPage(driver);
                 journalPage.NavigateToCurrentIssue();
+                wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.subscribeTOCBy));
                 CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
                 var listOfInnerHTML = currentIssuePage.GetIssueLinks();
                 Assert.IsTrue(listOfInnerHTML[0].Contains("Table of Contents Outline"));

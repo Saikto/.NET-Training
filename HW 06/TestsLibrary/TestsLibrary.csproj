@@ -58,8 +58,10 @@
     <Compile Include="Enums\BrowsersEnum.cs" />
     <Compile Include="Enums\PublicationDateEnum.cs" />
     <Compile Include="Enums\SortByOptionsEnum.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\FilterQueriesOptions.cs" />
     <Compile Include="Models\QueryStringOptions.cs" />
+    <Compile Include="Pages\AcrticlesContainer.cs" />
     <Compile Include="Pages\AddToFavoritesPopUp.cs" />
     <Compile Include="Pages\AdvSearchPage.cs" />
     <Compile Include="Pages\ArticlePage.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="SOLR\SearchResponse.cs" />
     <Compile Include="SOLR\SolrRequestGenerator.cs" />
     <Compile Include="SOLR\SolrWorker.cs" />
+    <Compile Include="Utils\DriverUtils.cs" />
     <Compile Include="Utils\HrefParser.cs" />
     <Compile Include="Utils\Comparers.cs" />
     <Compile Include="WebDriver\WebDriverSelector.cs" />

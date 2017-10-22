@@ -7,9 +7,9 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
    
-        public By UserNameFieldBy = By.XPath(@"//input[contains(@id, ""UserName"")]");
-        public By PasswordFieldBy = By.XPath(@"//input[contains(@id, ""Password"")]");
-        public By SubmitButtonBy = By.XPath(@"//input[contains(@id, ""LoginButton"")]");
+        public static By UserNameFieldBy = By.XPath(@"//input[contains(@id, ""UserName"")]");
+        public static By PasswordFieldBy = By.XPath(@"//input[contains(@id, ""Password"")]");
+        public static By SubmitButtonBy = By.XPath(@"//input[contains(@id, ""LoginButton"")]");
 
         private IWebElement UserNameField;
         private IWebElement PasswordField;
