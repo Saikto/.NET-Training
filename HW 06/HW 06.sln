@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsLibrary", "TestsLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{52FCC196-9862-4B43-80B6-77EDF5308ABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserStack", "BrowserStack\BrowserStack.csproj", "{4A72F955-BED5-4D52-9C73-AA53D9086904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{52FCC196-9862-4B43-80B6-77EDF5308ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52FCC196-9862-4B43-80B6-77EDF5308ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52FCC196-9862-4B43-80B6-77EDF5308ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A72F955-BED5-4D52-9C73-AA53D9086904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A72F955-BED5-4D52-9C73-AA53D9086904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A72F955-BED5-4D52-9C73-AA53D9086904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A72F955-BED5-4D52-9C73-AA53D9086904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
