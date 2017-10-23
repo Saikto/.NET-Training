@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace TestsLibrary.Pages
 {
@@ -44,6 +45,21 @@ namespace TestsLibrary.Pages
         {
             messageCancelButton = _driver.FindElement(messageCancelButtonBy);
             messageCancelButton.Click();
+        }
+
+        public void AddToFavoritesAnyway(string folder)
+        {
+            try
+            {
+                existingFoldersList.FindElement(By.XPath($@"//option[text()=""{folder}""]")).Click();
+                addButton.Click();
+            }
+            catch (Exception)
+            {
+                addTofolderRadio.Click();
+                addToFolderNameField.SendKeys(folder);
+                addButton.Click();
+            }
         }
 
     }

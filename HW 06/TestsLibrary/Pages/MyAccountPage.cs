@@ -39,7 +39,6 @@ namespace TestsLibrary.Pages
         public List<string> GetFavoritesLinksFromFolder(string folder)
         {
             _driver.FindElement(By.LinkText(folder)).Click();
-            System.Threading.Thread.Sleep(3000);
             ArticlesContainer = new AcrticlesContainer(_driver);
             var listOfHrefs = ArticlesContainer.GetArticlesList().Select(a => a.Href).ToList();
             return listOfHrefs;

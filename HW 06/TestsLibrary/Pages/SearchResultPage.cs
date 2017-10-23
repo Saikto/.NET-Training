@@ -39,15 +39,15 @@ namespace TestsLibrary.Pages
             List<string> uiIds = new List<string>();
             foreach (var article in listOfArticles)
             {
-                if (article.Href.Contains("imagegallery"))
-                {
-                    uiIds.Add(HrefParser.ParseImageHrefToId(article.Href));
-                    uiTitles.Add(article.Title);
-                }
                 if (!article.Href.Contains("imagegallery") && !article.IsPap())
                 {
-                    uiTitles.Add("");
                     uiIds.Add(HrefParser.ParseArticleHrefToId(article.Href));
+                    uiTitles.Add(article.Title);
+                }
+                if (article.Href.Contains("imagegallery"))
+                {
+                    uiTitles.Add("");
+                    uiIds.Add(HrefParser.ParseImageHrefToId(article.Href));
                     //uiTitles.Add(article.Title);
                 }
             }

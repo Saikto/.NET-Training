@@ -1,4 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestsLibrary;
 using TestsLibrary.Enums;
 using TestsLibrary.Models;
@@ -6,13 +9,30 @@ using TestsLibrary.SOLR;
 
 namespace Tests.Task_2
 {
-    public static class TestDataTask2
+    [SetUpFixture]
+    public class TestDataTask2
     {
+        private static string FixtureName = "Task2";
+        private static string Browser;
+        public static IWebDriver Driver;
+        public static WebDriverWait Wait;
+
+        [OneTimeSetUp]
+        public void TestsTask2Init()
+        {
+            Browser = Browsers.FireFox.ToString();
+            Driver = WebDriverSelector.GetWebDriver(FixtureName, Browser);
+            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+        }
+
+        [OneTimeTearDown]
+        public void TestsTask2Dispose()
+        {
+            Driver.Dispose();
+        }
+
         public static class DataForTstAdvSearchCase1
         {
-            public static string MethodName = "TstAdvSearhCase1";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
             public static string StartUrl = "http://journals.lww.com/ccmjournal/pages/advancedsearch.aspx";
             //Search options setup
             public static QueryStringOptions QsOptions = new QueryStringOptions(_title: "A");
@@ -24,9 +44,6 @@ namespace Tests.Task_2
 
         public static class DataForTstAdvSearchCase2
         {
-            public static string MethodName = "TstAdvSearchCase2";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
             public static string StartUrl = "http://journals.lww.com/aacr/pages/advancedsearch.aspx";
             //Search options setup
             public static QueryStringOptions QsOptions = new QueryStringOptions(_qAllKeys: "a");
@@ -38,9 +55,6 @@ namespace Tests.Task_2
 
         public static class DataForTstAdvSearchCase3
         {
-            public static string MethodName = "TstAdvSearchCase3";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
             public static string StartUrl = "http://journals.lww.com/ccmjournal/pages/advancedsearch.aspx";
             //Search options setup
             public static QueryStringOptions QsOptions = new QueryStringOptions(_qAllKeys: "a");
@@ -52,9 +66,6 @@ namespace Tests.Task_2
 
         public static class DataForTstAdvSearchCase4
         {
-            public static string MethodName = "TstAdvSearchCase4";
-            public static string Browser = Browsers.FireFox.ToString();
-            public static IWebDriver Driver = WebDriverSelector.GetWebDriver(MethodName, Browser);
             public static string StartUrl = "http://journals.lww.com/ccmjournal/pages/advancedsearch.aspx";
             //Search options setup
             public static QueryStringOptions QsOptions = new QueryStringOptions(_qAllKeys: "A");

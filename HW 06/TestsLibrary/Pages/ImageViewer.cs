@@ -22,13 +22,13 @@ namespace TestsLibrary.Pages
         {
             _driver = driver;
             imageModal = _driver.FindElement(imageModalBy);
-            imageView = imageModal.FindElement(imageViewBy);
             imageDisplayedCounter = imageModal.FindElement(imageDisplayedCounterBy);
             nextImageButton = imageModal.FindElement(nextImageButtonBy);
         }
 
         public IWebElement GetImageView()
         {
+            imageView = imageModal.FindElement(imageViewBy);
             return imageView;
         }
 

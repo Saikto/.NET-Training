@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using TestsLibrary.Pages;
@@ -7,24 +8,23 @@ using TestsLibrary.Utils;
 
 namespace Tests.Task_3
 {
+    [Parallelizable(ParallelScope.Fixtures)]
+    [TestFixture]
     public class TestsTask3
     {
-        [Parallelizable(ParallelScope.Self)]
+        private static IWebDriver driver = TestDataTask3.Driver;
+        private static WebDriverWait wait = TestDataTask3.Wait;
+
         [Test]
         public void TstOpenFristImage()
         {
             //TEST SETUP//
-            var driver = TestDataTask3.DataForTstOpenFristImage.Driver;
             driver.Url = TestDataTask3.DataForTstOpenFristImage.StartUrl;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
             //TEST
-            //using (driver)
-            //{
+            using (driver)
+            {
                 ArticlePage articlePage = new ArticlePage(driver);
                 articlePage.GoToImageGallery();
-                if (DriverUtils.isAlertPresent(driver))
-                    driver.SwitchTo().Alert().Accept();
                 wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.actionsDropDownListToggleBy));
                 ImageGalleryPage galleryPage = new ImageGalleryPage(driver);
                 var imagesLinks = galleryPage.GetImagesLinks();
@@ -32,17 +32,14 @@ namespace Tests.Task_3
                 wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
                 bool a = true;
                 Assert.IsTrue(a);
-            //}
+            }
         }
 
         [Test]
         public void TstCheckImagesIteration()
         {
             //TEST SETUP//
-            var driver = TestDataTask3.DataForTstCheckImagesIteration.Driver;
             driver.Url = TestDataTask3.DataForTstCheckImagesIteration.StartUrl;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
             //TEST
             using (driver)
             {
@@ -68,6 +65,7 @@ namespace Tests.Task_3
                         Assert.Fail();
                     viewer.NextImage();
                 }
+                wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
                 if(viewer.GetImageView().GetAttribute("src") != firstImageLink)
                     Assert.Fail();
             }
@@ -77,18 +75,13 @@ namespace Tests.Task_3
         public void TstCheckImagesDownload()
         {
             //TEST SETUP//
-            var driver = TestDataTask3.DataForTstCheckImagesDownload.Driver;
             driver.Url = TestDataTask3.DataForTstCheckImagesDownload.StartUrl;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
             //TEST
             //using (driver)
             //{
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.viewImagesGalleryBy));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.viewImagesGalleryBy));
                 ArticlePage articlePage = new ArticlePage(driver);
                 articlePage.GoToImageGallery();
-                if (DriverUtils.isAlertPresent(driver))
-                driver.SwitchTo().Alert().Accept();
                 wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.actionsDropDownListToggleBy));
                 ImageGalleryPage galleryPage = new ImageGalleryPage(driver);
                 galleryPage.SelectAllImages();
@@ -101,12 +94,9 @@ namespace Tests.Task_3
         public void TstAddArticleToFavorites()
         {
             //TEST SETUP//
-            var driver = TestDataTask3.DataForTstAddArticleToFavorites.Driver;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             var login = TestDataTask3.DataForTstAddArticleToFavorites.Login;
             var pass = TestDataTask3.DataForTstAddArticleToFavorites.Pass;
             var folderName = TestDataTask3.DataForTstAddArticleToFavorites.FolderName;
-
             //TEST
             using (driver)
             {
@@ -117,14 +107,11 @@ namespace Tests.Task_3
                 wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
                 UserActionsToolBarPage toolBarPage = new UserActionsToolBarPage(driver);
                 driver.Url = TestDataTask3.DataForTstAddArticleToFavorites.StartUrl;
-                if (DriverUtils.isAlertPresent(driver))
-                    driver.SwitchTo().Alert().Accept();
-                System.Threading.Thread.Sleep(4000); //Bad wait
-                //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.viewImagesGalleryBy));
                 driver.ExecuteJavaScript("ArticleTools_ShowAddToMyCollectionsPopUp();");
                 wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.existingFoldersListBy));
                 AddToFavoritesPopUp popUp = new AddToFavoritesPopUp(driver);
-                popUp.AddToNewFolder(folderName);
+                //popUp.AddToNewFolder(folderName);
+                popUp.AddToFavoritesAnyway(folderName);
                 wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.messageCancelButtonBy));
                 popUp.CloseMessage();
                 toolBarPage.GoToMyAccount();
@@ -132,9 +119,6 @@ namespace Tests.Task_3
                 wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.myFavoritesTabBy));
                 accountPage.GoToFavoritesTab();
                 var articlesInFolder =  accountPage.GetFavoritesLinksFromFolder(folderName);
-                if (DriverUtils.isAlertPresent(driver))
-                    driver.SwitchTo().Alert().Accept();
-                System.Threading.Thread.Sleep(4000); //Bad wait
                 Assert.IsTrue(articlesInFolder.Contains(TestDataTask3.DataForTstAddArticleToFavorites.StartUrl));
                 accountPage.DeleteCurrentFolder();
                 wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.deleteCollectionConfirmButtonBy));
@@ -146,12 +130,9 @@ namespace Tests.Task_3
         public void TstAddArticleToFavoritesFromIssue()
         {
             //TEST SETUP//
-            var driver = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.Driver;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             var login = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.Login;
             var pass = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.Pass;
             var folderName = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.FolderName;
-
             //TEST
             using (driver)
             {
@@ -162,16 +143,14 @@ namespace Tests.Task_3
                 wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
                 UserActionsToolBarPage toolBarPage = new UserActionsToolBarPage(driver);
                 driver.Url = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.StartUrl;
-                if (DriverUtils.isAlertPresent(driver))
-                    driver.SwitchTo().Alert().Accept();
                 wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.subscribeTOCBy));
                 CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
                 var articlesList = currentIssuePage.ArticlesContainer.GetArticlesList();
                 currentIssuePage.ArticlesContainer.AddArticleToFavorites(articlesList[1]);
-
                 wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.existingFoldersListBy));
                 AddToFavoritesPopUp popUp = new AddToFavoritesPopUp(driver);
-                popUp.AddToFolder(folderName);
+                //popUp.AddToFolder(folderName);
+                popUp.AddToFavoritesAnyway(folderName);
                 wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.messageCancelButtonBy));
                 popUp.CloseMessage();
                 toolBarPage.GoToMyAccount();
@@ -179,9 +158,6 @@ namespace Tests.Task_3
                 wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.myFavoritesTabBy));
                 accountPage.GoToFavoritesTab();
                 var articlesInFolder = accountPage.GetFavoritesLinksFromFolder(folderName);
-                if (DriverUtils.isAlertPresent(driver))
-                    driver.SwitchTo().Alert().Accept();
-                System.Threading.Thread.Sleep(2000); //Bad wait
                 Assert.IsTrue(articlesInFolder.Contains(articlesList[1].Href));
                 accountPage.DeleteCurrentFolder();
                 wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.deleteCollectionConfirmButtonBy));
