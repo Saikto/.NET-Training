@@ -77,6 +77,7 @@
     <Compile Include="SOLR\SolrRequestGenerator.cs" />
     <Compile Include="SOLR\SolrWorker.cs" />
     <Compile Include="Utils\DriverUtils.cs" />
+    <Compile Include="Utils\FileSize.cs" />
     <Compile Include="Utils\HrefParser.cs" />
     <Compile Include="Utils\Comparers.cs" />
     <Compile Include="WebDriver\WebDriverSelector.cs" />

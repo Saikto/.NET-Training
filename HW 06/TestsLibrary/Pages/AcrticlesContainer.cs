@@ -13,7 +13,7 @@ namespace TestsLibrary.Pages
     {
         private IWebDriver _driver;
 
-        public static By ArticlesOuterBy = By.XPath(@"//div[@class=""wp-feature-articles""]");
+        //public static By ArticlesOuterBy = By.XPath(@"//div[@class=""wp-feature-articles""]");
         public static By ArticleBy = By.XPath(@"//article");
 
         private List<Article> ArticleList;
@@ -22,9 +22,9 @@ namespace TestsLibrary.Pages
         public AcrticlesContainer(IWebDriver driver)
         {
             _driver = driver;
-            ArticlesOuter = _driver.FindElement(ArticlesOuterBy);
+            //ArticlesOuter = _driver.FindElement(ArticlesOuterBy);
             ArticleList = new List<Article>();
-            ArticleList = ArticlesOuter.FindElements(ArticleBy).ToList().Select(a => new Article(a)).ToList();
+            ArticleList = _driver.FindElements(ArticleBy).ToList().Where(a => a.Text != "").Select(a => new Article(a)).ToList();
         }
 
         public IWebElement FindFreeOrOpenArticle()
