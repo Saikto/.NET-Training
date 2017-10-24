@@ -53,15 +53,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Task 1\TestDataTask1.cs" />
-    <Compile Include="Task 3\TestDataTask3.cs" />
-    <Compile Include="Task 1\TestsTask1.cs" />
+    <Compile Include="Task 1\SetUp_Task1.cs" />
+    <Compile Include="Task 2\SetUp_Task2.cs" />
+    <Compile Include="Task 3\SetUp_Task3.cs" />
+    <Compile Include="Task 1\Tests_Task1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task 3\TestsTask3.cs" />
-    <Compile Include="Task 2\TestDataTask2.cs" />
-    <Compile Include="Task 2\TestsTask2.cs" />
+    <Compile Include="Task 3\Tests_Task3_1.cs" />
+    <Compile Include="Task 2\Tests_Task2.cs" />
+    <Compile Include="Task 3\Tests_Task3_2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

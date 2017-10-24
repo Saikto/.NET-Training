@@ -6,38 +6,33 @@ namespace TestsLibrary.Pages
 {
     public class CurrentIssuePage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
-        public static By issueActionsBy = By.XPath(@"//*[@class=""issueActions""]");
-        public static By actionTOCBy = By.XPath(@"//*[@class=""actionTOC""]");
-        public static By subscribeTOCBy = By.XPath(@"//*[@class=""subscribeTOC""]");
-        public static By contributorIndexBy = By.XPath(@"//*[@class=""contributorIndex""]");
+        public static By IssueActionsBy = By.XPath(@"//*[@class=""issueActions""]");
+        public static By ActionTocBy = By.XPath(@"//*[@class=""actionTOC""]");
+        public static By SubscribeTocBy = By.XPath(@"//*[@class=""subscribeTOC""]");
+        public static By ContributorIndexBy = By.XPath(@"//*[@class=""contributorIndex""]");
 
-        public AcrticlesContainer ArticlesContainer;
-        private IWebElement issueActions;
-        private IWebElement actionTOC;
-        private IWebElement subscribeTOC;
-        private IWebElement contributorIndex;
+        public AcrticlesContainer ArticlesContainer => new AcrticlesContainer(_driver);
+        private IWebElement IssueActions => _driver.FindElement(IssueActionsBy);
+        private IWebElement ActionToc => IssueActions.FindElement(ActionTocBy);
+        private IWebElement SubscribeToc => IssueActions.FindElement(SubscribeTocBy);
+        private IWebElement ContributorIndex => IssueActions.FindElement(ContributorIndexBy);
 
 
         public CurrentIssuePage(IWebDriver driver)
         {
             _driver = driver;
-            issueActions = _driver.FindElement(issueActionsBy);
-            actionTOC = issueActions.FindElement(actionTOCBy);
-            subscribeTOC = issueActions.FindElement(subscribeTOCBy);
-            contributorIndex = issueActions.FindElement(contributorIndexBy);
-            ArticlesContainer = new AcrticlesContainer(driver);
         }
 
         public List<string> GetIssueLinks()
         {
             List<string> listOfInnerHTML = new List<string>();
-            listOfInnerHTML.Add(actionTOC.FindElement(By.TagName("a"))
+            listOfInnerHTML.Add(ActionToc.FindElement(By.TagName("a"))
                                 .GetAttribute("innerHTML"));
-            listOfInnerHTML.Add(subscribeTOC.FindElement(By.TagName("a"))
+            listOfInnerHTML.Add(SubscribeToc.FindElement(By.TagName("a"))
                                 .GetAttribute("innerHTML"));
-            listOfInnerHTML.Add(contributorIndex.FindElement(By.TagName("a"))
+            listOfInnerHTML.Add(ContributorIndex.FindElement(By.TagName("a"))
                                 .GetAttribute("innerHTML"));
             return listOfInnerHTML;
         }

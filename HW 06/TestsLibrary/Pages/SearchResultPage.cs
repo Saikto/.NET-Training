@@ -8,7 +8,7 @@ namespace TestsLibrary.Pages
 {
     public class SearchResultPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public static By ResultCountBy = By.XPath(@"//*[@class=""resultCount""]");
         public static By SortByDropDownListBy = By.XPath(@"//*[@id=""wpSearchResults""]/div/div[2]/div[3]/div/div[1]/div");
@@ -16,20 +16,17 @@ namespace TestsLibrary.Pages
         public static By SortOptionNewestBy = By.XPath(@"//*[contains(text(), ""Newest"")]");
         public static By SortOptionOldestBy = By.XPath(@"//*[contains(text(), ""Oldest"")]");
 
-        private AcrticlesContainer ArticlesContainer;
-        private IWebElement ResultCount;
-        private IWebElement SortByDropDownList;
-        private IWebElement SortOptionBestMatch;
-        private IWebElement SortOptionNewest;
-        private IWebElement SortOptionOldest;
+        private AcrticlesContainer ArticlesContainer => new AcrticlesContainer(_driver);
+        private IWebElement ResultCount => _driver.FindElement(ResultCountBy);
+        private IWebElement SortByDropDownList => _driver.FindElement(SortByDropDownListBy);
+        private IWebElement SortOptionBestMatch => _driver.FindElement(SortOptionBestMatchBy);
+        private IWebElement SortOptionNewest => _driver.FindElement(SortOptionNewestBy);
+        private IWebElement SortOptionOldest => _driver.FindElement(SortOptionOldestBy);
 
 
         public SearchResultPage(IWebDriver driver)
         {
             _driver = driver;
-            ResultCount = _driver.FindElement(ResultCountBy);
-            ArticlesContainer = new AcrticlesContainer(_driver);
-            SortByDropDownList = _driver.FindElement(SortByDropDownListBy);
         }
 
         public void GetTitlesAndIds(out List<string> titles, out List<string> ids)
@@ -57,7 +54,6 @@ namespace TestsLibrary.Pages
 
         public int GetResultCount()
         {
-            ResultCount = _driver.FindElement(ResultCountBy);
             if (Int32.TryParse(ResultCount.Text.Split()[0], out int count))
                 return count;
             throw new NotFoundException();
@@ -66,9 +62,6 @@ namespace TestsLibrary.Pages
         public void SelectSortByOption(SortByOptionsEnum option)
         {
             SortByDropDownList.Click();
-            SortOptionBestMatch = _driver.FindElement(SortOptionBestMatchBy);
-            SortOptionNewest = _driver.FindElement(SortOptionNewestBy);
-            SortOptionOldest = _driver.FindElement(SortOptionOldestBy);
             if (option == SortByOptionsEnum.BestMatch)
             {
                 SortOptionBestMatch.Click();
@@ -82,7 +75,6 @@ namespace TestsLibrary.Pages
                 SortOptionOldest.Click();
             }
             System.Threading.Thread.Sleep(4000);
-            ArticlesContainer = new AcrticlesContainer(_driver);
         }
     }
 }

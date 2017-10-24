@@ -7,18 +7,16 @@ namespace TestsLibrary.Pages
 {
     public class JournalPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public static By CurrentIssueBy = By.XPath(@"//*[@id=""wpCurrentIssue""]");
 
-        public AcrticlesContainer ArticlesContainer;
-        private IWebElement CurrentIssue;
+        public AcrticlesContainer ArticlesContainer => new AcrticlesContainer(_driver);
+        private IWebElement CurrentIssue => _driver.FindElement(CurrentIssueBy);
 
         public JournalPage(IWebDriver driver)
         {
             _driver = driver;
-            ArticlesContainer = new AcrticlesContainer(_driver);
-            CurrentIssue = _driver.FindElement(CurrentIssueBy);
         }
 
         public void NavigateToCurrentIssue()

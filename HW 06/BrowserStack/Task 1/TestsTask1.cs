@@ -17,6 +17,7 @@ namespace BrowserStack.Task_1
         //private static IWebDriver driver = TestDataTask1.Driver;
         private static WebDriverWait wait = TestDataTask1.Wait;
         
+        [SetUp] public void 
         [Test]
         public void TstLogInBS()
         {
@@ -28,7 +29,7 @@ namespace BrowserStack.Task_1
             //TEST
             LoginPage loginPage = new LoginPage(driver);
             loginPage.Login(login, pass);
-            wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.LogOutButtonBy));
         }
 
         [Test]
@@ -40,7 +41,7 @@ namespace BrowserStack.Task_1
             //TEST
             JournalPage journalPage = new JournalPage(driver);
             journalPage.ArticlesContainer.FindFreeOrOpenArticle().Click();
-            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.addToMyCollectionsIconBy));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.AddToMyCollectionsIconBy));
             ArticlePage articlePage = new ArticlePage(driver);
             List<string> menuActions = articlePage.GetArticleMenu().Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList();
 
@@ -66,7 +67,7 @@ namespace BrowserStack.Task_1
             //TEST
             JournalPage journalPage = new JournalPage(driver);
             journalPage.NavigateToCurrentIssue();
-            wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.subscribeTOCBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.SubscribeTocBy));
             CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
             var listOfInnerHTML = currentIssuePage.GetIssueLinks();
             Assert.IsTrue(listOfInnerHTML[0].Contains("Table of Contents Outline"));

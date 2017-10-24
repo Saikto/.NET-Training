@@ -11,6 +11,7 @@ namespace TestsLibrary.Enums
         Chrome,
         FireFox,
         InternetExplorer,
-        Edge
+        Edge,
+        BrowserStack
     }
 }

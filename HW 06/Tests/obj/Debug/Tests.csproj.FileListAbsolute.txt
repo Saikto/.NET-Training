@@ -100,3 +100,5 @@ D:\Tasks\.NET-Training\HW 06\Tests\obj\Debug\Tests.csprojResolveAssemblyReferenc
 D:\Tasks\.NET-Training\HW 06\Tests\obj\Debug\Tests.csproj.CoreCompileInputs.cache
 D:\Tasks\.NET-Training\HW 06\Tests\obj\Debug\Tests.dll
 D:\Tasks\.NET-Training\HW 06\Tests\obj\Debug\Tests.pdb
+E:\Study\VS Projects\.NET-Training\HW 06\Tests\bin\Debug\TestsLibrary.dll.config
+E:\Study\VS Projects\.NET-Training\HW 06\Tests\bin\Debug\Tests.dll.config

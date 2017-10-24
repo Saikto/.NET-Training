@@ -6,49 +6,45 @@ namespace TestsLibrary.Pages
 {
     public class ImageViewer
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
         
-        public static By imageModalBy => By.XPath(@"//*[@id=""ArticleImageModal""]");
-        public static By imageViewBy => By.XPath("//div[1]/section[1]/div[1]/div[1]/img[1]");
-        public static By imageDisplayedCounterBy => By.XPath("//div/section/div[2]/div/div[2]/span");
-        public static By nextImageButtonBy => By.XPath("//div/section/div[2]/div/div[2]/a[2]");
+        public static By ImageModalBy => By.XPath(@"//*[@id=""ArticleImageModal""]");
+        public static By ImageViewBy => By.XPath("//div[1]/section[1]/div[1]/div[1]/img[1]");
+        public static By ImageDisplayedCounterBy => By.XPath("//div/section/div[2]/div/div[2]/span");
+        public static By NextImageButtonBy => By.XPath("//div/section/div[2]/div/div[2]/a[2]");
 
-        private IWebElement imageModal;
-        private IWebElement imageView;
-        private IWebElement imageDisplayedCounter;
-        private IWebElement nextImageButton;
+        private IWebElement ImageModal => _driver.FindElement(ImageModalBy);
+        private IWebElement ImageView => ImageModal.FindElement(ImageViewBy);
+        private IWebElement ImageDisplayedCounter => ImageModal.FindElement(ImageDisplayedCounterBy);
+        private IWebElement NextImageButton => ImageModal.FindElement(NextImageButtonBy);
 
         public ImageViewer(IWebDriver driver)
         {
             _driver = driver;
-            imageModal = _driver.FindElement(imageModalBy);
-            imageDisplayedCounter = imageModal.FindElement(imageDisplayedCounterBy);
-            nextImageButton = imageModal.FindElement(nextImageButtonBy);
         }
 
-        public IWebElement GetImageView()
+        public string GetCurrentImageLink()
         {
-            imageView = imageModal.FindElement(imageViewBy);
-            return imageView;
+            return ImageView.GetAttribute("src");
         }
 
         public int GetImagesCount()
         {
-            string s = imageDisplayedCounter.Text;
+            string s = ImageDisplayedCounter.Text;
             int count = Int32.Parse(s.Split()[2]);
             return count;
         }
 
         public int GetCurrentImageNumber()
         {
-            string s = imageDisplayedCounter.Text;
+            string s = ImageDisplayedCounter.Text;
             int currentNumber = Int32.Parse(s.Split()[0]);
             return currentNumber;
         }
 
         public void NextImage()
         {
-            nextImageButton.Click();
+            NextImageButton.Click();
         }
     }
 

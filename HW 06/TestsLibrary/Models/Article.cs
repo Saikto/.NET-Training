@@ -4,7 +4,6 @@ namespace TestsLibrary.Models
 {
     public class Article
     {
-        private IWebDriver _driver;
         public static By ArticleActionsBy = By.XPath(@".//*[@class=""article-actions""]");
         public By ArticleOpenIndicatorBy = By.XPath(@".//*[@id=""ej-article-indicators-open""]");
         public By ArticleFreeIndicatorBy = By.XPath(@".//li[contains(@id, ""liFree"")]");

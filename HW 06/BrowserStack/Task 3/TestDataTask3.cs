@@ -32,7 +32,7 @@ namespace BrowserStack.Task_3
             Wait.Until(ExpectedConditions.ElementIsVisible(LoginPage.SubmitButtonBy));
             LoginPage loginPage = new LoginPage(Driver);
             loginPage.Login(Login, Pass);
-            Wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
+            Wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.LogOutButtonBy));
         }
 
         [OneTimeTearDown]

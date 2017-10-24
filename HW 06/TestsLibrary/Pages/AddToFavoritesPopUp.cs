@@ -5,60 +5,55 @@ namespace TestsLibrary.Pages
 {
     public class AddToFavoritesPopUp
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
-        public static By existingFoldersListBy = By.XPath(@"//select[contains(@name, ""cmbExistingCollection"")]");
-        public static By addButtonBy = By.XPath(@"//input[contains(@value,""Add Item(s)"")]");
-        public static By messageCancelButtonBy = By.XPath(@"//input[contains(@id,""btnCancelAddToMyCollectionsMessage"")]");
-        public static By addTofolderRadioBy = By.XPath(@"//input[contains(@id,""rdoNewCollection"")]");
-        public static By addToFolderNameFieldBy = By.XPath(@"//input[contains(@name,""txtCollectionName"")]");
+        public static By ExistingFoldersListBy = By.XPath(@"//select[contains(@name, ""cmbExistingCollection"")]");
+        public static By AddButtonBy = By.XPath(@"//input[contains(@value,""Add Item(s)"")]");
+        public static By MessageCancelButtonBy = By.XPath(@"//input[contains(@id,""btnCancelAddToMyCollectionsMessage"")]");
+        public static By AddTofolderRadioBy = By.XPath(@"//input[contains(@id,""rdoNewCollection"")]");
+        public static By AddToFolderNameFieldBy = By.XPath(@"//input[contains(@name,""txtCollectionName"")]");
 
-        private IWebElement existingFoldersList;
-        private IWebElement addButton;
-        private IWebElement messageCancelButton;
-        private IWebElement addTofolderRadio;
-        private IWebElement addToFolderNameField;
+        private IWebElement ExistingFoldersList => _driver.FindElement(ExistingFoldersListBy);
+        private IWebElement AddButton => _driver.FindElement(AddButtonBy);
+        private IWebElement MessageCancelButton => _driver.FindElement(MessageCancelButtonBy);
+        private IWebElement AddTofolderRadio => _driver.FindElement(AddTofolderRadioBy);
+        private IWebElement AddToFolderNameField => _driver.FindElement(AddToFolderNameFieldBy);
 
         public AddToFavoritesPopUp(IWebDriver driver)
         {
             _driver = driver;
-            existingFoldersList = _driver.FindElement(existingFoldersListBy);
-            addButton = _driver.FindElement(addButtonBy);
-            addTofolderRadio = _driver.FindElement(addTofolderRadioBy);
-            addToFolderNameField = _driver.FindElement(addToFolderNameFieldBy);
         }
 
         public void AddToFolder(string folder)
         {
-            existingFoldersList.FindElement(By.XPath($@"//option[text()=""{folder}""]")).Click();
-            addButton.Click();
+            ExistingFoldersList.FindElement(By.XPath($@"//option[text()=""{folder}""]")).Click();
+            AddButton.Click();
         }
 
         public void AddToNewFolder(string folder)
         {
-            addTofolderRadio.Click();
-            addToFolderNameField.SendKeys(folder);
-            addButton.Click();
+            AddTofolderRadio.Click();
+            AddToFolderNameField.SendKeys(folder);
+            AddButton.Click();
         }
 
         public void CloseMessage()
         {
-            messageCancelButton = _driver.FindElement(messageCancelButtonBy);
-            messageCancelButton.Click();
+            MessageCancelButton.Click();
         }
 
         public void AddToFavoritesAnyway(string folder)
         {
             try
             {
-                existingFoldersList.FindElement(By.XPath($@"//option[text()=""{folder}""]")).Click();
-                addButton.Click();
+                ExistingFoldersList.FindElement(By.XPath($@"//option[text()=""{folder}""]")).Click();
+                AddButton.Click();
             }
             catch (Exception)
             {
-                addTofolderRadio.Click();
-                addToFolderNameField.SendKeys(folder);
-                addButton.Click();
+                AddTofolderRadio.Click();
+                AddToFolderNameField.SendKeys(folder);
+                AddButton.Click();
             }
         }
 

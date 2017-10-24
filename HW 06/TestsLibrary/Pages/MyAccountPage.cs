@@ -10,50 +10,44 @@ namespace TestsLibrary.Pages
 {
     public class MyAccountPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
-        public static By deleteCollectionButtonBy => By.XPath(@"//a[contains(@id, ""lnkDeleteMyCollection"")]");
-        public static By deleteCollectionConfirmButtonBy => By.XPath(@"//input[contains(@name, ""deleteMyCollectionControl$btnDelete"")]");
-        public static By myFavoritesTabBy => By.XPath(@"//a[contains(@id, ""PlaceHolderMain_tabsControl1_hypMyFavorites"")]");
+        public static By DeleteCollectionButtonBy => By.XPath(@"//a[contains(@id, ""lnkDeleteMyCollection"")]");
+        public static By DeleteCollectionConfirmButtonBy => By.XPath(@"//input[contains(@name, ""deleteMyCollectionControl$btnDelete"")]");
+        public static By MyFavoritesTabBy => By.XPath(@"//a[contains(@id, ""PlaceHolderMain_tabsControl1_hypMyFavorites"")]");
 
-        private AcrticlesContainer ArticlesContainer;
-        private IWebElement myFavoritesTab;
-        private IWebElement deleteCollectionConfirmButton;
-        private IWebElement deleteCollectionButton;
-        
+        private AcrticlesContainer ArticlesContainer => new AcrticlesContainer(_driver);
+        private IWebElement MyFavoritesTab => _driver.FindElement(MyFavoritesTabBy);
+        private IWebElement DeleteCollectionConfirmButton => _driver.FindElement(DeleteCollectionConfirmButtonBy);
+        private IWebElement DeleteCollectionButton => _driver.FindElement(DeleteCollectionButtonBy);
+
 
 
         public MyAccountPage(IWebDriver driver)
         {
             _driver = driver;
-            myFavoritesTab = _driver.FindElement(myFavoritesTabBy);
-            
         }
 
         public void GoToFavoritesTab()
         {
-            myFavoritesTab.Click();
-            ArticlesContainer = new AcrticlesContainer(_driver);
+            MyFavoritesTab.Click();
         }
 
         public List<string> GetFavoritesLinksFromFolder(string folder)
         {
             _driver.FindElement(By.LinkText(folder)).Click();
-            ArticlesContainer = new AcrticlesContainer(_driver);
             var listOfHrefs = ArticlesContainer.GetArticlesList().Select(a => a.Href).ToList();
             return listOfHrefs;
         }
 
         public void DeleteCurrentFolder()
         {
-            deleteCollectionButton = _driver.FindElement(deleteCollectionButtonBy);
-            deleteCollectionButton.Click();
+            DeleteCollectionButton.Click();
         }
 
         public void DeleteCurrentFolderConfirm()
         {
-            deleteCollectionConfirmButton = _driver.FindElement(deleteCollectionConfirmButtonBy);
-            deleteCollectionConfirmButton.Click();
+            DeleteCollectionConfirmButton.Click();
         }
     }
 }

@@ -8,38 +8,33 @@ using TestsLibrary.Pages;
 
 namespace Tests.Task_1
 {
-    [Parallelizable(ParallelScope.Fixtures)]
-    [TestFixture]
-    public class TestsTask1
+    public class Tests_Task1 : SetUp_Task1
     {
-        private static IWebDriver driver = TestDataTask1.Driver;
-        private static WebDriverWait wait = TestDataTask1.Wait;
-        
+        public Tests_Task1(string profile, string environment) : base(profile, environment) { }
+
+        private static string StartUrl;
+        private static string Login = "igor_neslukhovski@epam.com";
+        private static string Pass = "epam_test1";
+
         [Test]
         public void TstLogIn()
         {
-            //TEST SETUP//
-            var login = TestDataTask1.DataForTstLogIn.Login;
-            var pass = TestDataTask1.DataForTstLogIn.Pass;
-            driver.Url = TestDataTask1.DataForTstLogIn.StartUrl;
-
-            //TEST
-            LoginPage loginPage = new LoginPage(driver);
-            loginPage.Login(login, pass);
-            wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.logOutButtonBy));
+            StartUrl = "http://journals.lww.com/";
+            Driver.Url = StartUrl;
+            LoginPage loginPage = new LoginPage(Driver);
+            loginPage.Login(Login, Pass);
+            Wait.Until(ExpectedConditions.ElementIsVisible(UserActionsToolBarPage.LogOutButtonBy));
         }
 
         [Test]
         public void TstMenuElementsExist()
         {
-            //TEST SETUP//
-            driver.Url = TestDataTask1.DataForTstMenuElementsExist.StartUrl;
-
-            //TEST
-            JournalPage journalPage = new JournalPage(driver);
+            StartUrl = "http://journals.lww.com/asaiojournal";
+            Driver.Url = StartUrl;
+            JournalPage journalPage = new JournalPage(Driver);
             journalPage.ArticlesContainer.FindFreeOrOpenArticle().Click();
-            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.addToMyCollectionsIconBy));
-            ArticlePage articlePage = new ArticlePage(driver);
+            Wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.AddToMyCollectionsIconBy));
+            ArticlePage articlePage = new ArticlePage(Driver);
             List<string> menuActions = articlePage.GetArticleMenu().Select(t => t.FindElement(By.TagName("a")).GetAttribute("innerHTML")).ToList();
 
             Assert.IsTrue(menuActions[0].Contains("Article as PDF"));
@@ -58,14 +53,13 @@ namespace Tests.Task_1
         [Test]
         public void TstCurrentIssueLinksExist()
         {
-            //TEST SETUP//
-            driver.Url = TestDataTask1.DataForTstCurrentIssueLinksExist.StartUrl;
-
-            //TEST
-            JournalPage journalPage = new JournalPage(driver);
+            StartUrl = "http://journals.lww.com/ccmjournal/";
+            //StartUrl = "http://journals.lww.com/annalsplasticsurgery/"; //Only FREE article
+            Driver.Url = StartUrl;
+            JournalPage journalPage = new JournalPage(Driver);
             journalPage.NavigateToCurrentIssue();
-            wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.subscribeTOCBy));
-            CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
+            Wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.SubscribeTocBy));
+            CurrentIssuePage currentIssuePage = new CurrentIssuePage(Driver);
             var listOfInnerHTML = currentIssuePage.GetIssueLinks();
             Assert.IsTrue(listOfInnerHTML[0].Contains("Table of Contents Outline"));
             Assert.IsTrue(listOfInnerHTML[1].Contains("Subscribe to eTOC"));

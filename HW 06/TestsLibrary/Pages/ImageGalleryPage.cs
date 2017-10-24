@@ -10,39 +10,36 @@ namespace TestsLibrary.Pages
 {
     public class ImageGalleryPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
-        public static By actionsDropDownMenuPpBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/ul[1]/li[3]/a[1]");
-        public static By thumbDetailsElementsBy = By.XPath(@"//*[@class = ""ej-thumb-details""]");
-        public static By selectAllCheckBoxBy = By.XPath(@"//*[@id = ""chkSelectTop""]");
-        public static By actionsDropDownListToggleBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/li[1]");
-        public static By actionsDropDownListMenuBy = By.XPath(@"//*[@class = ""wk--toolbar__dropdown-menu""]");
+        public static By ActionsDropDownMenuPpBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/ul[1]/li[3]/a[1]");
+        public static By ThumbDetailsElementsBy = By.XPath(@"//*[@class = ""ej-thumb-details""]");
+        public static By SelectAllCheckBoxBy = By.XPath(@"//*[@id = ""chkSelectTop""]");
+        public static By ActionsDropDownListToggleBy = By.XPath(@"//*[@class = ""toolbar-nav toolbar-nav-left""]/li[1]");
+        public static By ActionsDropDownListMenuBy = By.XPath(@"//*[@class = ""wk--toolbar__dropdown-menu""]");
 
 
-        private IWebElement thumbDetailsElements;
-        private IWebElement selectAllCheckBox;
-        private IWebElement actionsDropDownListToggle;
+        private IWebElement ThumbDetailsElements => _driver.FindElement(ThumbDetailsElementsBy);
+        private IWebElement SelectAllCheckBox => _driver.FindElement(SelectAllCheckBoxBy);
+        private IWebElement ActionsDropDownListToggle => _driver.FindElement(ActionsDropDownListToggleBy);
 
 
         public ImageGalleryPage(IWebDriver driver)
         {
             _driver = driver;
-            thumbDetailsElements = _driver.FindElement(thumbDetailsElementsBy);
-            selectAllCheckBox = _driver.FindElement(selectAllCheckBoxBy);
-            actionsDropDownListToggle = _driver.FindElement(actionsDropDownListToggleBy);
         }
 
         public List<IWebElement> GetImagesLinks()
         {
-            var listOfLinks = thumbDetailsElements.FindElements(By.XPath("//li/div[1]/a[1]")).ToList();
+            var listOfLinks = ThumbDetailsElements.FindElements(By.XPath("//li/div[1]/a[1]")).ToList();
             return listOfLinks;
         }
 
         public void ExportSelectedToPowerPoint()
         {
-            actionsDropDownListToggle.Click();
+            ActionsDropDownListToggle.Click();
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.InvisibilityOfElementWithText(actionsDropDownMenuPpBy, "Export to PowerPoint"));
+            wait.Until(ExpectedConditions.InvisibilityOfElementWithText(ActionsDropDownMenuPpBy, "Export to PowerPoint"));
             try
             {
                 _driver.ExecuteJavaScript(@"ItemListActionsControl_DoAction('exportToPowerPoint', this);");
@@ -54,7 +51,7 @@ namespace TestsLibrary.Pages
 
         public void SelectAllImages()
         {
-            selectAllCheckBox.Click();
+            SelectAllCheckBox.Click();
         }
     }
 }

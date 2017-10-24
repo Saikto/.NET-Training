@@ -6,43 +6,33 @@ namespace TestsLibrary.Pages
 {
     public class AdvSearchPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public By SearchButtonBy = By.XPath(@"//input[contains(@name, ""searchAgain"")]");
         public By AllKeyWordsFieldBy = By.XPath(@"//input[@id=""keywords_input_1""]");
         public By TitleFieldBy = By.XPath(@"//input[@id=""keywords_input_2""]");
         public By ContentTypeArticleCheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListArticle"")]");
         public By ContentTypeImageCheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListImage"")]");
-        public By CMECheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListCME"")]");
+        public By CmeCheckBoxBy = By.XPath(@"//input[contains(@name, ""filterListCME"")]");
         public By AllDatesRadioBy = By.XPath(@"//input[contains(@id, ""searchDatesRadioButtonList_0"")]");
         public By LastFiveYearsRadioBy = By.XPath(@"//input[contains(@id, ""searchDatesRadioButtonList_4"")]");
         public By AllArticleTypesRadioBy = By.XPath(@"//input[contains(@id, ""articleAccessRadioButtonList_0"")]");
         public By OpenAccessOnlyRadioBy = By.XPath(@"//input[contains(@id, ""articleAccessRadioButtonList_1"")]");
 
-        private IWebElement SearchButton;
-        private IWebElement AllKeyWordsField;
-        private IWebElement TitleField;
-        private IWebElement ContentTypeArticleCheckBox;
-        private IWebElement ContentTypeImageCheckBox;
-        private IWebElement CmeCheckBox;
-        private IWebElement AllDatesRadio;
-        private IWebElement LastFiveYearsRadio;
-        private IWebElement AllArticleTypesRadio;
-        private IWebElement OpenAccessOnlyRadio;
+        private IWebElement SearchButton => _driver.FindElement(SearchButtonBy);
+        private IWebElement AllKeyWordsField => _driver.FindElement(AllKeyWordsFieldBy);
+        private IWebElement TitleField => _driver.FindElement(TitleFieldBy);
+        private IWebElement ContentTypeArticleCheckBox => _driver.FindElement(ContentTypeArticleCheckBoxBy);
+        private IWebElement ContentTypeImageCheckBox => _driver.FindElement(ContentTypeImageCheckBoxBy);
+        private IWebElement CmeCheckBox => _driver.FindElement(CmeCheckBoxBy);
+        private IWebElement AllDatesRadio => _driver.FindElement(AllDatesRadioBy);
+        private IWebElement LastFiveYearsRadio => _driver.FindElement(LastFiveYearsRadioBy);
+        private IWebElement AllArticleTypesRadio => _driver.FindElement(AllArticleTypesRadioBy);
+        private IWebElement OpenAccessOnlyRadio => _driver.FindElement(OpenAccessOnlyRadioBy);
 
         public AdvSearchPage(IWebDriver driver)
         {
             _driver = driver;
-            SearchButton = _driver.FindElement(SearchButtonBy);
-            AllKeyWordsField = _driver.FindElement(AllKeyWordsFieldBy);
-            TitleField = _driver.FindElement(TitleFieldBy);
-            ContentTypeArticleCheckBox = _driver.FindElement(ContentTypeArticleCheckBoxBy);
-            ContentTypeImageCheckBox = _driver.FindElement(ContentTypeImageCheckBoxBy);
-            CmeCheckBox = _driver.FindElement(CMECheckBoxBy);
-            AllDatesRadio = _driver.FindElement(AllDatesRadioBy);
-            LastFiveYearsRadio = _driver.FindElement(LastFiveYearsRadioBy);
-            AllArticleTypesRadio = _driver.FindElement(AllArticleTypesRadioBy);
-            OpenAccessOnlyRadio = _driver.FindElement(OpenAccessOnlyRadioBy);
         }
 
         public void SelectSearchOptions(QueryStringOptions qso, FilterQueriesOptions fqo, params string[] prods)

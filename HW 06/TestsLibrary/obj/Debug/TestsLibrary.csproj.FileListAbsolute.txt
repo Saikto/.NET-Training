@@ -24,7 +24,6 @@ E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Suppor
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\nunit.framework.xml
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.xml
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\WebDriver.Support.xml
-E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAssemblyReference.cache
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csproj.CoreCompileInputs.cache
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.dll
 E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.pdb
@@ -64,3 +63,5 @@ D:\Tasks\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAs
 D:\Tasks\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csproj.CoreCompileInputs.cache
 D:\Tasks\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.dll
 D:\Tasks\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.pdb
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\bin\Debug\TestsLibrary.dll.config
+E:\Study\VS Projects\.NET-Training\HW 06\TestsLibrary\obj\Debug\TestsLibrary.csprojResolveAssemblyReference.cache

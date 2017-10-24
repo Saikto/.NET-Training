@@ -26,11 +26,11 @@ namespace BrowserStack.Task_3
             //TEST
             ArticlePage articlePage = new ArticlePage(driver);
             articlePage.GoToImageGallery();
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.actionsDropDownListToggleBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.ActionsDropDownListToggleBy));
             ImageGalleryPage galleryPage = new ImageGalleryPage(driver);
             var imagesLinks = galleryPage.GetImagesLinks();
             imagesLinks[0].Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.ImageViewBy));
             bool a = true;
             Assert.IsTrue(a);
         }
@@ -45,11 +45,11 @@ namespace BrowserStack.Task_3
             articlePage.GoToImageGallery();
             if (DriverUtils.isAlertPresent(driver))
                 driver.SwitchTo().Alert().Accept();
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.actionsDropDownListToggleBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.ActionsDropDownListToggleBy));
             ImageGalleryPage galleryPage = new ImageGalleryPage(driver);
             var imagesLinks = galleryPage.GetImagesLinks();
             imagesLinks[0].Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.ImageViewBy));
             ImageViewer viewer = new ImageViewer(driver);
             string firstImageLink = viewer.GetImageView().GetAttribute("src");
             int countV = viewer.GetImagesCount();
@@ -57,13 +57,13 @@ namespace BrowserStack.Task_3
                 Assert.Fail();
             for (int i = 1; i <= imagesLinks.Count; i++)
             {
-                wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
+                wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.ImageViewBy));
                 int current = viewer.GetCurrentImageNumber();
                 if (current != i)
                     Assert.Fail();
                 viewer.NextImage();
             }
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.imageViewBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageViewer.ImageViewBy));
             if(viewer.GetImageView().GetAttribute("src") != firstImageLink)
                 Assert.Fail();
         
@@ -77,10 +77,10 @@ namespace BrowserStack.Task_3
             string filePath = TestDataTask3.DataForTstCheckImagesDownload.FilePath;
             int expectedSize = TestDataTask3.DataForTstCheckImagesDownload.ExpectedFileSize;
             //TEST
-            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.viewImagesGalleryBy));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ArticlePage.ViewImagesGalleryBy));
             ArticlePage articlePage = new ArticlePage(driver);
             articlePage.GoToImageGallery();
-            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.actionsDropDownListToggleBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(ImageGalleryPage.ActionsDropDownListToggleBy));
             ImageGalleryPage galleryPage = new ImageGalleryPage(driver);
             galleryPage.SelectAllImages();
             galleryPage.ExportSelectedToPowerPoint();
@@ -98,20 +98,20 @@ namespace BrowserStack.Task_3
             UserActionsToolBarPage toolBarPage = new UserActionsToolBarPage(driver);
             driver.Url = TestDataTask3.DataForTstAddArticleToFavorites.StartUrl;
             driver.ExecuteJavaScript("ArticleTools_ShowAddToMyCollectionsPopUp();");
-            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.existingFoldersListBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.ExistingFoldersListBy));
             AddToFavoritesPopUp popUp = new AddToFavoritesPopUp(driver);
             //popUp.AddToNewFolder(folderName);
             popUp.AddToFavoritesAnyway(folderName);
-            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.messageCancelButtonBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.MessageCancelButtonBy));
             popUp.CloseMessage();
             toolBarPage.GoToMyAccount();
             MyAccountPage accountPage = new MyAccountPage(driver);
-            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.myFavoritesTabBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.MyFavoritesTabBy));
             accountPage.GoToFavoritesTab();
             var articlesInFolder =  accountPage.GetFavoritesLinksFromFolder(folderName);
             Assert.IsTrue(articlesInFolder.Contains(TestDataTask3.DataForTstAddArticleToFavorites.StartUrl));
             accountPage.DeleteCurrentFolder();
-            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.deleteCollectionConfirmButtonBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.DeleteCollectionConfirmButtonBy));
             accountPage.DeleteCurrentFolderConfirm();
             
         }
@@ -124,24 +124,24 @@ namespace BrowserStack.Task_3
             //TEST
             UserActionsToolBarPage toolBarPage = new UserActionsToolBarPage(driver);
             driver.Url = TestDataTask3.DataForTstAddArticleToFavoritesFromIssue.StartUrl;
-            wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.subscribeTOCBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(CurrentIssuePage.SubscribeTocBy));
             CurrentIssuePage currentIssuePage = new CurrentIssuePage(driver);
             var articlesList = currentIssuePage.ArticlesContainer.GetArticlesList();
             currentIssuePage.ArticlesContainer.AddArticleToFavorites(articlesList[1]);
-            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.existingFoldersListBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.ExistingFoldersListBy));
             AddToFavoritesPopUp popUp = new AddToFavoritesPopUp(driver);
             //popUp.AddToFolder(folderName);
             popUp.AddToFavoritesAnyway(folderName);
-            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.messageCancelButtonBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(AddToFavoritesPopUp.MessageCancelButtonBy));
             popUp.CloseMessage();
             toolBarPage.GoToMyAccount();
             MyAccountPage accountPage = new MyAccountPage(driver);
-            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.myFavoritesTabBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.MyFavoritesTabBy));
             accountPage.GoToFavoritesTab();
             var articlesInFolder = accountPage.GetFavoritesLinksFromFolder(folderName);
             Assert.IsTrue(articlesInFolder.Contains(articlesList[1].Href));
             accountPage.DeleteCurrentFolder();
-            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.deleteCollectionConfirmButtonBy));
+            wait.Until(ExpectedConditions.ElementIsVisible(MyAccountPage.DeleteCollectionConfirmButtonBy));
             accountPage.DeleteCurrentFolderConfirm();
         }
     }

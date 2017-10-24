@@ -11,20 +11,20 @@ namespace TestsLibrary.Pages
 {
     public class AcrticlesContainer
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
-        //public static By ArticlesOuterBy = By.XPath(@"//div[@class=""wp-feature-articles""]");
         public static By ArticleBy = By.XPath(@"//article");
 
-        private List<Article> ArticleList;
-        private IWebElement ArticlesOuter;
+        private List<Article> ArticleList => _driver.FindElements(ArticleBy).ToList().Where(a => a.Text != "").Select(a => new Article(a)).ToList();
 
         public AcrticlesContainer(IWebDriver driver)
         {
             _driver = driver;
-            //ArticlesOuter = _driver.FindElement(ArticlesOuterBy);
-            ArticleList = new List<Article>();
-            ArticleList = _driver.FindElements(ArticleBy).ToList().Where(a => a.Text != "").Select(a => new Article(a)).ToList();
+        }
+
+        public List<Article> GetArticlesList()
+        {
+            return ArticleList;
         }
 
         public IWebElement FindFreeOrOpenArticle()
@@ -39,17 +39,12 @@ namespace TestsLibrary.Pages
             return null;
         }
 
-        public List<Article> GetArticlesList()
-        {
-            return ArticleList;
-        }
-
         public void AddArticleToFavorites(Article article)
         {
-            if (!ArticleList.Contains(article))
-            {
-                throw new ArgumentException("No such article found.");
-            }
+            //if (!ArticleList.Contains(article))
+            //{
+            //    throw new ArgumentException("No such article found.");
+            //}
             article.AddToFavorites();
         }
 
